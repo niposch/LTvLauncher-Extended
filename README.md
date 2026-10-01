@@ -14,7 +14,6 @@ Release builds use **`com.niposch.ltvlauncher.extended`** and the label **LTv Ex
 | Weather | Click the weather pill to configure a city (no default city), with optional daily high/low and precipitation chance; Open-Meteo and Breezy Weather support |
 | Jellyfin | Optional Next Up and Recently Added rows, opening items in Jellyfin for Android TV |
 | Seerr | Optional For You recommendations from watch history and requests, opening items in Seerr TV |
-| Configuration | Weather options and selected city included in settings backups; media server credentials in an app-specific `fork_config.json`, excluded from backups |
 | Network access | Internet permission for weather, configured media servers, and remote artwork; HTTP supported for local servers |
 
 The media and weather additions above are credited to **hamish henare (hamishakl)**. See [extension setup](docs/extensions.md) and [full attribution](ATTRIBUTION.md).
