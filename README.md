@@ -114,6 +114,8 @@ With native D-pad navigation, recency-sorted Continue Watching rows, customizabl
 
 [LTv Extended releases](https://github.com/niposch/LTvLauncher-Extended/releases) contain this fork’s APKs when published. You can also [build locally](docs/extensions.md#local-build). Upstream store listings and Downloader codes distribute the original app.
 
+**[Download the latest universal APK](https://github.com/niposch/LTvLauncher-Extended/releases/latest/download/LTv-Extended-universal-release.apk)** — this permanent URL follows the latest stable release and is suitable for an AFTVnews Downloader short code. Each release keeps the same APK filename.
+
 ### Architecture Matrix
 
 | File | Target Devices | Architecture |
