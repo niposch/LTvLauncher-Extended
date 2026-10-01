@@ -196,11 +196,23 @@ class WeatherData {
   }
 
   String formatTemperature({bool useFahrenheit = false}) {
-    if (currentTemp == null) return "--°";
+    return formatDegrees(currentTemp, useFahrenheit: useFahrenheit);
+  }
+
+  /// The first forecast is today, independent of any warning on a later day.
+  int? get todayPrecipProbability =>
+      forecasts.isEmpty ? null : forecasts.first.precipProbability;
+  int? get dailyHigh =>
+      todayMaxTemp ?? (forecasts.isEmpty ? null : forecasts.first.maxTemp);
+  int? get dailyLow =>
+      todayMinTemp ?? (forecasts.isEmpty ? null : forecasts.first.minTemp);
+
+  static String formatDegrees(int? temperature, {bool useFahrenheit = false}) {
+    if (temperature == null) return "--°";
     if (useFahrenheit) {
-      final fahrenheit = (currentTemp! * 9 / 5 + 32).round();
+      final fahrenheit = (temperature * 9 / 5 + 32).round();
       return "$fahrenheit°F";
     }
-    return "$currentTemp°C";
+    return "$temperature°C";
   }
 }

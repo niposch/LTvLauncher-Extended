@@ -17,7 +17,9 @@
  */
 
 import 'dart:async';
+import 'dart:convert';
 
+import 'package:flauncher/fork/fork_config.dart';
 import 'package:flauncher/widgets/settings/back_button_actions.dart';
 import 'package:flutter/material.dart';
 
@@ -60,6 +62,9 @@ const String _appLanguageKey = "app_language";
 const String _showWeatherInStatusBarKey = "show_weather_in_status_bar";
 const String _showWeatherWarningsKey = "show_weather_warnings";
 const String _temperatureUnitKey = "temperature_unit";
+const String _showWeatherHighLowKey = "show_weather_high_low";
+const String _showWeatherRainChanceKey = "show_weather_rain_chance";
+const String _weatherLocationKey = "weather_location";
 
 const String TEMPERATURE_UNIT_CELSIUS = "celsius";
 const String TEMPERATURE_UNIT_FAHRENHEIT = "fahrenheit";
@@ -178,6 +183,21 @@ class SettingsService extends ChangeNotifier {
   bool get autoHideNotificationsWidget => _autoHideNotificationsWidget;
   bool get showWeatherInStatusBar => _showWeatherInStatusBar;
   bool get showWeatherWarnings => _showWeatherWarnings;
+  bool get showWeatherHighLow =>
+      _sharedPreferences.getBool(_showWeatherHighLowKey) ?? false;
+  bool get showWeatherRainChance =>
+      _sharedPreferences.getBool(_showWeatherRainChanceKey) ?? false;
+  WeatherLocation? get weatherLocation {
+    final value = _sharedPreferences.getString(_weatherLocationKey);
+    if (value == null) return null;
+    try {
+      return WeatherLocation.fromJson(
+          jsonDecode(value) as Map<String, dynamic>);
+    } catch (_) {
+      return null;
+    }
+  }
+
   String get temperatureUnit => _temperatureUnit;
   bool get useFahrenheit => _temperatureUnit == TEMPERATURE_UNIT_FAHRENHEIT;
 
@@ -283,6 +303,10 @@ class SettingsService extends ChangeNotifier {
       _showWeatherInStatusBarKey: _showWeatherInStatusBar,
       _showWeatherWarningsKey: _showWeatherWarnings,
       _temperatureUnitKey: _temperatureUnit,
+      _showWeatherHighLowKey: showWeatherHighLow,
+      _showWeatherRainChanceKey: showWeatherRainChance,
+      _weatherLocationKey:
+          weatherLocation == null ? '' : jsonEncode(weatherLocation!.toJson()),
     };
   }
 
@@ -560,6 +584,26 @@ class SettingsService extends ChangeNotifier {
   Future<void> setShowWeatherWarnings(bool show) async {
     await _sharedPreferences.setBool(_showWeatherWarningsKey, show);
     _showWeatherWarnings = show;
+    notifyListeners();
+  }
+
+  Future<void> setShowWeatherHighLow(bool show) async {
+    await _sharedPreferences.setBool(_showWeatherHighLowKey, show);
+    notifyListeners();
+  }
+
+  Future<void> setShowWeatherRainChance(bool show) async {
+    await _sharedPreferences.setBool(_showWeatherRainChanceKey, show);
+    notifyListeners();
+  }
+
+  Future<void> setWeatherLocation(WeatherLocation? location) async {
+    if (location == null) {
+      await _sharedPreferences.remove(_weatherLocationKey);
+    } else {
+      await _sharedPreferences.setString(
+          _weatherLocationKey, jsonEncode(location.toJson()));
+    }
     notifyListeners();
   }
 

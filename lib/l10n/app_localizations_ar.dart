@@ -466,6 +466,41 @@ class AppLocalizationsAr extends AppLocalizations {
   String get weather => 'الطقس';
 
   @override
+  String get showWeatherHighLow => 'Show today\'s high and low';
+
+  @override
+  String get showWeatherRainChance => 'Show today\'s rain / snow chance';
+
+  @override
+  String weatherRainChance(int chance) {
+    return 'Precip. $chance%';
+  }
+
+  @override
+  String get weatherLocation => 'Weather location';
+
+  @override
+  String get weatherAutomatic => 'Use Breezy Weather / configured default';
+
+  @override
+  String get weatherLocationHint => 'Search for your city to use Open-Meteo weather at that location.';
+
+  @override
+  String get searchWeatherCity => 'City or postal code';
+
+  @override
+  String get weatherSearch => 'Search';
+
+  @override
+  String get weatherNoLocations => 'No locations found. Try a city name or postal code.';
+
+  @override
+  String get weatherSearchFailed => 'Could not search locations. Check your connection and try again.';
+
+  @override
+  String get weatherSetupHint => 'Choose a weather location above, or enable local data sharing in Breezy Weather. Check your connection if weather is unavailable.';
+
+  @override
   String get showWeatherWarnings => 'إظهار تحذيرات الطقس والأمطار';
 
   @override

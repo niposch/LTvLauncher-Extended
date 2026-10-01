@@ -692,6 +692,8 @@ SettingsService mkSettingsService() {
   when(settingsService.autoHideNotificationsWidget).thenReturn(false);
   when(settingsService.showWeatherInStatusBar).thenReturn(false);
   when(settingsService.showWeatherWarnings).thenReturn(false);
+  when(settingsService.showWeatherHighLow).thenReturn(false);
+  when(settingsService.showWeatherRainChance).thenReturn(false);
   when(settingsService.useFahrenheit).thenReturn(false);
   return settingsService;
 }

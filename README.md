@@ -11,10 +11,10 @@ Release builds use **`com.niposch.ltvlauncher.extended`** and the label **LTvLau
 | Android identity | Separate package, app label, data, and service permissions so it can coexist with upstream and LTv Posters |
 | Continue Watching | Poster artwork behind cards, downloaded in a bounded worker pool, downscaled, and cached on disk |
 | Rendering | Cached wallpaper and gradient composition, fast solid fill for Pitch Black, synchronized focus scaling and shadows, and clean rounded card corners. See [device measurements](docs/performance.md) |
-| Weather | Open-Meteo fallback when Breezy Weather is absent; location configured through `fork_config.json` |
+| Weather | City search in Settings → Interface → Status bar, with optional daily high/low and precipitation chance; Open-Meteo and Breezy Weather support |
 | Jellyfin | Optional Next Up and Recently Added rows, opening items in Jellyfin for Android TV |
 | Seerr | Optional For You recommendations from watch history and requests, opening items in Seerr TV |
-| Configuration | Media server credentials and weather location in an app-specific `fork_config.json`, excluded from settings backups |
+| Configuration | Weather options and selected city included in settings backups; media server credentials in an app-specific `fork_config.json`, excluded from backups |
 | Network access | Internet permission for weather, configured media servers, and remote artwork; HTTP supported for local servers |
 
 The media and weather additions above are credited to **hamish henare (hamishakl)**. See [extension setup](docs/extensions.md) and [full attribution](ATTRIBUTION.md).

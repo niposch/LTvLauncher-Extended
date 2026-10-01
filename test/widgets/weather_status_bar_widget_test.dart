@@ -1,4 +1,5 @@
 import 'package:flauncher/models/weather_data.dart';
+import 'package:flauncher/l10n/app_localizations.dart';
 import 'package:flauncher/providers/settings_service.dart';
 import 'package:flauncher/providers/weather_service.dart';
 import 'package:flauncher/widgets/weather_status_bar_widget.dart';
@@ -35,17 +36,24 @@ void main() {
 
     when(mockSettingsService.showWeatherInStatusBar).thenReturn(true);
     when(mockSettingsService.useFahrenheit).thenReturn(false);
+    when(mockSettingsService.showWeatherWarnings).thenReturn(false);
+    when(mockSettingsService.showWeatherHighLow).thenReturn(false);
+    when(mockSettingsService.showWeatherRainChance).thenReturn(false);
     when(mockWeatherService.hasWeather).thenReturn(true);
     when(mockWeatherService.weatherData).thenReturn(testWeatherWithWarning);
   });
 
   Widget createWidgetUnderTest() {
     return MaterialApp(
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       home: Scaffold(
         body: MultiProvider(
           providers: [
-            ChangeNotifierProvider<SettingsService>.value(value: mockSettingsService),
-            ChangeNotifierProvider<WeatherService>.value(value: mockWeatherService),
+            ChangeNotifierProvider<SettingsService>.value(
+                value: mockSettingsService),
+            ChangeNotifierProvider<WeatherService>.value(
+                value: mockWeatherService),
           ],
           child: const WeatherStatusBarWidget(),
         ),
@@ -53,7 +61,50 @@ void main() {
     );
   }
 
-  testWidgets('renders harmonized styling when weather warnings is disabled', (tester) async {
+  testWidgets('optional high/low and precipitation fit inside the app bar',
+      (tester) async {
+    when(mockSettingsService.showWeatherHighLow).thenReturn(true);
+    when(mockSettingsService.showWeatherRainChance).thenReturn(true);
+    when(mockSettingsService.showWeatherWarnings).thenReturn(true);
+    await tester.pumpWidget(createWidgetUnderTest());
+    expect(find.text('↑30°C ↓20°C · Precip. 80%'), findsOneWidget);
+    expect(tester.getSize(find.byType(AnimatedContainer)).height,
+        lessThanOrEqualTo(kToolbarHeight));
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets(
+      'range uses Fahrenheit and today chance rather than tomorrow warning',
+      (tester) async {
+    when(mockSettingsService.showWeatherHighLow).thenReturn(true);
+    when(mockSettingsService.showWeatherRainChance).thenReturn(true);
+    when(mockSettingsService.useFahrenheit).thenReturn(true);
+    when(mockWeatherService.weatherData).thenReturn(WeatherData.fromJson({
+      'currentTemp': 20,
+      'todayMinTemp': 10,
+      'todayMaxTemp': 30,
+      'forecasts': [
+        {'conditionCode': 800, 'precipProbability': 0},
+        {'conditionCode': 500, 'precipProbability': 90},
+      ],
+    }));
+    await tester.pumpWidget(createWidgetUnderTest());
+    expect(find.text('↑86°F ↓50°F · Precip. 0%'), findsOneWidget);
+  });
+
+  testWidgets('missing optional values are omitted', (tester) async {
+    when(mockSettingsService.showWeatherHighLow).thenReturn(true);
+    when(mockSettingsService.showWeatherRainChance).thenReturn(true);
+    when(mockWeatherService.weatherData)
+        .thenReturn(const WeatherData(currentTemp: 20));
+    await tester.pumpWidget(createWidgetUnderTest());
+    expect(find.text('20°C'), findsOneWidget);
+    expect(find.textContaining('Precip.'), findsNothing);
+    expect(find.textContaining('↑'), findsNothing);
+  });
+
+  testWidgets('renders harmonized styling when weather warnings is disabled',
+      (tester) async {
     when(mockSettingsService.showWeatherWarnings).thenReturn(false);
 
     await tester.pumpWidget(createWidgetUnderTest());
@@ -68,14 +119,17 @@ void main() {
     expect(iconWidget.icon, Icons.wb_sunny_outlined);
     expect(iconWidget.color, Colors.white);
 
-    final container = tester.widget<AnimatedContainer>(find.byType(AnimatedContainer));
+    final container =
+        tester.widget<AnimatedContainer>(find.byType(AnimatedContainer));
     final boxDecoration = container.decoration as BoxDecoration;
     final border = boxDecoration.border as Border;
     expect(border.top.color, Colors.white.withOpacity(0.12));
     expect(border.top.width, 1.0);
   });
 
-  testWidgets('renders harmonized styling and current icon when weather warnings is enabled', (tester) async {
+  testWidgets(
+      'renders harmonized styling and current icon when weather warnings is enabled',
+      (tester) async {
     when(mockSettingsService.showWeatherWarnings).thenReturn(true);
 
     await tester.pumpWidget(createWidgetUnderTest());
@@ -93,7 +147,8 @@ void main() {
     expect(iconWidget.color, Colors.white);
 
     // Border remains subtle white with width 1.0, not amber
-    final container = tester.widget<AnimatedContainer>(find.byType(AnimatedContainer));
+    final container =
+        tester.widget<AnimatedContainer>(find.byType(AnimatedContainer));
     final boxDecoration = container.decoration as BoxDecoration;
     final border = boxDecoration.border as Border;
     expect(border.top.color, Colors.white.withOpacity(0.12));

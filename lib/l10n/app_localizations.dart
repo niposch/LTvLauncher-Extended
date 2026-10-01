@@ -1001,6 +1001,72 @@ abstract class AppLocalizations {
   /// **'Weather'**
   String get weather;
 
+  /// No description provided for @showWeatherHighLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Show today\'s high and low'**
+  String get showWeatherHighLow;
+
+  /// No description provided for @showWeatherRainChance.
+  ///
+  /// In en, this message translates to:
+  /// **'Show today\'s rain / snow chance'**
+  String get showWeatherRainChance;
+
+  /// No description provided for @weatherRainChance.
+  ///
+  /// In en, this message translates to:
+  /// **'Precip. {chance}%'**
+  String weatherRainChance(int chance);
+
+  /// No description provided for @weatherLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Weather location'**
+  String get weatherLocation;
+
+  /// No description provided for @weatherAutomatic.
+  ///
+  /// In en, this message translates to:
+  /// **'Use Breezy Weather / configured default'**
+  String get weatherAutomatic;
+
+  /// No description provided for @weatherLocationHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search for your city to use Open-Meteo weather at that location.'**
+  String get weatherLocationHint;
+
+  /// No description provided for @searchWeatherCity.
+  ///
+  /// In en, this message translates to:
+  /// **'City or postal code'**
+  String get searchWeatherCity;
+
+  /// No description provided for @weatherSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get weatherSearch;
+
+  /// No description provided for @weatherNoLocations.
+  ///
+  /// In en, this message translates to:
+  /// **'No locations found. Try a city name or postal code.'**
+  String get weatherNoLocations;
+
+  /// No description provided for @weatherSearchFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not search locations. Check your connection and try again.'**
+  String get weatherSearchFailed;
+
+  /// No description provided for @weatherSetupHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a weather location above, or enable local data sharing in Breezy Weather. Check your connection if weather is unavailable.'**
+  String get weatherSetupHint;
+
   /// No description provided for @showWeatherWarnings.
   ///
   /// In en, this message translates to:

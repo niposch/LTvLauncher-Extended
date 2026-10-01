@@ -19,6 +19,7 @@
 //import 'dart:html';
 
 import 'package:flauncher/providers/settings_service.dart';
+import 'package:flauncher/fork/fork_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -221,6 +222,9 @@ void main() async {
       expect(service.showWeatherWarnings, isTrue);
       expect(service.temperatureUnit, TEMPERATURE_UNIT_CELSIUS);
       expect(service.useFahrenheit, isFalse);
+      expect(service.showWeatherHighLow, isFalse);
+      expect(service.showWeatherRainChance, isFalse);
+      expect(service.weatherLocation, isNull);
     });
 
     test("set and update weather preferences", () async {
@@ -235,6 +239,32 @@ void main() async {
       expect(service.showWeatherWarnings, isFalse);
       expect(service.temperatureUnit, TEMPERATURE_UNIT_FAHRENHEIT);
       expect(service.useFahrenheit, isTrue);
+    });
+
+    test('weather details and location persist and round-trip through backups', () async {
+      final service = SettingsService(sharedPreferences);
+      await service.setShowWeatherHighLow(true);
+      await service.setShowWeatherRainChance(true);
+      await service.setWeatherLocation(const WeatherLocation(name: 'Berlin', latitude: 52.52, longitude: 13.4));
+      final snapshot = service.exportSettingsMap();
+      final reloaded = SettingsService(sharedPreferences);
+      expect(reloaded.weatherLocation?.name, 'Berlin');
+      expect(reloaded.showWeatherHighLow, isTrue);
+      expect(reloaded.showWeatherRainChance, isTrue);
+      await sharedPreferences.clear();
+      await reloaded.importSettingsMap(snapshot);
+      expect(reloaded.weatherLocation?.latitude, 52.52);
+      expect(reloaded.showWeatherHighLow, isTrue);
+      await reloaded.setWeatherLocation(null);
+      final automatic = reloaded.exportSettingsMap();
+      await reloaded.importSettingsMap(snapshot);
+      await reloaded.importSettingsMap(automatic);
+      expect(reloaded.weatherLocation, isNull);
+    });
+
+    test('invalid stored coordinates do not override the weather source', () async {
+      await sharedPreferences.setString('weather_location', '{"name":"invalid","latitude":999,"longitude":2}');
+      expect(SettingsService(sharedPreferences).weatherLocation, isNull);
     });
   });
 

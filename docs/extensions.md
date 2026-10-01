@@ -15,7 +15,17 @@ adb shell am start -n com.niposch.ltvlauncher.extended/com.leanbitlab.ltvL.MainA
 
 For debug APKs, use `com.niposch.ltvlauncher.extended.debug` in the command and configuration directory below.
 
-## Weather and media configuration
+## Weather options
+
+Open **Settings → Interface → Status bar**, enable **Weather**, then select **Weather location**. Search for a city or postal code and choose the matching region and country with the remote. This uses Open-Meteo for the selected city and refreshes immediately, even if Breezy Weather is installed. The selected location is saved in launcher settings and included in backups.
+
+**Show today's high and low** and **Show today's rain / snow chance** are separate optional switches, off by default. The compact second line shows `↑` for the daily high, `↓` for the daily low, and `Precip.` for today's maximum precipitation probability (rain or snow). Temperatures follow the Celsius/Fahrenheit setting. Missing values are omitted; a warning about a later day does not replace today's probability.
+
+**Use Breezy Weather / configured default** removes the city override. Weather then comes from Breezy broadcasts, or Open-Meteo when Breezy is absent. The legacy `weather` entry in `fork_config.json` remains the Open-Meteo fallback, with Auckland as the inherited default. The settings page displays the active city and source.
+
+City search uses the [Open-Meteo Geocoding API](https://open-meteo.com/en/docs/geocoding-api), whose location data comes from GeoNames. Forecasts use [Open-Meteo](https://open-meteo.com/); no API key or device location permission is needed.
+
+## Media and legacy weather configuration
 
 Launch the app once to create its external files directory, then create a local `fork_config.json` with your own values:
 
@@ -48,7 +58,7 @@ adb shell am start -n com.niposch.ltvlauncher.extended/com.leanbitlab.ltvL.MainA
 
 Enable Continue Watching in launcher settings to show the media rows. Jellyfin supplies Next Up and Recently Added; selecting an item opens `org.jellyfin.androidtv`. Seerr supplies For You recommendations; selecting an item opens the Seerr TV app (`seerrtv://` deep links). Each app must be installed to open its items.
 
-When Breezy Weather is absent and no broadcast weather data is available, weather is fetched from Open-Meteo at most every 30 minutes after a successful fetch. The inherited default location is Auckland; configure `weather` to use your location. Jellyfin refreshes every 10 minutes, and Seerr every 30 minutes, with additional refreshes on resume.
+Open-Meteo weather refreshes at most every 30 minutes after a successful fetch, with an immediate fetch when the selected city changes. Jellyfin refreshes every 10 minutes, and Seerr every 30 minutes, with additional refreshes on resume.
 
 Remote artwork is downloaded and downscaled to at most 640 pixels wide, cached privately on disk, and pruned after 30 days without access. The app requests Internet access and permits HTTP for local media servers. It contacts Open-Meteo, configured media servers, and artwork hosts such as TMDB; it does not add analytics.
 

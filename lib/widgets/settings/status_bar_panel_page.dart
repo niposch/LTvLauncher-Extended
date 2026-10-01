@@ -17,6 +17,8 @@
  */
 
 import 'package:flauncher/providers/weather_service.dart';
+import 'package:flauncher/fork/fork_config.dart';
+import 'package:flauncher/widgets/settings/weather_location_dialog.dart';
 import 'package:flauncher/widgets/rounded_switch_list_tile.dart';
 import 'package:flauncher/widgets/settings/focusable_settings_tile.dart';
 import 'package:flutter/material.dart';
@@ -34,124 +36,183 @@ class StatusBarPanelPage extends StatelessWidget {
     SettingsService settingsService = Provider.of(context);
 
     return Column(
-        children: [
-          Text(localizations.statusBar, style: Theme.of(context).textTheme.titleLarge),
-          Divider(),
-          Expanded(
-            child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              children: [
-                RoundedSwitchListTile(
-                  autofocus: true,
-                  value: settingsService.autoHideAppBarEnabled,
-                  onChanged: (value) => settingsService.setAutoHideAppBarEnabled(value),
-                  title: Text(localizations.autoHideAppBar, style: Theme.of(context).textTheme.bodyMedium),
-                  secondary: Icon(Icons.visibility_off_outlined),
-                ),
-                Divider(),
-                RoundedSwitchListTile(
+      children: [
+        Text(localizations.statusBar,
+            style: Theme.of(context).textTheme.titleLarge),
+        Divider(),
+        Expanded(
+          child: ListView(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            children: [
+              RoundedSwitchListTile(
+                autofocus: true,
+                value: settingsService.autoHideAppBarEnabled,
+                onChanged: (value) =>
+                    settingsService.setAutoHideAppBarEnabled(value),
+                title: Text(localizations.autoHideAppBar,
+                    style: Theme.of(context).textTheme.bodyMedium),
+                secondary: Icon(Icons.visibility_off_outlined),
+              ),
+              Divider(),
+              RoundedSwitchListTile(
                   value: settingsService.showDateInStatusBar,
-                  onChanged: (value) => settingsService.setShowDateInStatusBar(value),
+                  onChanged: (value) =>
+                      settingsService.setShowDateInStatusBar(value),
                   title: Text(localizations.date),
-                  secondary: Icon(Icons.calendar_today_outlined)
-                ),
-                RoundedSwitchListTile(
+                  secondary: Icon(Icons.calendar_today_outlined)),
+              RoundedSwitchListTile(
                   value: settingsService.showTimeInStatusBar,
-                  onChanged: (value) => settingsService.setShowTimeInStatusBar(value),
+                  onChanged: (value) =>
+                      settingsService.setShowTimeInStatusBar(value),
                   title: Text(localizations.time),
-                  secondary: Icon(Icons.watch_later_outlined)
-                ),
-                RoundedSwitchListTile(
+                  secondary: Icon(Icons.watch_later_outlined)),
+              RoundedSwitchListTile(
                   value: settingsService.showDataWidgetInStatusBar,
-                  onChanged: (value) => settingsService.setShowDataWidgetInStatusBar(value),
+                  onChanged: (value) =>
+                      settingsService.setShowDataWidgetInStatusBar(value),
                   title: Text(localizations.dataUsage),
-                  secondary: Icon(Icons.data_usage)
-                ),
-                RoundedSwitchListTile(
+                  secondary: Icon(Icons.data_usage)),
+              RoundedSwitchListTile(
                   value: settingsService.showNetworkIndicatorInStatusBar,
-                  onChanged: (value) => settingsService.setShowNetworkIndicatorInStatusBar(value),
+                  onChanged: (value) =>
+                      settingsService.setShowNetworkIndicatorInStatusBar(value),
                   title: Text(localizations.networkIndicator),
-                  secondary: Icon(Icons.signal_wifi_4_bar)
-                ),
+                  secondary: Icon(Icons.signal_wifi_4_bar)),
+              RoundedSwitchListTile(
+                value: settingsService.showInputsWidgetInStatusBar,
+                onChanged: (value) =>
+                    settingsService.setShowInputsWidgetInStatusBar(value),
+                title: Text(localizations.inputs),
+                secondary: Icon(Icons.tv_outlined),
+              ),
+              RoundedSwitchListTile(
+                value: settingsService.showNotificationsWidgetInStatusBar,
+                onChanged: (value) => settingsService
+                    .setShowNotificationsWidgetInStatusBar(value),
+                title: Text(localizations.notificationBell),
+                secondary: Icon(Icons.notifications_outlined),
+              ),
+              if (settingsService.showNotificationsWidgetInStatusBar)
                 RoundedSwitchListTile(
-                  value: settingsService.showInputsWidgetInStatusBar,
-                  onChanged: (value) => settingsService.setShowInputsWidgetInStatusBar(value),
-                  title: Text(localizations.inputs),
-                  secondary: Icon(Icons.tv_outlined),
+                  value: settingsService.autoHideNotificationsWidget,
+                  onChanged: (value) =>
+                      settingsService.setAutoHideNotificationsWidget(value),
+                  title: Text(localizations.autoHideNotificationBell),
+                  secondary: Icon(Icons.notifications_paused_outlined),
                 ),
-                RoundedSwitchListTile(
-                  value: settingsService.showNotificationsWidgetInStatusBar,
-                  onChanged: (value) => settingsService.setShowNotificationsWidgetInStatusBar(value),
-                  title: Text(localizations.notificationBell),
-                  secondary: Icon(Icons.notifications_outlined),
-                ),
-                if (settingsService.showNotificationsWidgetInStatusBar)
-                  RoundedSwitchListTile(
-                    value: settingsService.autoHideNotificationsWidget,
-                    onChanged: (value) => settingsService.setAutoHideNotificationsWidget(value),
-                    title: Text(localizations.autoHideNotificationBell),
-                    secondary: Icon(Icons.notifications_paused_outlined),
-                  ),
-                Divider(),
-                RoundedSwitchListTile(
-                  value: settingsService.showWeatherInStatusBar,
-                  onChanged: (value) => settingsService.setShowWeatherInStatusBar(value),
-                  title: Text(localizations.weather),
-                  secondary: Icon(Icons.wb_sunny_outlined),
-                ),
-                if (settingsService.showWeatherInStatusBar) ...[
-                  RoundedSwitchListTile(
-                    value: settingsService.showWeatherWarnings,
-                    onChanged: (value) => settingsService.setShowWeatherWarnings(value),
-                    title: Text(localizations.showWeatherWarnings),
-                    secondary: Icon(Icons.thunderstorm_outlined),
-                  ),
-                  FocusableSettingsTile(
-                    leading: const Icon(Icons.thermostat_outlined),
-                    title: Text(
-                      "${localizations.temperatureUnit}: ${settingsService.useFahrenheit ? localizations.fahrenheit : localizations.celsius}",
-                    ),
-                    onPressed: () {
-                      final next = settingsService.useFahrenheit
-                          ? TEMPERATURE_UNIT_CELSIUS
-                          : TEMPERATURE_UNIT_FAHRENHEIT;
-                      settingsService.setTemperatureUnit(next);
-                    },
-                  ),
-                  Consumer<WeatherService>(
-                    builder: (context, weatherService, _) {
-                      if (!weatherService.hasWeather) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: Container(
-                            padding: const EdgeInsets.all(12),
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.05),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Row(
-                              children: [
-                                const Icon(Icons.info_outline, size: 20, color: Colors.white70),
-                                const SizedBox(width: 12),
-                                Expanded(
-                                  child: Text(
-                                    localizations.breezyWeatherSetupHint,
-                                    style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.white70),
-                                  ),
-                                ),
-                              ],
-                            ),
+              Divider(),
+              RoundedSwitchListTile(
+                value: settingsService.showWeatherInStatusBar,
+                onChanged: (value) =>
+                    settingsService.setShowWeatherInStatusBar(value),
+                title: Text(localizations.weather),
+                secondary: Icon(Icons.wb_sunny_outlined),
+              ),
+              if (settingsService.showWeatherInStatusBar) ...[
+                Consumer<WeatherService>(
+                    builder: (context, weather, _) => FocusableSettingsTile(
+                          leading: const Icon(Icons.location_on_outlined),
+                          title: Text(
+                              '${localizations.weatherLocation}: ${settingsService.weatherLocation?.name ?? weather.weatherData?.location ?? localizations.weatherAutomatic}'),
+                          onPressed: () async {
+                            final location = await showDialog<WeatherLocation>(
+                              context: context,
+                              builder: (_) => const WeatherLocationDialog(),
+                            );
+                            if (location != null)
+                              await settingsService
+                                  .setWeatherLocation(location);
+                          },
+                        )),
+                Consumer<WeatherService>(
+                    builder: (context, weather, _) => Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 24, vertical: 4),
+                          child: Text(
+                            settingsService.weatherLocation != null ||
+                                    weather.usesOpenMeteo
+                                ? 'Open-Meteo'
+                                : weather.isBreezyInstalled
+                                    ? 'Breezy Weather'
+                                    : localizations.weatherAutomatic,
+                            style: Theme.of(context).textTheme.bodySmall,
                           ),
-                        );
-                      }
-                      return const SizedBox.shrink();
-                    },
+                        )),
+                if (settingsService.weatherLocation != null)
+                  FocusableSettingsTile(
+                    leading: const Icon(Icons.restore),
+                    title: Text(localizations.weatherAutomatic),
+                    onPressed: () => settingsService.setWeatherLocation(null),
                   ),
-                ],
+                RoundedSwitchListTile(
+                  value: settingsService.showWeatherHighLow,
+                  onChanged: settingsService.setShowWeatherHighLow,
+                  title: Text(localizations.showWeatherHighLow),
+                  secondary: const Icon(Icons.thermostat_outlined),
+                ),
+                RoundedSwitchListTile(
+                  value: settingsService.showWeatherRainChance,
+                  onChanged: settingsService.setShowWeatherRainChance,
+                  title: Text(localizations.showWeatherRainChance),
+                  secondary: const Icon(Icons.umbrella_outlined),
+                ),
+                RoundedSwitchListTile(
+                  value: settingsService.showWeatherWarnings,
+                  onChanged: (value) =>
+                      settingsService.setShowWeatherWarnings(value),
+                  title: Text(localizations.showWeatherWarnings),
+                  secondary: Icon(Icons.thunderstorm_outlined),
+                ),
+                FocusableSettingsTile(
+                  leading: const Icon(Icons.thermostat_outlined),
+                  title: Text(
+                    "${localizations.temperatureUnit}: ${settingsService.useFahrenheit ? localizations.fahrenheit : localizations.celsius}",
+                  ),
+                  onPressed: () {
+                    final next = settingsService.useFahrenheit
+                        ? TEMPERATURE_UNIT_CELSIUS
+                        : TEMPERATURE_UNIT_FAHRENHEIT;
+                    settingsService.setTemperatureUnit(next);
+                  },
+                ),
+                Consumer<WeatherService>(
+                  builder: (context, weatherService, _) {
+                    if (!weatherService.hasWeather) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Container(
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.05),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Row(
+                            children: [
+                              const Icon(Icons.info_outline,
+                                  size: 20, color: Colors.white70),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Text(
+                                  localizations.weatherSetupHint,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall
+                                      ?.copyWith(color: Colors.white70),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }
+                    return const SizedBox.shrink();
+                  },
+                ),
               ],
-            ),
+            ],
           ),
-        ],
-      );
+        ),
+      ],
+    );
   }
 }

@@ -28,6 +28,8 @@ void main() {
     when(service.timeFormat).thenReturn(SettingsService.defaultTimeFormat);
     when(service.showWeatherInStatusBar).thenReturn(false);
     when(service.showWeatherWarnings).thenReturn(false);
+    when(service.showWeatherHighLow).thenReturn(false);
+    when(service.showWeatherRainChance).thenReturn(false);
     when(service.useFahrenheit).thenReturn(false);
   }
 

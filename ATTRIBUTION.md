@@ -11,4 +11,6 @@ The following commits from [hamishakl/LtvLauncher, branch `posters`](https://git
 | [7e6ff96](https://github.com/hamishakl/LtvLauncher/commit/7e6ff96) | Open-Meteo weather and Jellyfin Next Up / Recently Added rows |
 | [34b29ab](https://github.com/hamishakl/LtvLauncher/commit/34b29ab) | Seerr For You recommendations |
 
-Integration, the distinct Android application ID, compatibility fixes, and rendering performance and rounded-corner fixes in this repository were assisted by **Codex (OpenAI)**. New commits for this work include `Co-authored-by: Codex <codex@openai.com>`; the imported upstream commits retain their original authorship without modification.
+Integration, the distinct Android application ID, compatibility fixes, rendering performance and rounded-corner fixes, and optional weather details and city selection in this repository were assisted by **Codex (OpenAI)**. New commits for this work include `Co-authored-by: Codex <codex@openai.com>`; the imported upstream commits retain their original authorship without modification.
+
+Weather forecasts and city search use [Open-Meteo](https://open-meteo.com/). City search data is provided by [GeoNames](https://www.geonames.org/), as credited by the [Open-Meteo Geocoding API](https://open-meteo.com/en/docs/geocoding-api).

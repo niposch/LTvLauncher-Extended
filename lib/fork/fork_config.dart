@@ -52,14 +52,25 @@ class WeatherLocation {
   final double latitude;
   final double longitude;
 
-  const WeatherLocation({required this.name, required this.latitude, required this.longitude});
+  const WeatherLocation(
+      {required this.name, required this.latitude, required this.longitude});
+
+  Map<String, dynamic> toJson() =>
+      {'name': name, 'latitude': latitude, 'longitude': longitude};
 
   static WeatherLocation? fromJson(Map<String, dynamic>? json) {
-    if (json == null || json['latitude'] is! num || json['longitude'] is! num) return null;
+    if (json == null || json['latitude'] is! num || json['longitude'] is! num)
+      return null;
+    final latitude = (json['latitude'] as num).toDouble();
+    final longitude = (json['longitude'] as num).toDouble();
+    if (!latitude.isFinite ||
+        !longitude.isFinite ||
+        latitude.abs() > 90 ||
+        longitude.abs() > 180) return null;
     return WeatherLocation(
       name: json['name'] as String? ?? '',
-      latitude: (json['latitude'] as num).toDouble(),
-      longitude: (json['longitude'] as num).toDouble(),
+      latitude: latitude,
+      longitude: longitude,
     );
   }
 }

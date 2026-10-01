@@ -111,7 +111,7 @@ Future<void> main() async {
         ChangeNotifierProvider(create: (_) => TvInputsService(fLauncherChannel)),
         ChangeNotifierProvider(create: (_) => NotificationsService(fLauncherChannel)),
         ChangeNotifierProvider(create: (_) => WatchNextService(fLauncherChannel)),
-        ChangeNotifierProvider(create: (_) => WeatherService(fLauncherChannel)),
+        ChangeNotifierProvider(create: (context) => WeatherService(fLauncherChannel, settings: context.read<SettingsService>())),
         ChangeNotifierProvider(create: (_) => JellyfinService(fLauncherChannel)),
         ChangeNotifierProvider(create: (_) => SeerrService(fLauncherChannel)),
       ],

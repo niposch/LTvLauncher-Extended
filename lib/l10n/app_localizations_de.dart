@@ -466,6 +466,41 @@ class AppLocalizationsDe extends AppLocalizations {
   String get weather => 'Wetter';
 
   @override
+  String get showWeatherHighLow => 'Heutige Höchst- und Tiefsttemperatur anzeigen';
+
+  @override
+  String get showWeatherRainChance => 'Heutige Regen- / Schneewahrscheinlichkeit anzeigen';
+
+  @override
+  String weatherRainChance(int chance) {
+    return 'Niederschlag $chance%';
+  }
+
+  @override
+  String get weatherLocation => 'Wetterstandort';
+
+  @override
+  String get weatherAutomatic => 'Breezy Weather / konfigurierten Standard verwenden';
+
+  @override
+  String get weatherLocationHint => 'Suche nach deinem Ort, um dortiges Wetter von Open-Meteo zu verwenden.';
+
+  @override
+  String get searchWeatherCity => 'Ort oder Postleitzahl';
+
+  @override
+  String get weatherSearch => 'Suchen';
+
+  @override
+  String get weatherNoLocations => 'Keine Orte gefunden. Versuche einen Ortsnamen oder eine Postleitzahl.';
+
+  @override
+  String get weatherSearchFailed => 'Ortssuche fehlgeschlagen. Prüfe deine Verbindung und versuche es erneut.';
+
+  @override
+  String get weatherSetupHint => 'Wähle oben einen Wetterstandort oder aktiviere die lokale Datenfreigabe in Breezy Weather. Prüfe deine Verbindung, falls Wetterdaten fehlen.';
+
+  @override
   String get showWeatherWarnings => 'Wetter- & Regenwarnungen anzeigen';
 
   @override
