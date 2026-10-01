@@ -30,6 +30,9 @@ import 'package:flauncher/providers/wallpaper_service.dart';
 import 'package:flauncher/providers/notifications_service.dart';
 import 'package:flauncher/providers/watch_next_service.dart';
 import 'package:flauncher/providers/weather_service.dart';
+import 'package:flauncher/fork/jellyfin_service.dart';
+import 'package:flauncher/fork/seerr_service.dart';
+import 'package:flauncher/models/watch_next_program.dart';
 import 'package:flauncher/widgets/application_info_panel.dart';
 import 'package:flauncher/widgets/apps_grid.dart';
 import 'package:flauncher/widgets/category_row.dart';
@@ -109,6 +112,33 @@ void main() {
     expect(find.byType(CategoryRow), findsOneWidget);
     expect(find.byType(AppsGrid), findsOneWidget);
     expect(find.text("This category is empty."), findsNWidgets(2));
+  });
+
+  testWidgets('Jellyfin rows appear without Android Watch Next programs', (tester) async {
+    final apps = mkAppService();
+    when(apps.launcherSections).thenReturn([]);
+    when(apps.applications).thenReturn([]);
+    final settings = mkSettingsService() as MockSettingsService;
+    when(settings.showContinueWatching).thenReturn(true);
+    when(settings.hiddenWatchNextProgramIds).thenReturn([]);
+    when(settings.hiddenWatchNextPackages).thenReturn([]);
+    when(settings.continueWatchingMaxItems).thenReturn(0);
+    when(settings.continueWatchingCardSize).thenReturn('normal');
+    when(settings.continueWatchingShowProgress).thenReturn(true);
+    when(settings.continueWatchingShowPercentage).thenReturn(true);
+    when(settings.continueWatchingShowDescription).thenReturn(true);
+    final jellyfin = MockJellyfinService();
+    when(jellyfin.configured).thenReturn(true);
+    when(jellyfin.nextUp).thenReturn([
+      WatchNextProgram.fromMap({'id': 123, 'title': 'Next episode', 'packageName': 'org.jellyfin.androidtv'}),
+    ]);
+    when(jellyfin.recentlyAdded).thenReturn([]);
+
+    await _pumpWidgetWithProviders(tester, mkWallpaperService(), apps, settings, jellyfin: jellyfin);
+    await tester.pump();
+    expect(find.text('Next Up'), findsOneWidget);
+    expect(find.text('Next episode'), findsOneWidget);
+    expect(find.text('Continue Watching'), findsNothing);
   });
 
   testWidgets("Home page displays background image", (tester) async {
@@ -638,6 +668,7 @@ NotificationsService mkNotificationsService() {
 WatchNextService mkWatchNextService() {
   final watchNextService = MockWatchNextService();
   when(watchNextService.programs).thenReturn([]);
+  when(watchNextService.hasPermission).thenReturn(true);
   return watchNextService;
 }
 
@@ -672,7 +703,9 @@ Future<void> _pumpWidgetWithProviders(
   WidgetTester tester,
   WallpaperService wallpaperService,
   AppsService appsService,
-  SettingsService settingsService,
+  SettingsService settingsService, {
+  JellyfinService? jellyfin,
+}
 ) async {
   tester.view.physicalSize = const Size(1920, 1080);
   tester.view.devicePixelRatio = 1.0;
@@ -685,6 +718,8 @@ Future<void> _pumpWidgetWithProviders(
         ChangeNotifierProvider<TvInputsService>.value(value: mkTvInputsService()),
         ChangeNotifierProvider<NotificationsService>.value(value: mkNotificationsService()),
         ChangeNotifierProvider<WatchNextService>.value(value: mkWatchNextService()),
+        ChangeNotifierProvider<JellyfinService>.value(value: jellyfin ?? JellyfinService(FLauncherChannel())),
+        ChangeNotifierProvider<SeerrService>(create: (_) => SeerrService(FLauncherChannel())),
         ChangeNotifierProvider<WeatherService>.value(value: mkWeatherService()),
         ChangeNotifierProvider(create: (_) => LauncherState()),
         ChangeNotifierProvider(create: (_) => NetworkService(FLauncherChannel())),

@@ -1,4 +1,22 @@
-# LTvLauncher
+# LTvLauncher Extended
+
+This fork integrates [hamishakl's `posters` branch](https://github.com/hamishakl/LtvLauncher/tree/posters), authored by **hamish henare**, into LTvLauncher. The original commits and authorship are preserved. See [ATTRIBUTION.md](ATTRIBUTION.md) for credits and [the extension setup guide](docs/extensions.md) for weather, Jellyfin, and Seerr configuration.
+
+Release builds use **`com.niposch.ltvlauncher.extended`** and the label **LTvLauncher Extended**. Debug builds use **`com.niposch.ltvlauncher.extended.debug`**. Both can be installed alongside upstream LTvLauncher (`com.leanbitlab.ltvL`) and LTv Posters (`com.leanbitlab.ltvL.posters`), with their own app data and permissions. The upstream download links below still distribute the original app.
+
+## Differences from upstream
+
+| Area | LTvLauncher Extended |
+| --- | --- |
+| Android identity | Separate package, app label, data, and service permissions so it can coexist with upstream and LTv Posters |
+| Continue Watching | Poster artwork behind cards, downloaded in a bounded worker pool, downscaled, and cached on disk |
+| Weather | Open-Meteo fallback when Breezy Weather is absent; location configured through `fork_config.json` |
+| Jellyfin | Optional Next Up and Recently Added rows, opening items in Jellyfin for Android TV |
+| Seerr | Optional For You recommendations from watch history and requests, opening items in Seerr TV |
+| Configuration | Media server credentials and weather location in an app-specific `fork_config.json`, excluded from settings backups |
+| Network access | Internet permission for weather, configured media servers, and remote artwork; HTTP supported for local servers |
+
+The media and weather additions above are credited to **hamish henare (hamishakl)**. See [extension setup](docs/extensions.md) and [full attribution](ATTRIBUTION.md).
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".github/assets/banner_dark.svg">
@@ -87,7 +105,7 @@ With native D-pad navigation, recency-sorted Continue Watching rows, customizabl
 - **Audio Feedback**: Remote key navigation sound feedback.
 
 ### 💾 Privacy & Data Management
-- **100% Ad-Free & Private**: No analytics, no ads, no trackers, zero network telemetry.
+- **Ad-Free & Tracker-Free**: No analytics or ads. This fork downloads remote poster artwork and uses Open-Meteo when Breezy Weather is absent. Configured Jellyfin and Seerr integrations contact those servers; see [extension setup](docs/extensions.md).
 - **Multiple Backups & Restore Dialog**: Export configuration backups with timestamps and restore them via a D-pad friendly picker.
 - **Category Customization**: Reorder, rename, hide, and organize apps in grid or row layouts with remote arrow keys.
 
@@ -218,6 +236,8 @@ If LTvLauncher improves your daily TV experience, please consider supporting our
 
 ## 📜 Credits & Acknowledgments
 
+- **[hamish henare / hamishakl](https://github.com/hamishakl/LtvLauncher/tree/posters)** — Poster cards and caching, Open-Meteo weather, Jellyfin rows, and Seerr recommendations, integrated with original commit authorship preserved.
+- **[LeanBitLab / LTvLauncher](https://github.com/leanbitlab-org/LtvLauncher)** — The upstream launcher on which this fork is based.
 - **[FLauncher](https://gitlab.com/flauncher/flauncher)** by [etienn01](https://github.com/etienn01) — The original TV launcher project.
 - **[FLauncher (Fork)](https://github.com/osrosal/flauncher)** by [osrosal](https://github.com/osrosal) — The foundation for this fork.
 - All [contributors](https://github.com/leanbitlab-org/LtvLauncher/graphs/contributors) and open-source supporters!

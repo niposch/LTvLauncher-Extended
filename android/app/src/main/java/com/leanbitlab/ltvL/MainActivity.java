@@ -1104,19 +1104,13 @@ public class MainActivity extends FlutterActivity {
             }
         }
 
-        String packageName = getPackageName();
+        ComponentName listener = new ComponentName(this, LauncherNotificationListenerService.class);
         String flat = Settings.Secure.getString(getContentResolver(), "enabled_notification_listeners");
         if (flat != null && !flat.isEmpty()) {
-            if (flat.contains(packageName) || flat.contains("com.leanbitlab.ltvL")) {
-                return true;
-            }
             String[] names = flat.split(":");
             for (String name : names) {
-                if (name.contains(packageName) || name.contains("com.leanbitlab.ltvL")) {
-                    return true;
-                }
                 ComponentName cn = ComponentName.unflattenFromString(name);
-                if (cn != null && (cn.getPackageName().equals(packageName) || cn.getPackageName().contains("leanbitlab"))) {
+                if (listener.equals(cn)) {
                     return true;
                 }
             }

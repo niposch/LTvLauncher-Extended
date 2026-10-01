@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
 /// Fork-only configuration, read from `<external files dir>/fork_config.json`
-/// (e.g. /sdcard/Android/data/com.leanbitlab.ltvL.posters/files/fork_config.json).
+/// (e.g. /sdcard/Android/data/com.niposch.ltvlauncher.extended/files/fork_config.json).
 ///
 /// Kept out of SharedPreferences and backups on purpose: it holds the Jellyfin
 /// API key, and is pushed with adb rather than typed on a TV remote.

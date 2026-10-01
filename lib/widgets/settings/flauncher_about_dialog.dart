@@ -74,7 +74,7 @@ class LTvLauncherAboutDialog extends StatelessWidget {
 
               // Title & Version
               const Text(
-                "LTvLauncher",
+                "LTvLauncher Extended",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
@@ -91,7 +91,8 @@ class LTvLauncherAboutDialog extends StatelessWidget {
               ),
               const SizedBox(height: 4),
               const Text(
-                "Developed by LeanBitLab",
+                "Based on LTvLauncher by LeanBitLab\nPoster and media integrations by hamish henare (hamishakl)",
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.white70,
                   fontSize: 13,
@@ -154,7 +155,7 @@ class LTvLauncherAboutDialog extends StatelessWidget {
                 label: "GitHub Repository",
                 accentColor: accentColor,
                 onPressed: () {
-                  FLauncherChannel().openUrl("https://github.com/leanbitlab-org/LtvLauncher");
+                  FLauncherChannel().openUrl("https://github.com/niposch/LTvLauncher-Extended");
                 },
               ),
               const SizedBox(height: 6),

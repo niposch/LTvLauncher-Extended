@@ -172,6 +172,45 @@ void main() {
     });
   });
 
+  test('remote poster pool updates cards progressively and reuses loaded artwork', () async {
+    final pending = <String, Completer<Uint8List?>>{};
+    when(mockChannel.getWatchNextPrograms()).thenAnswer((_) async => [
+      for (var id = 1; id <= 5; id++)
+        {'id': id, 'title': 'Program $id', 'posterArtUri': 'https://example.com/$id.jpg'},
+    ]);
+    var active = 0;
+    var maxActive = 0;
+    when(mockChannel.getWatchNextPoster(any)).thenAnswer((invocation) {
+      final uri = invocation.positionalArguments[0] as String;
+      active++;
+      if (active > maxActive) maxActive = active;
+      final completer = pending[uri] = Completer<Uint8List?>();
+      return completer.future.whenComplete(() => active--);
+    });
+    watchNextService = WatchNextService(mockChannel);
+    await pumpEventQueue();
+    expect(watchNextService.programs, hasLength(5));
+    expect(pending, hasLength(3));
+
+    final bytes = Uint8List.fromList([1, 2, 3]);
+    pending.values.first.complete(bytes);
+    await pumpEventQueue();
+    expect(watchNextService.programs.where((p) => p.posterBytes != null), hasLength(1));
+    expect(pending, hasLength(4));
+    while (!watchNextService.initialized) {
+      for (final completer in pending.values.toList()) {
+        if (!completer.isCompleted) completer.complete(bytes);
+      }
+      await pumpEventQueue();
+    }
+    expect(maxActive, 3);
+    expect(watchNextService.programs.every((p) => p.posterBytes == bytes), isTrue);
+    clearInteractions(mockChannel);
+    await watchNextService.refresh();
+    verifyNever(mockChannel.getWatchNextPoster(any));
+    watchNextService.dispose();
+  });
+
   group('WatchNextService Permissions', () {
     test('checkPermission queries channel directly', () async {
       when(mockChannel.checkWatchNextPermission()).thenAnswer((_) async => false);

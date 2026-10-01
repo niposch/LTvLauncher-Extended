@@ -88,7 +88,7 @@
         <service
             android:name=".ClockScreensaverService"
             android:exported="true"
-            android:label="LTvLauncher Clock"
+            android:label="${appLabel} Clock"
             android:permission="android.permission.BIND_DREAM_SERVICE">
             <intent-filter>
                 <action android:name="android.service.dreams.DreamService" />
@@ -101,7 +101,7 @@
 
         <service
             android:name=".LauncherNotificationListenerService"
-            android:label="LTvLauncher Notification Service"
+            android:label="${appLabel} Notification Service"
             android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
             android:exported="true">
             <intent-filter>
@@ -117,7 +117,7 @@
 
         <service
             android:name=".LauncherAccessibilityService"
-            android:label="LTvLauncher Home Button Fix"
+            android:label="${appLabel} Home Button Fix"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
             android:exported="true">
             <intent-filter>

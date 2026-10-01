@@ -68,13 +68,13 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.leanbitlab.ltvL"
+        applicationId "com.niposch.ltvlauncher.extended"
         compileSdk 35
         minSdk 21
         targetSdk 35
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
-        manifestPlaceholders = [appLabel: "LTvLauncher"]
+        manifestPlaceholders = [appLabel: "LTvLauncher Extended"]
         ndk {
             abiFilters 'armeabi-v7a', 'arm64-v8a'
         }
@@ -95,15 +95,13 @@ android {
     buildTypes {
         debug {
             applicationIdSuffix '.debug'
+            manifestPlaceholders = [appLabel: "LTvLauncher Extended (Debug)"]
             signingConfig signingConfigs.debug
             ndk {
                 abiFilters 'armeabi-v7a', 'arm64-v8a'
             }
         }
         release {
-            // Fork: install alongside upstream LTvLauncher
-            applicationIdSuffix '.posters'
-            manifestPlaceholders = [appLabel: "LTv Posters"]
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -134,6 +132,8 @@ android {
     namespace 'com.leanbitlab.ltvL'
 
     applicationVariants.all { variant ->
+        // Dream settings must open this variant, including its debug suffix.
+        variant.resValue "string", "screensaver_settings_activity", "${variant.applicationId}/com.leanbitlab.ltvL.MainActivity"
         variant.outputs.all { output ->
             output.versionCodeOverride = variant.versionCode
             def abi = output.getFilter(com.android.build.OutputFile.ABI)

@@ -18,6 +18,8 @@
 
 
 import 'package:flauncher/fork/jellyfin_rows.dart';
+import 'package:flauncher/fork/jellyfin_service.dart';
+import 'package:flauncher/fork/seerr_service.dart';
 import 'package:flauncher/actions.dart';
 import 'package:flauncher/custom_traversal_policy.dart';
 import 'package:flauncher/providers/apps_service.dart';
@@ -78,9 +80,13 @@ class _FLauncherState extends State<FLauncher> {
                 child: Consumer<AppsService>(
                   builder: (context, appsService, _) {
                     if (appsService.initialized) {
-                      return Selector<WatchNextService, bool>(
-                        selector: (_, watchNext) => watchNext.programs.isNotEmpty,
-                        builder: (context, hasContinuingPrograms, _) =>
+                      return Selector3<WatchNextService, JellyfinService, SeerrService, bool>(
+                        selector: (_, watchNext, jellyfin, seerr) =>
+                            watchNext.programs.isNotEmpty ||
+                            jellyfin.nextUp.isNotEmpty ||
+                            jellyfin.recentlyAdded.isNotEmpty ||
+                            seerr.forYou.isNotEmpty,
+                        builder: (context, hasMediaPrograms, _) =>
                             Selector<SettingsService, ({bool show, int order})>(
                               selector: (_, settings) => (
                                 show: settings.showContinueWatching,
@@ -97,7 +103,7 @@ class _FLauncherState extends State<FLauncher> {
                                             appsService.launcherSections,
                                             continueWatchingActive:
                                                 cwSettings.show &&
-                                                hasContinuingPrograms,
+                                                hasMediaPrograms,
                                             continueWatchingOrder:
                                                 cwSettings.order),
                                       ],
@@ -182,7 +188,7 @@ class _FLauncherState extends State<FLauncher> {
     if (continueWatchingActive && !cwInserted) {
       final bool isFirstSection = !firstCategoryFound;
       children.add(ContinueWatchingRow(isFirstSection: isFirstSection));
-        children.add(const JellyfinRows());
+      children.add(const JellyfinRows());
       cwInserted = true;
       firstCategoryFound = true;
     }
