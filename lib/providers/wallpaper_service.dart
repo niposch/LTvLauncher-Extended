@@ -161,8 +161,8 @@ class WallpaperService extends ChangeNotifier {
       await _wallpaperFile.delete();
     }
 
-    _settingsService.setGradientUuid(fLauncherGradient.uuid);
-    notifyListeners();
+    await _settingsService.setGradientUuid(fLauncherGradient.uuid);
+    await _updateWallpaper(force: true);
   }
 }
 

@@ -9,6 +9,8 @@ import 'package:flutter/material.dart' show InkWell;
 import 'package:provider/provider.dart';
 import 'package:flauncher/flauncher.dart';
 import 'package:flauncher/providers/settings_service.dart';
+import 'package:flauncher/providers/wallpaper_service.dart';
+import 'package:flauncher/gradients.dart';
 import 'package:flauncher/widgets/app_card.dart';
 import 'package:flauncher/widgets/continue_watching_row.dart';
 
@@ -49,9 +51,12 @@ void installFrameProfiler() {
   });
   registerExtension('ext.ltv.settings', (method, parameters) async {
     SettingsService? settings;
+    WallpaperService? wallpaper;
     void visit(Element element) {
-      if (element.widget is FLauncher)
+      if (element.widget is FLauncher) {
         settings = element.read<SettingsService>();
+        wallpaper = element.read<WallpaperService>();
+      }
       element.visitChildren(visit);
     }
 
@@ -72,11 +77,17 @@ void installFrameProfiler() {
           .setShowContinueWatching(parameters['continueWatching'] == 'true');
     if (parameters.containsKey('theme'))
       await service.setThemes(parameters['theme']!);
+    if (parameters.containsKey('gradient')) {
+      final gradient = FLauncherGradients.all.firstWhere((g) =>
+          g.uuid == parameters['gradient'] || g.name == parameters['gradient']);
+      await wallpaper!.setGradient(gradient);
+    }
     return ServiceExtensionResponse.result(jsonEncode({
       'highlight': service.appHighlightAnimationEnabled,
       'transition': service.appSelectorTransitionAnimationEnabled,
       'continueWatching': service.showContinueWatching,
       'theme': service.themes,
+      'gradient': wallpaper?.gradient.name,
     }));
   });
   final frames = <FrameTiming>[];

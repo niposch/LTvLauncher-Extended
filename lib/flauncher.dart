@@ -30,6 +30,7 @@ import 'package:flauncher/widgets/apps_grid.dart';
 import 'package:flauncher/widgets/category_row.dart';
 import 'package:flauncher/widgets/launcher_alternative_view.dart';
 import 'package:flauncher/widgets/focus_aware_app_bar.dart';
+import 'package:flauncher/widgets/wallpaper_background.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flauncher/widgets/continue_watching_row.dart';
@@ -219,25 +220,7 @@ class _FLauncherState extends State<FLauncher> {
       background = Container(key: const Key("background"), decoration: BoxDecoration(gradient: wallpaperService.gradient.gradient));
     }
 
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        background,
-        DecoratedBox(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Colors.black.withOpacity(0.35),
-                Colors.black.withOpacity(0.15),
-                Colors.black.withOpacity(0.45),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
+    return WallpaperBackground(child: background);
   }
 
   Widget _emptyState(BuildContext context) {

@@ -16,6 +16,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import 'dart:async';
+
 import 'package:drift/drift.dart';
 import 'package:flauncher/gradients.dart';
 import 'package:flauncher/providers/wallpaper_service.dart';
@@ -81,6 +83,29 @@ void main() {
 
     verify(settingsService.setGradientUuid(FLauncherGradients.greatWhale.uuid));
     expect(wallpaperService.wallpaper, null);
+  });
+
+  test('Gradient listeners see the new value after preferences finish saving', () async {
+    final settings = MockSettingsService();
+    when(settings.timeBasedWallpaperEnabled).thenReturn(false);
+    when(settings.gradientUuid).thenReturn(FLauncherGradients.pitchBlack.uuid);
+    final saved = Completer<void>();
+    when(settings.setGradientUuid(FLauncherGradients.greatWhale.uuid)).thenAnswer((_) async {
+      await saved.future;
+      when(settings.gradientUuid).thenReturn(FLauncherGradients.greatWhale.uuid);
+    });
+    final wallpaper = WallpaperService(MockFLauncherChannel(), settings);
+    await untilCalled(pathProviderPlatform.getApplicationDocumentsPath());
+    await Future<void>.delayed(Duration.zero);
+    final notifications = <String>[];
+    wallpaper.addListener(() => notifications.add(wallpaper.gradient.uuid));
+    final change = wallpaper.setGradient(FLauncherGradients.greatWhale);
+    await untilCalled(settings.setGradientUuid(FLauncherGradients.greatWhale.uuid));
+    expect(notifications, isEmpty);
+    saved.complete();
+    await change;
+    expect(notifications, [FLauncherGradients.greatWhale.uuid]);
+    wallpaper.dispose();
   });
 
   group("getGradient", () {
