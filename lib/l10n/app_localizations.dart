@@ -1028,7 +1028,7 @@ abstract class AppLocalizations {
   /// No description provided for @weatherAutomatic.
   ///
   /// In en, this message translates to:
-  /// **'Use Breezy Weather / configured default'**
+  /// **'Clear location / use Breezy Weather'**
   String get weatherAutomatic;
 
   /// No description provided for @weatherLocationHint.
@@ -1064,7 +1064,7 @@ abstract class AppLocalizations {
   /// No description provided for @weatherSetupHint.
   ///
   /// In en, this message translates to:
-  /// **'Choose a weather location above, or enable local data sharing in Breezy Weather. Check your connection if weather is unavailable.'**
+  /// **'Choose a location above to show weather from Open-Meteo. You can also use an existing Breezy Weather configuration.'**
   String get weatherSetupHint;
 
   /// No description provided for @showWeatherWarnings.
@@ -1168,6 +1168,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Left: Dismiss • OK: Options'**
   String get dpadDismissHint;
+
+  /// No description provided for @configureWeather.
+  ///
+  /// In en, this message translates to:
+  /// **'Click to configure weather'**
+  String get configureWeather;
+
+  /// No description provided for @weatherSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Weather settings'**
+  String get weatherSettings;
+
+  /// No description provided for @weatherNoLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'No location selected'**
+  String get weatherNoLocation;
+
+  /// No description provided for @weatherUpdating.
+  ///
+  /// In en, this message translates to:
+  /// **'Updating weather…'**
+  String get weatherUpdating;
+
+  /// No description provided for @weatherUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Weather unavailable'**
+  String get weatherUnavailable;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

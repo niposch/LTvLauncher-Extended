@@ -2,10 +2,14 @@ import 'package:flauncher/providers/settings_service.dart';
 import 'package:flauncher/models/weather_data.dart';
 import 'package:flauncher/l10n/app_localizations.dart';
 import 'package:flauncher/providers/weather_service.dart';
+import 'package:flauncher/widgets/settings/settings_panel.dart';
+import 'package:flauncher/widgets/settings/weather_settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class WeatherStatusBarWidget extends StatefulWidget {
+  static const double pillHeight = 48;
+
   final FocusNode? focusNode;
 
   const WeatherStatusBarWidget({Key? key, this.focusNode}) : super(key: key);
@@ -17,6 +21,11 @@ class WeatherStatusBarWidget extends StatefulWidget {
 class _WeatherStatusBarWidgetState extends State<WeatherStatusBarWidget> {
   bool _focused = false;
 
+  void _openSettings() => showDialog<void>(
+        context: context,
+        builder: (_) =>
+            const SettingsPanel(initialRoute: WeatherSettingsPage.routeName),
+      );
   @override
   Widget build(BuildContext context) {
     return Selector<SettingsService, (bool, bool, bool, bool, bool)>(
@@ -40,14 +49,19 @@ class _WeatherStatusBarWidgetState extends State<WeatherStatusBarWidget> {
         return Consumer<WeatherService>(
           builder: (context, weatherService, _) {
             final weather = weatherService.weatherData;
-            if (weather == null) return const SizedBox.shrink();
 
-            final bool isWarning = showWarnings && weather.hasWarning;
-            final icon = weather.getConditionIcon();
+            final bool isWarning =
+                showWarnings && (weather?.hasWarning ?? false);
+            final icon = weather?.getConditionIcon() ?? Icons.cloud_outlined;
             final tempText =
-                weather.formatTemperature(useFahrenheit: useFahrenheit);
+                weather?.formatTemperature(useFahrenheit: useFahrenheit) ??
+                    (weatherService.configured
+                        ? weatherService.initialized
+                            ? AppLocalizations.of(context)!.weatherUnavailable
+                            : AppLocalizations.of(context)!.weatherUpdating
+                        : AppLocalizations.of(context)!.configureWeather);
             final details = <String>[];
-            if (showHighLow) {
+            if (showHighLow && weather != null) {
               final range = <String>[
                 if (weather.dailyHigh != null)
                   '↑${WeatherData.formatDegrees(weather.dailyHigh, useFahrenheit: useFahrenheit)}',
@@ -56,14 +70,14 @@ class _WeatherStatusBarWidgetState extends State<WeatherStatusBarWidget> {
               ];
               if (range.isNotEmpty) details.add(range.join(' '));
             }
-            if (showRainChance && weather.todayPrecipProbability != null) {
+            if (showRainChance && weather?.todayPrecipProbability != null) {
               details.add(AppLocalizations.of(context)!
-                  .weatherRainChance(weather.todayPrecipProbability!));
+                  .weatherRainChance(weather!.todayPrecipProbability!));
             }
 
             String displayText;
-            if (isWarning && weather.warningText != null) {
-              displayText = "$tempText • ${weather.warningText}";
+            if (isWarning && weather?.warningText != null) {
+              displayText = "$tempText • ${weather!.warningText}";
             } else {
               displayText = tempText;
             }
@@ -73,10 +87,10 @@ class _WeatherStatusBarWidgetState extends State<WeatherStatusBarWidget> {
             return Actions(
               actions: <Type, Action<Intent>>{
                 ActivateIntent: CallbackAction<ActivateIntent>(
-                  onInvoke: (_) => weatherService.openBreezyWeather(),
+                  onInvoke: (_) => _openSettings(),
                 ),
                 ButtonActivateIntent: CallbackAction<ButtonActivateIntent>(
-                  onInvoke: (_) => weatherService.openBreezyWeather(),
+                  onInvoke: (_) => _openSettings(),
                 ),
               },
               child: Focus(
@@ -84,10 +98,13 @@ class _WeatherStatusBarWidgetState extends State<WeatherStatusBarWidget> {
                 onFocusChange: (hasFocus) =>
                     setState(() => _focused = hasFocus),
                 child: InkWell(
-                  onTap: () => weatherService.openBreezyWeather(),
+                  canRequestFocus: false,
+                  onTap: () => _openSettings(),
                   borderRadius: BorderRadius.circular(14),
                   focusColor: Colors.transparent,
                   child: AnimatedContainer(
+                    key: const Key('statusbar_weather_pill'),
+                    height: WeatherStatusBarWidget.pillHeight,
                     duration: const Duration(milliseconds: 150),
                     padding:
                         const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
@@ -139,6 +156,7 @@ class _WeatherStatusBarWidgetState extends State<WeatherStatusBarWidget> {
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
                                   fontSize: 18,
+                                  height: 1.1,
                                   fontWeight: FontWeight.w400,
                                   color: Colors.white,
                                   shadows: [
@@ -149,14 +167,19 @@ class _WeatherStatusBarWidgetState extends State<WeatherStatusBarWidget> {
                                   ],
                                 ),
                               ),
-                              if (details.isNotEmpty)
+                              if (details.isNotEmpty) ...[
+                                const SizedBox(height: 3),
                                 Text(
                                   details.join(' · '),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: const TextStyle(
-                                      fontSize: 12, color: Colors.white70),
+                                      fontSize: 12,
+                                      height: 1.2,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.white70),
                                 ),
+                              ],
                             ],
                           )),
                         ],

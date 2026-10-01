@@ -480,7 +480,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get weatherLocation => 'Wetterstandort';
 
   @override
-  String get weatherAutomatic => 'Breezy Weather / konfigurierten Standard verwenden';
+  String get weatherAutomatic => 'Ort löschen / Breezy Weather verwenden';
 
   @override
   String get weatherLocationHint => 'Suche nach deinem Ort, um dortiges Wetter von Open-Meteo zu verwenden.';
@@ -498,7 +498,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get weatherSearchFailed => 'Ortssuche fehlgeschlagen. Prüfe deine Verbindung und versuche es erneut.';
 
   @override
-  String get weatherSetupHint => 'Wähle oben einen Wetterstandort oder aktiviere die lokale Datenfreigabe in Breezy Weather. Prüfe deine Verbindung, falls Wetterdaten fehlen.';
+  String get weatherSetupHint => 'Wähle oben einen Ort, um Wetterdaten von Open-Meteo anzuzeigen. Du kannst auch eine vorhandene Breezy-Weather-Konfiguration verwenden.';
 
   @override
   String get showWeatherWarnings => 'Wetter- & Regenwarnungen anzeigen';
@@ -550,4 +550,19 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get dpadDismissHint => 'Links: Verwerfen • OK: Optionen';
+
+  @override
+  String get configureWeather => 'Wetter konfigurieren';
+
+  @override
+  String get weatherSettings => 'Wettereinstellungen';
+
+  @override
+  String get weatherNoLocation => 'Kein Ort ausgewählt';
+
+  @override
+  String get weatherUpdating => 'Wetter wird aktualisiert…';
+
+  @override
+  String get weatherUnavailable => 'Wetter nicht verfügbar';
 }

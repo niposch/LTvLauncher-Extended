@@ -3,6 +3,8 @@ import 'package:flauncher/l10n/app_localizations.dart';
 import 'package:flauncher/providers/settings_service.dart';
 import 'package:flauncher/providers/weather_service.dart';
 import 'package:flauncher/widgets/weather_status_bar_widget.dart';
+import 'package:flauncher/widgets/settings/weather_settings_page.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -39,27 +41,66 @@ void main() {
     when(mockSettingsService.showWeatherWarnings).thenReturn(false);
     when(mockSettingsService.showWeatherHighLow).thenReturn(false);
     when(mockSettingsService.showWeatherRainChance).thenReturn(false);
+    when(mockWeatherService.configured).thenReturn(true);
+    when(mockWeatherService.initialized).thenReturn(true);
+    when(mockWeatherService.isBreezyInstalled).thenReturn(false);
+    when(mockWeatherService.usesOpenMeteo).thenReturn(true);
+    when(mockSettingsService.weatherLocation).thenReturn(null);
     when(mockWeatherService.hasWeather).thenReturn(true);
     when(mockWeatherService.weatherData).thenReturn(testWeatherWithWarning);
   });
 
   Widget createWidgetUnderTest() {
-    return MaterialApp(
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      home: Scaffold(
-        body: MultiProvider(
-          providers: [
-            ChangeNotifierProvider<SettingsService>.value(
-                value: mockSettingsService),
-            ChangeNotifierProvider<WeatherService>.value(
-                value: mockWeatherService),
-          ],
-          child: const WeatherStatusBarWidget(),
-        ),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<SettingsService>.value(
+            value: mockSettingsService),
+        ChangeNotifierProvider<WeatherService>.value(value: mockWeatherService),
+      ],
+      child: MaterialApp(
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: const Scaffold(body: WeatherStatusBarWidget()),
       ),
     );
   }
+
+  testWidgets('unconfigured pill opens weather settings and location picker',
+      (tester) async {
+    when(mockWeatherService.weatherData).thenReturn(null);
+    when(mockWeatherService.hasWeather).thenReturn(false);
+    when(mockWeatherService.configured).thenReturn(false);
+    await tester.pumpWidget(createWidgetUnderTest());
+    expect(find.text('Click to configure weather'), findsOneWidget);
+    await tester.tap(find.text('Click to configure weather'));
+    await tester.pumpAndSettle();
+    expect(find.byType(WeatherSettingsPage), findsOneWidget);
+    expect(find.text('Weather location: No location selected'), findsOneWidget);
+    await tester.sendKeyEvent(LogicalKeyboardKey.select);
+    await tester.pumpAndSettle();
+    expect(find.byType(TextField), findsOneWidget);
+    verifyNever(mockWeatherService.openBreezyWeather());
+  });
+
+  testWidgets('remote activation opens settings for configured weather',
+      (tester) async {
+    await tester.pumpWidget(createWidgetUnderTest());
+    await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+    await tester.pump();
+    await tester.sendKeyEvent(LogicalKeyboardKey.select);
+    await tester.pumpAndSettle();
+    expect(find.byType(WeatherSettingsPage), findsOneWidget);
+    verifyNever(mockWeatherService.openBreezyWeather());
+  });
+
+  testWidgets(
+      'configured weather failure offers settings without a setup prompt',
+      (tester) async {
+    when(mockWeatherService.weatherData).thenReturn(null);
+    await tester.pumpWidget(createWidgetUnderTest());
+    expect(find.text('Weather unavailable'), findsOneWidget);
+    expect(find.text('Click to configure weather'), findsNothing);
+  });
 
   testWidgets('optional high/low and precipitation fit inside the app bar',
       (tester) async {

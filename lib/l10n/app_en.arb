@@ -214,13 +214,13 @@
     "weatherRainChance": "Precip. {chance}%",
     "@weatherRainChance": {"placeholders": {"chance": {"type": "int"}}},
     "weatherLocation": "Weather location",
-    "weatherAutomatic": "Use Breezy Weather / configured default",
+    "weatherAutomatic": "Clear location / use Breezy Weather",
     "weatherLocationHint": "Search for your city to use Open-Meteo weather at that location.",
     "searchWeatherCity": "City or postal code",
     "weatherSearch": "Search",
     "weatherNoLocations": "No locations found. Try a city name or postal code.",
     "weatherSearchFailed": "Could not search locations. Check your connection and try again.",
-    "weatherSetupHint": "Choose a weather location above, or enable local data sharing in Breezy Weather. Check your connection if weather is unavailable.",
+    "weatherSetupHint": "Choose a location above to show weather from Open-Meteo. You can also use an existing Breezy Weather configuration.",
     "showWeatherWarnings": "Show Weather & Rain Warnings",
     "temperatureUnit": "Temperature Unit",
     "celsius": "Celsius (°C)",
@@ -237,5 +237,10 @@
     "noBlockedAppsDesc": "All applications are currently allowed to show notifications",
     "notificationsAllowed": "Notifications Allowed",
     "notificationsBlocked": "Notifications Blocked",
-    "dpadDismissHint": "Left: Dismiss • OK: Options"
+    "dpadDismissHint": "Left: Dismiss • OK: Options",
+    "configureWeather": "Click to configure weather",
+    "weatherSettings": "Weather settings",
+    "weatherNoLocation": "No location selected",
+    "weatherUpdating": "Updating weather…",
+    "weatherUnavailable": "Weather unavailable"
 }

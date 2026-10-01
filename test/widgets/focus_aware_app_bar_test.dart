@@ -1,4 +1,6 @@
 import 'package:flauncher/providers/weather_service.dart';
+import 'package:flauncher/l10n/app_localizations.dart';
+import 'package:flauncher/models/weather_data.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flauncher/widgets/focus_aware_app_bar.dart';
@@ -50,12 +52,33 @@ void main() {
 
   Widget createWidgetUnderTest() {
     return MaterialApp(
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       home: Scaffold(
         appBar: FocusAwareAppBar(),
         body: Container(),
       ),
     );
   }
+
+  testWidgets('two-row weather and clock pills have equal heights and centers', (tester) async {
+    when(mockSettingsService.showWeatherInStatusBar).thenReturn(true);
+    when(mockSettingsService.showWeatherHighLow).thenReturn(true);
+    when(mockWeatherService.weatherData).thenReturn(const WeatherData(
+      currentTemp: 20, todayMinTemp: 10, todayMaxTemp: 25));
+    await tester.pumpWidget(MultiProvider(providers: [
+      ChangeNotifierProvider<SettingsService>.value(value: mockSettingsService),
+      ChangeNotifierProvider<TvInputsService>.value(value: mockTvInputsService),
+      ChangeNotifierProvider<NotificationsService>.value(value: mockNotificationsService),
+      ChangeNotifierProvider<WeatherService>.value(value: mockWeatherService),
+    ], child: createWidgetUnderTest()));
+    final weather = tester.getRect(find.byKey(const Key('statusbar_weather_pill')));
+    final clock = tester.getRect(find.byKey(const Key('statusbar_datetime_pill')));
+    expect(weather.height, clock.height);
+    expect(weather.center.dy, clock.center.dy);
+    expect(find.text('↑25°C ↓10°C'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
 
   testWidgets('FocusAwareAppBar renders settings button and date/time widgets', (WidgetTester tester) async {
     await tester.pumpWidget(

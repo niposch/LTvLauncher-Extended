@@ -3,13 +3,13 @@
     "showWeatherRainChance": "Heutige Regen- / Schneewahrscheinlichkeit anzeigen",
     "weatherRainChance": "Niederschlag {chance}%",
     "weatherLocation": "Wetterstandort",
-    "weatherAutomatic": "Breezy Weather / konfigurierten Standard verwenden",
+    "weatherAutomatic": "Ort löschen / Breezy Weather verwenden",
     "weatherLocationHint": "Suche nach deinem Ort, um dortiges Wetter von Open-Meteo zu verwenden.",
     "searchWeatherCity": "Ort oder Postleitzahl",
     "weatherSearch": "Suchen",
     "weatherNoLocations": "Keine Orte gefunden. Versuche einen Ortsnamen oder eine Postleitzahl.",
     "weatherSearchFailed": "Ortssuche fehlgeschlagen. Prüfe deine Verbindung und versuche es erneut.",
-    "weatherSetupHint": "Wähle oben einen Wetterstandort oder aktiviere die lokale Datenfreigabe in Breezy Weather. Prüfe deine Verbindung, falls Wetterdaten fehlen.",
+    "weatherSetupHint": "Wähle oben einen Ort, um Wetterdaten von Open-Meteo anzuzeigen. Du kannst auch eine vorhandene Breezy-Weather-Konfiguration verwenden.",
     "aboutFlauncher": "Über LTv Extended",
     "addCategory": "Kategorie hinzufügen",
     "addSection": "Abschnitt hinzufügen",
@@ -236,5 +236,10 @@
     "noBlockedAppsDesc": "Alle Apps dürfen derzeit Benachrichtigungen anzeigen",
     "notificationsAllowed": "Benachrichtigungen erlaubt",
     "notificationsBlocked": "Benachrichtigungen blockiert",
-    "dpadDismissHint": "Links: Verwerfen • OK: Optionen"
+    "dpadDismissHint": "Links: Verwerfen • OK: Optionen",
+    "configureWeather": "Wetter konfigurieren",
+    "weatherSettings": "Wettereinstellungen",
+    "weatherNoLocation": "Kein Ort ausgewählt",
+    "weatherUpdating": "Wetter wird aktualisiert…",
+    "weatherUnavailable": "Wetter nicht verfügbar"
 }

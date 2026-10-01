@@ -11,7 +11,7 @@ Release builds use **`com.niposch.ltvlauncher.extended`** and the label **LTv Ex
 | Android identity | Separate package, app label, data, and service permissions so it can coexist with upstream and LTv Posters |
 | Continue Watching | Poster artwork behind cards, downloaded in a bounded worker pool, downscaled, and cached on disk |
 | Rendering | Cached wallpaper and gradient composition, fast solid fill for Pitch Black, synchronized focus scaling and shadows, and clean rounded card corners. See [device measurements](docs/performance.md) |
-| Weather | City search in Settings → Interface → Status bar, with optional daily high/low and precipitation chance; Open-Meteo and Breezy Weather support |
+| Weather | Click the weather pill to configure a city (no default city), with optional daily high/low and precipitation chance; Open-Meteo and Breezy Weather support |
 | Jellyfin | Optional Next Up and Recently Added rows, opening items in Jellyfin for Android TV |
 | Seerr | Optional For You recommendations from watch history and requests, opening items in Seerr TV |
 | Configuration | Weather options and selected city included in settings backups; media server credentials in an app-specific `fork_config.json`, excluded from backups |
@@ -57,15 +57,13 @@ With native D-pad navigation, recency-sorted Continue Watching rows, customizabl
   <tr>
     <td align="center"><b>Home Screen</b></td>
     <td align="center"><b>Settings Overview</b></td>
-    <td align="center"><b>Category & Layout</b></td>
-    <td align="center"><b>Accessibility & Remap</b></td>
+    <td align="center"><b>Weather Settings</b></td>
     <td align="center"><b>OLED Screensaver</b></td>
   </tr>
   <tr>
     <td><img src="docs/images/screenshot_1.png" width="180" alt="Home Screen"/></td>
     <td><img src="docs/images/screenshot_2.png" width="180" alt="Settings Overview"/></td>
-    <td><img src="docs/images/screenshot_3.png" width="180" alt="Category & Layout"/></td>
-    <td><img src="docs/images/screenshot_4.png" width="180" alt="Accessibility & Remap"/></td>
+    <td><img src="docs/images/screenshot_3.png" width="180" alt="Weather Settings"/></td>
     <td><img src="docs/images/screensaver.gif" width="180" alt="OLED Screensaver"/></td>
   </tr>
 </table>

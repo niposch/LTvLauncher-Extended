@@ -11,18 +11,16 @@ import 'package:path_provider/path_provider.dart';
 /// API key, and is pushed with adb rather than typed on a TV remote.
 ///
 /// {
-///   "weather":  { "name": "Auckland", "latitude": -36.8485, "longitude": 174.7633 },
+///   "weather":  { "name": "Berlin", "latitude": 52.52, "longitude": 13.405 },
 ///   "jellyfin": { "url": "http://192.168.0.243:8096", "apiKey": "...", "userId": "..." },
 ///   "seerr":    { "url": "https://requests.example.com", "apiKey": "..." }
 /// }
 class ForkConfig {
-  final WeatherLocation weather;
+  final WeatherLocation? weather;
   final JellyfinConfig? jellyfin;
   final SeerrConfig? seerr;
 
-  const ForkConfig({required this.weather, this.jellyfin, this.seerr});
-
-  static const _defaultWeather = WeatherLocation(name: 'Auckland', latitude: -36.8485, longitude: 174.7633);
+  const ForkConfig({this.weather, this.jellyfin, this.seerr});
 
   static Future<ForkConfig>? _cached;
 
@@ -31,18 +29,18 @@ class ForkConfig {
   static Future<ForkConfig> _load() async {
     try {
       final dir = await getExternalStorageDirectory();
-      if (dir == null) return const ForkConfig(weather: _defaultWeather);
+      if (dir == null) return const ForkConfig();
       final file = File('${dir.path}/fork_config.json');
-      if (!await file.exists()) return const ForkConfig(weather: _defaultWeather);
+      if (!await file.exists()) return const ForkConfig();
       final json = jsonDecode(await file.readAsString()) as Map<String, dynamic>;
       return ForkConfig(
-        weather: WeatherLocation.fromJson(json['weather'] as Map<String, dynamic>?) ?? _defaultWeather,
+        weather: WeatherLocation.fromJson(json['weather'] as Map<String, dynamic>?),
         jellyfin: JellyfinConfig.fromJson(json['jellyfin'] as Map<String, dynamic>?),
         seerr: SeerrConfig.fromJson(json['seerr'] as Map<String, dynamic>?),
       );
     } catch (e, stack) {
       developer.log('Failed to read fork_config.json', name: 'ForkConfig', error: e, stackTrace: stack);
-      return const ForkConfig(weather: _defaultWeather);
+      return const ForkConfig();
     }
   }
 }

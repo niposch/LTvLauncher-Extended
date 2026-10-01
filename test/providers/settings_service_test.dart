@@ -218,7 +218,7 @@ void main() async {
     test("default weather preferences", () async {
       final sp = await SharedPreferences.getInstance();
       final service = SettingsService(sp);
-      expect(service.showWeatherInStatusBar, isFalse);
+      expect(service.showWeatherInStatusBar, isTrue);
       expect(service.showWeatherWarnings, isTrue);
       expect(service.temperatureUnit, TEMPERATURE_UNIT_CELSIUS);
       expect(service.useFahrenheit, isFalse);

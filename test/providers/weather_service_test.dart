@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flauncher/fork/fork_config.dart';
 import 'package:flauncher/models/weather_data.dart';
 import 'package:flauncher/providers/weather_service.dart';
 import 'package:flutter/widgets.dart';
@@ -50,6 +51,23 @@ void main() {
   });
 
   group('WeatherService', () {
+    test('fresh install has no default location and makes no forecast request', () async {
+      when(mockChannel.isBreezyWeatherInstalled()).thenAnswer((_) async => false);
+      when(mockChannel.getLatestWeatherData()).thenAnswer((_) async => null);
+      var requests = 0;
+      weatherService = WeatherService(mockChannel,
+        loadFallbackLocation: () async => const ForkConfig().weather,
+        fetchWeather: (_) async { requests++; return validWeatherJson; });
+      while (!weatherService.initialized) {
+        await Future.delayed(Duration.zero);
+      }
+      expect(weatherService.configured, false);
+      expect(weatherService.weatherData, isNull);
+      await weatherService.refresh();
+      expect(requests, 0);
+      weatherService.dispose();
+    });
+
     test('initializes with cached data and Breezy installed status', () async {
       weatherService = WeatherService(mockChannel);
       while (!weatherService.initialized) {

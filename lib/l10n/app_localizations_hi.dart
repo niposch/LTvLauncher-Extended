@@ -480,7 +480,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get weatherLocation => 'Weather location';
 
   @override
-  String get weatherAutomatic => 'Use Breezy Weather / configured default';
+  String get weatherAutomatic => 'Clear location / use Breezy Weather';
 
   @override
   String get weatherLocationHint => 'Search for your city to use Open-Meteo weather at that location.';
@@ -498,7 +498,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get weatherSearchFailed => 'Could not search locations. Check your connection and try again.';
 
   @override
-  String get weatherSetupHint => 'Choose a weather location above, or enable local data sharing in Breezy Weather. Check your connection if weather is unavailable.';
+  String get weatherSetupHint => 'Choose a location above to show weather from Open-Meteo. You can also use an existing Breezy Weather configuration.';
 
   @override
   String get showWeatherWarnings => 'मौसम और बारिश की चेतावनी दिखाएं';
@@ -550,4 +550,19 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get dpadDismissHint => 'बायां: हटाएं • ठीक है: विकल्प';
+
+  @override
+  String get configureWeather => 'Click to configure weather';
+
+  @override
+  String get weatherSettings => 'Weather settings';
+
+  @override
+  String get weatherNoLocation => 'No location selected';
+
+  @override
+  String get weatherUpdating => 'Updating weather…';
+
+  @override
+  String get weatherUnavailable => 'Weather unavailable';
 }

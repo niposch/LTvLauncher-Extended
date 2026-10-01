@@ -12,7 +12,8 @@ class WeatherService extends ChangeNotifier with WidgetsBindingObserver {
   final FLauncherChannel _channel;
   final SettingsService? _settings;
   final Future<String> Function(WeatherLocation) _fetchWeather;
-  final Future<WeatherLocation> Function() _loadFallbackLocation;
+  final Future<WeatherLocation?> Function() _loadFallbackLocation;
+  bool _configured = false;
   String? _locationKey;
   int _locationRevision = 0;
   bool _disposed = false;
@@ -33,7 +34,7 @@ class WeatherService extends ChangeNotifier with WidgetsBindingObserver {
     this._channel, {
     SettingsService? settings,
     Future<String> Function(WeatherLocation)? fetchWeather,
-    Future<WeatherLocation> Function()? loadFallbackLocation,
+    Future<WeatherLocation?> Function()? loadFallbackLocation,
   })  : _settings = settings,
         _fetchWeather = fetchWeather ?? fetchOpenMeteoWeatherJson,
         _loadFallbackLocation = loadFallbackLocation ??
@@ -51,6 +52,7 @@ class WeatherService extends ChangeNotifier with WidgetsBindingObserver {
   bool get initialized => _initialized;
   bool get hasWeather => _weatherData != null;
   bool get usesOpenMeteo => _usesOpenMeteo;
+  bool get configured => _settings?.weatherLocation != null || _configured;
 
   String? get _selectedLocationKey =>
       _settings?.weatherLocation?.toJson().toString();
@@ -62,6 +64,7 @@ class WeatherService extends ChangeNotifier with WidgetsBindingObserver {
     _locationRevision++;
     _lastOpenMeteoFetch = null;
     _lastJson = null;
+    _configured = false;
     // Do not label the old city's weather as the newly selected city.
     _weatherData = null;
     notifyListeners();
@@ -135,6 +138,7 @@ class WeatherService extends ChangeNotifier with WidgetsBindingObserver {
       final latestJson = await _channel.getLatestWeatherData();
       if (_disposed || revision != _locationRevision) return;
       if (latestJson != null && latestJson.isNotEmpty) {
+        _configured = true;
         _usesOpenMeteo = false;
         _processWeatherJson(latestJson);
       } else if (!_isBreezyInstalled) {
@@ -158,6 +162,8 @@ class WeatherService extends ChangeNotifier with WidgetsBindingObserver {
       final location =
           _settings?.weatherLocation ?? await _loadFallbackLocation();
       if (_disposed || revision != _locationRevision) return;
+      _configured = location != null;
+      if (location == null) return;
       final json = await _fetchWeather(location);
       if (_disposed || revision != _locationRevision) return;
       _usesOpenMeteo = true;
@@ -175,6 +181,7 @@ class WeatherService extends ChangeNotifier with WidgetsBindingObserver {
     }
     try {
       _weatherData = WeatherData.fromJsonString(jsonString);
+      _configured = true;
       _lastJson = jsonString;
       notifyListeners();
     } catch (e, stack) {

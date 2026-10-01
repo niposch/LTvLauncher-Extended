@@ -19,11 +19,11 @@ For debug APKs, use `com.niposch.ltvlauncher.extended.debug` in the command and 
 
 ## Weather options
 
-Open **Settings → Interface → Status bar**, enable **Weather**, then select **Weather location**. Search for a city or postal code and choose the matching region and country with the remote. This uses Open-Meteo for the selected city and refreshes immediately, even if Breezy Weather is installed. The selected location is saved in launcher settings and included in backups.
+Select the weather pill to open **Weather settings**, then select **Weather location**. The same page is available under **Settings → Interface → Status bar → Weather settings**. On a fresh install, no city is selected and the pill says **Click to configure weather**. Search for a city or postal code and choose the matching region and country with the remote. This uses Open-Meteo for the selected city and refreshes immediately, even if Breezy Weather is installed. The selected location is saved in launcher settings and included in backups.
 
 **Show today's high and low** and **Show today's rain / snow chance** are separate optional switches, off by default. The compact second line shows `↑` for the daily high, `↓` for the daily low, and `Precip.` for today's maximum precipitation probability (rain or snow). Temperatures follow the Celsius/Fahrenheit setting. Missing values are omitted; a warning about a later day does not replace today's probability.
 
-**Use Breezy Weather / configured default** removes the city override. Weather then comes from Breezy broadcasts, or Open-Meteo when Breezy is absent. The legacy `weather` entry in `fork_config.json` remains the Open-Meteo fallback, with Auckland as the inherited default. The settings page displays the active city and source.
+**Clear location / use Breezy Weather** removes the city override. Weather can then come from an existing Breezy configuration, or an explicit legacy `weather` entry in `fork_config.json` when Breezy is absent. There is no built-in default city. The settings page displays the active city and source. Weather and clock pills share a consistent height, including when optional stats add a second line.
 
 City search uses the [Open-Meteo Geocoding API](https://open-meteo.com/en/docs/geocoding-api), whose location data comes from GeoNames. Forecasts use [Open-Meteo](https://open-meteo.com/); no API key or device location permission is needed.
 
@@ -50,7 +50,7 @@ Launch the app once to create its external files directory, then create a local 
 }
 ```
 
-Omit `jellyfin` or `seerr` to disable that integration. Configuration is read once per app process and kept out of settings backups. Keep your local file and API keys out of Git.
+Omit `weather`, `jellyfin`, or `seerr` to leave that integration unconfigured. Weather can be configured from the pill without this file. Configuration is read once per app process and kept out of settings backups. Keep your local file and API keys out of Git.
 
 ```sh
 adb push fork_config.json /sdcard/Android/data/com.niposch.ltvlauncher.extended/files/fork_config.json
