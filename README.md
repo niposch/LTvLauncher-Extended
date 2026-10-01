@@ -1,5 +1,28 @@
 # LTv Extended
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".github/assets/banner_dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset=".github/assets/banner_light.svg">
+  <img alt="LTv Extended Banner" src=".github/assets/banner_light.svg">
+</picture>
+
+<div align="center">
+
+[![Latest Release](https://img.shields.io/github/v/release/niposch/LTvLauncher-Extended?style=flat-square&color=4f46e5&label=Release)](https://github.com/niposch/LTvLauncher-Extended/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/niposch/LTvLauncher-Extended/total?style=flat-square&color=059669&label=Downloads)](https://github.com/niposch/LTvLauncher-Extended/releases)
+[![Stars](https://img.shields.io/github/stars/niposch/LTvLauncher-Extended?style=flat-square&color=dc2626&label=Stars)](https://github.com/niposch/LTvLauncher-Extended/stargazers)
+[![License: GPL v3](https://img.shields.io/badge/License-GPL_v3-blue.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-3.0)
+[![Sponsor](https://img.shields.io/badge/Sponsor-LeanBitLab-db2777?style=flat-square&logo=githubsponsors&logoColor=white)](https://github.com/sponsors/LeanBitLab)
+[![Downloader: 1090273](https://img.shields.io/badge/Downloader-1090273-ff8a00?style=flat-square&logo=android&logoColor=white)](https://go.aftvnews.com/1090273)
+[![Donate on Open Collective](https://img.shields.io/badge/Donate-Open_Collective-1f6feb?style=flat-square&logo=opencollective&logoColor=white)](https://opencollective.com/leanbitlab-org)
+
+**A fast, private, and customizable open-source launcher for Android TV.**
+*Forked from [LTvLauncher](https://github.com/leanbitlab-org/LtvLauncher), which was forked from [osrosal’s FLauncher](https://github.com/osrosal/flauncher), based on [FLauncher by Étienne Fesser](https://gitlab.com/flauncher/flauncher).*
+
+[Screenshots](#-screenshots) • [Download APKs](#-download) • [Features](#-features) • [Setup Guide](#-setup-guide) • [Community](#-community--contributing) • [Other Projects](https://github.com/LeanBitLab#-android-projects)
+
+</div>
+
 This fork integrates [hamishakl's `posters` branch](https://github.com/hamishakl/LtvLauncher/tree/posters), authored by **hamish henare**, into LTvLauncher. The original commits and authorship are preserved. See [ATTRIBUTION.md](ATTRIBUTION.md) for credits and [the extension setup guide](docs/extensions.md) for weather, Jellyfin, and Seerr configuration.
 
 Release builds use **`com.niposch.ltvlauncher.extended`** and the label **LTv Extended**. Debug builds use **`com.niposch.ltvlauncher.extended.debug`**. Both can be installed alongside upstream LTvLauncher (`com.leanbitlab.ltvL`) and LTv Posters (`com.leanbitlab.ltvL.posters`), with their own app data and permissions. The visible app name is LTv Extended; its package ID stays stable across this branding update.
@@ -18,27 +41,7 @@ Release builds use **`com.niposch.ltvlauncher.extended`** and the label **LTv Ex
 
 The media and weather additions above are credited to **hamish henare (hamishakl)**. See [extension setup](docs/extensions.md) and [full attribution](ATTRIBUTION.md).
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".github/assets/banner_dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset=".github/assets/banner_light.svg">
-  <img alt="LTv Extended Banner" src=".github/assets/banner_light.svg">
-</picture>
 
-<div align="center">
-
-[![Latest Release](https://img.shields.io/github/v/release/niposch/LTvLauncher-Extended?style=flat-square&color=4f46e5&label=Release)](https://github.com/niposch/LTvLauncher-Extended/releases/latest)
-[![Downloads](https://img.shields.io/github/downloads/niposch/LTvLauncher-Extended/total?style=flat-square&color=059669&label=Downloads)](https://github.com/niposch/LTvLauncher-Extended/releases)
-[![Stars](https://img.shields.io/github/stars/niposch/LTvLauncher-Extended?style=flat-square&color=dc2626&label=Stars)](https://github.com/niposch/LTvLauncher-Extended/stargazers)
-[![License: GPL v3](https://img.shields.io/badge/License-GPL_v3-blue.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-3.0)
-[![Sponsor](https://img.shields.io/badge/Sponsor-LeanBitLab-db2777?style=flat-square&logo=githubsponsors&logoColor=white)](https://github.com/sponsors/LeanBitLab)
-[![Donate on Open Collective](https://img.shields.io/badge/Donate-Open_Collective-1f6feb?style=flat-square&logo=opencollective&logoColor=white)](https://opencollective.com/leanbitlab-org)
-
-**A fast, private, and customizable open-source launcher for Android TV.**
-*Forked from [FLauncher](https://github.com/osrosal/flauncher) (originally by [etienn01](https://gitlab.com/flauncher/flauncher)).*
-
-[Screenshots](#-screenshots) • [Download APKs](#-download) • [Features](#-features) • [Setup Guide](#-setup-guide) • [Community](#-community--contributing) • [Other Projects](https://github.com/LeanBitLab#-android-projects)
-
-</div>
 
 ---
 
@@ -52,6 +55,8 @@ With native D-pad navigation, recency-sorted Continue Watching rows, customizabl
 
 ## 📸 Screenshots
 
+These captures use fictional programs and original artwork. See [the reproducible capture setup](docs/screenshots.md).
+
 <table>
   <tr>
     <td align="center"><b>Home Screen</b></td>
@@ -60,9 +65,9 @@ With native D-pad navigation, recency-sorted Continue Watching rows, customizabl
     <td align="center"><b>OLED Screensaver</b></td>
   </tr>
   <tr>
-    <td><img src="docs/images/screenshot_1.png" width="180" alt="Home Screen"/></td>
-    <td><img src="docs/images/screenshot_2.png" width="180" alt="Settings Overview"/></td>
-    <td><img src="docs/images/screenshot_3.png" width="180" alt="Weather Settings"/></td>
+    <td><img src="docs/images/home.png" width="180" alt="Home Screen"/></td>
+    <td><img src="docs/images/settings.png" width="180" alt="Settings Overview"/></td>
+    <td><img src="docs/images/weather.png" width="180" alt="Weather Settings"/></td>
     <td><img src="docs/images/screensaver.gif" width="180" alt="OLED Screensaver"/></td>
   </tr>
 </table>
@@ -114,6 +119,8 @@ With native D-pad navigation, recency-sorted Continue Watching rows, customizabl
 [LTv Extended releases](https://github.com/niposch/LTvLauncher-Extended/releases) contain this fork’s APKs when published. You can also [build locally](docs/extensions.md#local-build). Upstream store listings and Downloader codes distribute the original app.
 
 **[Download the latest universal APK](https://github.com/niposch/LTvLauncher-Extended/releases/latest/download/LTv-Extended-universal-release.apk)** — this permanent URL follows the latest stable release and is suitable for an AFTVnews Downloader short code. Each release keeps the same APK filename.
+
+For **Downloader by AFTVnews**, enter code **`1090273`**, or open [go.aftvnews.com/1090273](https://go.aftvnews.com/1090273).
 
 ### Architecture Matrix
 
