@@ -79,7 +79,7 @@ class ContinueWatchingRow extends StatelessWidget {
             children: [
               if (settingsService.showCategoryTitles)
                 Padding(
-                  padding: const EdgeInsets.only(left: 16, bottom: 8),
+                  padding: const EdgeInsets.only(left: 32, bottom: 8),
                   child: Row(
                     children: [
                       Text(
@@ -109,7 +109,7 @@ class ContinueWatchingRow extends StatelessWidget {
                 height: rowHeight,
                 child: ListView.builder(
                   clipBehavior: Clip.none,
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
                   physics: const ClampingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   itemCount: programs.length,

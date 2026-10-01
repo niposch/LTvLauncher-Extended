@@ -43,6 +43,12 @@ The follow-up capture moved **eight Continue Watching cards right, then eight le
 
 These are Flutter frame-stage measurements, not a direct measurement of screen presentation or a benchmark of Google TV Home. The tested gradients met the frame budget throughout their wider captures. The image wallpaper had a few remaining long frames. Cold startup, new image downloads, very large images, changing backgrounds, and other devices can produce different results. A background being visually detailed does not require it to be recomputed every animation frame.
 
+### Row edges and shadow space
+
+The vertical scroll viewport formerly sat inside 16 logical pixels of page padding on each side. Its clip cut a straight edge through the leftmost card's shadow and left a background strip beside horizontally scrolling cards. Horizontal rows now occupy the full screen width; their own scroll-content padding preserves the 32-pixel resting margin of the first/last card and headings. Grid categories retain their original width and padding. This applies to Continue Watching, app rows, and Jellyfin/Seerr rows.
+
+After this viewport change, the same eight-card sweeps on Great Whale recorded 1,117 frames with a 6.483 ms raster median, 10.110 ms p95, and no over-budget frames. The Pitch Black run recorded 1,121 frames with a 6.373 ms median, 12.578 ms p95, and 18 over-budget frames (1.61%). First-card and mid-row screenshots were checked against the colored background for shadow truncation and the inset strip.
+
 ## Reproduce
 
 Use Flutter 3.24.5, an Android SDK, and a paired ADB device. Generate dependencies, mocks, and migration fixtures as in the release workflow. Database tests on Windows also need a compatible x64 `sqlite3.dll` on PATH.
@@ -72,4 +78,4 @@ Use `focus row=apps index=0` for the app row. `trace` enables Dart/GC/Embedder t
 
 ## Validation
 
-The final full Flutter test suite passed: 278 tests, with two existing skips. Tests cover synchronized focus reversal, instant updates when animations are disabled, the solid black wallpaper path, and corner pixels that must never become brighter than the shaded artwork. The corner pixel regression fails with the old `antiAlias` clip and passes with the corrected compositing. Additional tests compare the original and cached linear/radial backgrounds byte-for-byte and verify listeners see the new gradient after preferences finish saving. Static analysis of the changed production code, new tests, and profiling tools passed. The normal release APK was built, signed with the local Android debug key for device testing, installed alongside upstream, and launched successfully.
+The final full Flutter test suite passed: 279 tests, with two existing skips. Tests cover synchronized focus reversal, instant updates when animations are disabled, the solid black wallpaper path, and corner pixels that must never become brighter than the shaded artwork. The corner pixel regression fails with the old `antiAlias` clip and passes with the corrected compositing. Additional tests compare the original and cached linear/radial backgrounds byte-for-byte and verify listeners see the new gradient after preferences finish saving. The layout regression also checks full-width row viewports, heading/grid alignment, and the resting margin of the last card. Static analysis of the changed production code, new tests, and profiling tools passed. The normal release APK was built, signed with the local Android debug key for device testing, installed alongside upstream, and launched successfully.

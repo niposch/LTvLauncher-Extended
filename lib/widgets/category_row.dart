@@ -44,14 +44,17 @@ class CategoryRow extends StatelessWidget
   Widget build(BuildContext context) {
     Widget categoryContent;
     if (applications.isEmpty) {
-      categoryContent = categoryContainerEmptyState(context);
+      categoryContent = Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: categoryContainerEmptyState(context),
+      );
     }
     else {
       categoryContent = SizedBox(
         height: category.rowHeight.toDouble(),
         child: ListView.custom(
           clipBehavior: Clip.none,
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
           scrollDirection: Axis.horizontal,
           childrenDelegate: SliverChildBuilderDelegate(
             childCount: applications.length,
@@ -85,7 +88,7 @@ class CategoryRow extends StatelessWidget
           builder: (context, showCategoriesTitle, _) {
             if (showCategoriesTitle) {
               return Padding(
-                padding: const EdgeInsets.only(left: 16, bottom: 8),
+                padding: const EdgeInsets.only(left: 32, bottom: 8),
                 child: Row(
                   children: [
                     Text(category.name,

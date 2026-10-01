@@ -67,7 +67,7 @@ class JellyfinRows extends StatelessWidget {
         children: [
           if (settings.showCategoryTitles)
             Padding(
-              padding: const EdgeInsets.only(left: 16, bottom: 8),
+              padding: const EdgeInsets.only(left: 32, bottom: 8),
               child: Row(
                 children: [
                   Text(
@@ -91,7 +91,7 @@ class JellyfinRows extends StatelessWidget {
             height: cardHeight + 36.0,
             child: ListView.builder(
               clipBehavior: Clip.none,
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
               physics: const ClampingScrollPhysics(),
               scrollDirection: Axis.horizontal,
               itemCount: programs.length,

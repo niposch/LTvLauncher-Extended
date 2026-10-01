@@ -37,6 +37,7 @@ import 'package:flauncher/widgets/application_info_panel.dart';
 import 'package:flauncher/widgets/apps_grid.dart';
 import 'package:flauncher/widgets/category_row.dart';
 import 'package:flauncher/widgets/app_card.dart';
+import 'package:flauncher/widgets/continue_watching_row.dart';
 import 'package:flauncher/widgets/focus_aware_app_bar.dart';
 import 'package:flauncher/widgets/settings/settings_panel_page.dart';
 import 'package:flutter/material.dart';
@@ -168,6 +169,47 @@ void main() {
     final background = tester.widget<Container>(find.byKey(const Key('background')));
     expect(background.color, Colors.black);
     expect(background.decoration, isNull);
+  });
+
+  testWidgets('Rows scroll at the screen edges while card and grid margins stay aligned', (tester) async {
+    final apps = mkAppService();
+    final row = fakeCategory(name: 'Row apps', type: CategoryType.row);
+    row.applications.add(fakeApp(packageName: 'row.app', name: 'Row app'));
+    final grid = fakeCategory(name: 'Grid apps', type: CategoryType.grid);
+    grid.applications.add(fakeApp(packageName: 'grid.app', name: 'Grid app'));
+    when(apps.launcherSections).thenReturn([row, grid]);
+    when(apps.applications).thenReturn([...row.applications, ...grid.applications]);
+    final settings = mkSettingsService() as MockSettingsService;
+    when(settings.showContinueWatching).thenReturn(true);
+    when(settings.hiddenWatchNextProgramIds).thenReturn([]);
+    when(settings.hiddenWatchNextPackages).thenReturn([]);
+    when(settings.continueWatchingMaxItems).thenReturn(0);
+    when(settings.continueWatchingCardSize).thenReturn('normal');
+    when(settings.continueWatchingShowProgress).thenReturn(true);
+    when(settings.continueWatchingShowPercentage).thenReturn(true);
+    when(settings.continueWatchingShowDescription).thenReturn(true);
+    final watchNext = mkWatchNextService() as MockWatchNextService;
+    when(watchNext.programs).thenReturn(List.generate(12, (index) => WatchNextProgram.fromMap({
+      'id': index, 'title': 'Program $index', 'packageName': 'media.app',
+    })));
+    await _pumpWidgetWithProviders(tester, mkWallpaperService(), apps, settings, watchNext: watchNext);
+    await tester.pump();
+    final mediaList = find.descendant(of: find.byType(ContinueWatchingRow), matching: find.byType(ListView));
+    final appList = find.descendant(of: find.byType(CategoryRow), matching: find.byType(ListView));
+    for (final list in [mediaList, appList]) {
+      expect(tester.getRect(list).left, 0);
+      expect(tester.getRect(list).right, 1920);
+    }
+    expect(tester.getRect(find.byType(SingleChildScrollView)).left, 0);
+    expect(tester.getRect(find.byType(SingleChildScrollView)).right, 1920);
+    expect(tester.getTopLeft(find.byType(WatchNextCard).first).dx, 32);
+    expect(tester.getTopLeft(find.text('Continue Watching')).dx, 32);
+    expect(tester.getTopLeft(find.text('Row apps')).dx, 32);
+    expect(tester.getTopLeft(find.byKey(const Key('grid.app'))).dx, 32);
+    await tester.drag(mediaList, const Offset(-4000, 0));
+    await tester.pump(const Duration(seconds: 1));
+    final lastCard = find.byWidgetPredicate((widget) => widget is WatchNextCard && widget.program.id == 11);
+    expect(tester.getRect(lastCard).right, closeTo(1920 - 32, 0.01));
   });
 
   testWidgets("Pressing select on settings icon opens SettingsPanel", (tester) async {
@@ -716,6 +758,7 @@ Future<void> _pumpWidgetWithProviders(
   AppsService appsService,
   SettingsService settingsService, {
   JellyfinService? jellyfin,
+  WatchNextService? watchNext,
 }
 ) async {
   tester.view.physicalSize = const Size(1920, 1080);
@@ -728,7 +771,7 @@ Future<void> _pumpWidgetWithProviders(
         ChangeNotifierProvider<SettingsService>.value(value: settingsService),
         ChangeNotifierProvider<TvInputsService>.value(value: mkTvInputsService()),
         ChangeNotifierProvider<NotificationsService>.value(value: mkNotificationsService()),
-        ChangeNotifierProvider<WatchNextService>.value(value: mkWatchNextService()),
+        ChangeNotifierProvider<WatchNextService>.value(value: watchNext ?? mkWatchNextService()),
         ChangeNotifierProvider<JellyfinService>.value(value: jellyfin ?? JellyfinService(FLauncherChannel())),
         ChangeNotifierProvider<SeerrService>(create: (_) => SeerrService(FLauncherChannel())),
         ChangeNotifierProvider<WeatherService>.value(value: mkWeatherService()),

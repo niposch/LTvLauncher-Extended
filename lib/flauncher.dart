@@ -78,7 +78,9 @@ class _FLauncherState extends State<FLauncher> {
               backgroundColor: Colors.transparent,
               appBar: FocusAwareAppBar(key: _appBarKey),
               body: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                // Horizontal rows need a full-width viewport: an inset parent
+                // clip truncates card shadows and leaves a strip at each edge.
+                padding: const EdgeInsets.only(top: 16),
                 child: Consumer<AppsService>(
                   builder: (context, appsService, _) {
                     if (appsService.initialized) {
@@ -181,7 +183,10 @@ class _FLauncherState extends State<FLauncher> {
       }
 
       children.add(Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8),
+          padding: EdgeInsets.symmetric(
+            vertical: 8,
+            horizontal: category.type == CategoryType.grid ? 16 : 0,
+          ),
           child: categoryWidget
       ));
       sectionIdx++;
