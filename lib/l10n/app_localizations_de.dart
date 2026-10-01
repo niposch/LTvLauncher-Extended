@@ -7,7 +7,7 @@ class AppLocalizationsDe extends AppLocalizations {
   AppLocalizationsDe([String locale = 'de']) : super(locale);
 
   @override
-  String get aboutFlauncher => 'Über LTvLauncher';
+  String get aboutFlauncher => 'Über LTv Extended';
 
   @override
   String get addCategory => 'Kategorie hinzufügen';
@@ -199,7 +199,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String textAboutDialog(String repoUrl) {
-    return 'LTvLauncher ist ein angepasster Open-Source-Launcher für Android TV, basierend auf FLauncher.\n\nEntwickelt von LeanBitLab.\nQuellcode verfügbar unter $repoUrl.';
+    return 'LTv Extended ist ein angepasster Open-Source-Launcher für Android TV, basierend auf FLauncher.\n\nBasierend auf LTvLauncher von LeanBitLab. Poster- und Medienintegrationen von hamish henare (hamishakl).\nQuellcode: $repoUrl';
   }
 
   @override
@@ -245,16 +245,16 @@ class AppLocalizationsDe extends AppLocalizations {
   String get accessibility => 'Barrierefreiheit';
 
   @override
-  String get defaultLauncherIsDefault => 'LTvLauncher ist der Standard-Launcher';
+  String get defaultLauncherIsDefault => 'LTv Extended ist der Standard-Launcher';
 
   @override
-  String get defaultLauncherNotDefault => 'LTvLauncher ist nicht der Standard-Launcher';
+  String get defaultLauncherNotDefault => 'LTv Extended ist nicht der Standard-Launcher';
 
   @override
   String get setAsDefaultLauncher => 'Als Standard-Launcher festlegen';
 
   @override
-  String get defaultLauncherDescription => 'Wenn als Standard-Launcher festgelegt, kehrt die Home-Taste immer zu LTvLauncher zurück. Der TV bootet ebenfalls direkt in LTvLauncher.';
+  String get defaultLauncherDescription => 'Wenn als Standard-Launcher festgelegt, kehrt die Home-Taste immer zu LTv Extended zurück. Der TV bootet ebenfalls direkt in LTv Extended.';
 
   @override
   String get inputs => 'Eingänge';

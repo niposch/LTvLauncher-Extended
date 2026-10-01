@@ -75,7 +75,7 @@ class FLauncherApp extends StatelessWidget
         GlobalWidgetsLocalizations.delegate
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      title: 'FLauncher',
+      title: 'LTv Extended',
         theme: ThemeData(
           useMaterial3: true,
           brightness: Brightness.dark,

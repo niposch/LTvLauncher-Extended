@@ -1,6 +1,6 @@
-LTvLauncher is a fork of FLauncher - an open-source alternative launcher for Android TV.
+LTv Extended extends LTvLauncher by LeanBitLab, based on FLauncher - an open-source alternative launcher for Android TV.
 
-This customized version introduces usability enhancements and UX improvements.
+This fork adds poster cards, cached wallpaper rendering, optional weather details with city search, and Jellyfin and Seerr integrations. It can be installed alongside upstream LTvLauncher.
 
 Key Features & Enhancements:
 

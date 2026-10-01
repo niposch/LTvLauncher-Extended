@@ -1,5 +1,5 @@
 {
-    "aboutFlauncher": "Про LTvLauncher",
+    "aboutFlauncher": "Про LTv Extended",
     "addCategory": "Додати категорію",
     "addSection": "Додати розділ",
     "alphabetical": "За алфавітом",
@@ -88,7 +88,7 @@
     "appSelectorTransitionAnimation": "Анімація переходу вибору застосунку",
     "sort": "Сортування",
     "systemSettings": "Системні налаштування",
-    "textAboutDialog": "LTvLauncher — це налаштований лаунчер з відкритим кодом для Android TV, створений на основі FLauncher.\n\nРозроблено LeanBitLab.\nВихідний код доступний за адресою {repoUrl}.",
+    "textAboutDialog": "LTv Extended — це налаштований лаунчер з відкритим кодом для Android TV, створений на основі FLauncher.\n\nНа основі LTvLauncher від LeanBitLab. Інтеграції постерів і медіа від hamish henare (hamishakl).\nВихідний код: {repoUrl}",
     "@textAboutDialog": {
         "placeholders": {
             "repoUrl": {
@@ -110,10 +110,10 @@
     "pickDayWallpaper": "Вибрати денні шпалери",
     "pickNightWallpaper": "Вибрати нічні шпалери",
     "accessibility": "Спеціальні можливості",
-    "defaultLauncherIsDefault": "LTvLauncher є лаунчером за замовчуванням",
-    "defaultLauncherNotDefault": "LTvLauncher не є лаунчером за замовчуванням",
+    "defaultLauncherIsDefault": "LTv Extended є лаунчером за замовчуванням",
+    "defaultLauncherNotDefault": "LTv Extended не є лаунчером за замовчуванням",
     "setAsDefaultLauncher": "Встановити як лаунчер за замовчуванням",
-    "defaultLauncherDescription": "Якщо встановлено як лаунчер за замовчуванням, кнопка «Домівка» завжди повертатиме до LTvLauncher. Телевізор також завантажуватиметься одразу в LTvLauncher.",
+    "defaultLauncherDescription": "Якщо встановлено як лаунчер за замовчуванням, кнопка «Домівка» завжди повертатиме до LTv Extended. Телевізор також завантажуватиметься одразу в LTv Extended.",
     "inputs": "Джерела сигналу",
     "inputSources": "Джерела сигналу",
     "backupAndRestore": "Резервне копіювання та відновлення",

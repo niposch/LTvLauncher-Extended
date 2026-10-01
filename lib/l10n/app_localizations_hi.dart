@@ -7,7 +7,7 @@ class AppLocalizationsHi extends AppLocalizations {
   AppLocalizationsHi([String locale = 'hi']) : super(locale);
 
   @override
-  String get aboutFlauncher => 'LTvLauncher के बारे में';
+  String get aboutFlauncher => 'LTv Extended के बारे में';
 
   @override
   String get addCategory => 'श्रेणी जोड़ें';
@@ -199,7 +199,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String textAboutDialog(String repoUrl) {
-    return 'LTvLauncher FLauncher पर आधारित Android TV के लिए एक अनुकूलित ओपन-सोर्स लॉन्चर है।\n\nLeanBitLab द्वारा विकसित।\nस्रोत कोड $repoUrl पर उपलब्ध है।';
+    return 'LTv Extended FLauncher पर आधारित Android TV के लिए एक अनुकूलित ओपन-सोर्स लॉन्चर है।\n\nLeanBitLab के LTvLauncher पर आधारित। पोस्टर और मीडिया एकीकरण hamish henare (hamishakl) द्वारा।\nस्रोत कोड: $repoUrl';
   }
 
   @override
@@ -245,16 +245,16 @@ class AppLocalizationsHi extends AppLocalizations {
   String get accessibility => 'पहुंच (एक्सेसिबिलिटी)';
 
   @override
-  String get defaultLauncherIsDefault => 'LTvLauncher डिफ़ॉल्ट लॉन्चर है';
+  String get defaultLauncherIsDefault => 'LTv Extended डिफ़ॉल्ट लॉन्चर है';
 
   @override
-  String get defaultLauncherNotDefault => 'LTvLauncher डिफ़ॉल्ट लॉन्चर नहीं है';
+  String get defaultLauncherNotDefault => 'LTv Extended डिफ़ॉल्ट लॉन्चर नहीं है';
 
   @override
   String get setAsDefaultLauncher => 'डिफ़ॉल्ट लॉन्चर के रूप में सेट करें';
 
   @override
-  String get defaultLauncherDescription => 'डिफ़ॉल्ट लॉन्चर के रूप में सेट होने पर, होम बटन हमेशा LTvLauncher पर वापस आएगा। टीवी भी सीधे LTvLauncher में बूट होगा।';
+  String get defaultLauncherDescription => 'डिफ़ॉल्ट लॉन्चर के रूप में सेट होने पर, होम बटन हमेशा LTv Extended पर वापस आएगा। टीवी भी सीधे LTv Extended में बूट होगा।';
 
   @override
   String get inputs => 'इनपुट';

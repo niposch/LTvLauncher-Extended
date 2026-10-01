@@ -7,7 +7,7 @@ class AppLocalizationsJa extends AppLocalizations {
   AppLocalizationsJa([String locale = 'ja']) : super(locale);
 
   @override
-  String get aboutFlauncher => 'LTvLauncherについて';
+  String get aboutFlauncher => 'LTv Extendedについて';
 
   @override
   String get addCategory => 'カテゴリを追加';
@@ -199,7 +199,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String textAboutDialog(String repoUrl) {
-    return 'LTvLauncherはFLauncherをベースにしたAndroid TV用のカスタムオープンソースランチャーです。\n\nLeanBitLabによって開発されています。\nソースコードは$repoUrlで入手できます。';
+    return 'LTv ExtendedはFLauncherをベースにしたAndroid TV用のカスタムオープンソースランチャーです。\n\nLeanBitLab の LTvLauncher を基にしています。ポスターとメディアの統合は hamish henare (hamishakl) によるものです。\nソースコード: $repoUrl';
   }
 
   @override
@@ -245,16 +245,16 @@ class AppLocalizationsJa extends AppLocalizations {
   String get accessibility => 'アクセシビリティ';
 
   @override
-  String get defaultLauncherIsDefault => 'LTvLauncherはデフォルトのランチャーです';
+  String get defaultLauncherIsDefault => 'LTv Extendedはデフォルトのランチャーです';
 
   @override
-  String get defaultLauncherNotDefault => 'LTvLauncherはデフォルトのランチャーではありません';
+  String get defaultLauncherNotDefault => 'LTv Extendedはデフォルトのランチャーではありません';
 
   @override
   String get setAsDefaultLauncher => 'デフォルトのランチャーに設定';
 
   @override
-  String get defaultLauncherDescription => 'デフォルトのランチャーに設定すると、ホームボタンは常にLTvLauncherに戻ります。TVの起動時も直接LTvLauncherが起動します。';
+  String get defaultLauncherDescription => 'デフォルトのランチャーに設定すると、ホームボタンは常にLTv Extendedに戻ります。TVの起動時も直接LTv Extendedが起動します。';
 
   @override
   String get inputs => '入力';

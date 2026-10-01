@@ -1,5 +1,5 @@
 {
-    "aboutFlauncher": "Acerca de LTvLauncher",
+    "aboutFlauncher": "Acerca de LTv Extended",
     "addCategory": "Agregar categoría",
     "addSection": "Agregar sección",
     "alphabetical": "Alfabético",
@@ -88,7 +88,7 @@
     "appSelectorTransitionAnimation": "Animación de transición del selector de aplicaciones",
     "sort": "Orden",
     "systemSettings": "Ajustes del sistema",
-    "textAboutDialog": "LTvLauncher es un lanzador de código abierto personalizado para Android TV, basado en FLauncher.\n\nDesarrollado por LeanBitLab.\nCódigo fuente disponible en {repoUrl}.",
+    "textAboutDialog": "LTv Extended es un lanzador de código abierto personalizado para Android TV, basado en FLauncher.\n\nBasado en LTvLauncher de LeanBitLab. Integraciones de pósteres y medios de hamish henare (hamishakl).\nCódigo fuente: {repoUrl}",
     "@textAboutDialog": {
         "placeholders": {
             "repoUrl": {
@@ -110,10 +110,10 @@
     "pickDayWallpaper": "Elegir fondo de pantalla diurno",
     "pickNightWallpaper": "Elegir fondo de pantalla nocturno",
     "accessibility": "Accesibilidad",
-    "defaultLauncherIsDefault": "LTvLauncher es el lanzador predeterminado",
-    "defaultLauncherNotDefault": "LTvLauncher no es el lanzador predeterminado",
+    "defaultLauncherIsDefault": "LTv Extended es el lanzador predeterminado",
+    "defaultLauncherNotDefault": "LTv Extended no es el lanzador predeterminado",
     "setAsDefaultLauncher": "Establecer como lanzador predeterminado",
-    "defaultLauncherDescription": "Cuando se establece como lanzador predeterminado, el botón de inicio siempre regresará a LTvLauncher. El TV también iniciará directamente en LTvLauncher.",
+    "defaultLauncherDescription": "Cuando se establece como lanzador predeterminado, el botón de inicio siempre regresará a LTv Extended. El TV también iniciará directamente en LTv Extended.",
     "inputs": "Entradas",
     "inputSources": "Fuentes de Entrada",
     "backupAndRestore": "Copia de seguridad y restauración",

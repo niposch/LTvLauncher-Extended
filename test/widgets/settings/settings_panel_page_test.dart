@@ -147,7 +147,7 @@ void main() {
     verify(appsService.openSettings());
   });
 
-  testWidgets("'About LTvLauncher' opens about dialog", (tester) async {
+  testWidgets("'About LTv Extended' opens about dialog", (tester) async {
     final settingsService = MockSettingsService();
     final appsService = MockAppsService();
     when(appsService.launcherSections).thenReturn([]);
@@ -158,7 +158,7 @@ void main() {
 
     await _pumpWidgetWithProviders(tester, settingsService, appsService);
 
-    await tester.tap(find.text("About LTvLauncher"));
+    await tester.tap(find.text("About LTv Extended"));
     await tester.pumpAndSettle();
     expect(find.byType(LTvLauncherAboutDialog), findsOneWidget);
   });
@@ -215,7 +215,7 @@ Future<void> _pumpWidgetWithProviders(
 class _MockPackageInfoPlatform with MockPlatformInterfaceMixin implements PackageInfoPlatform {
   @override
   Future<PackageInfoData> getAll({String? baseUrl}) async => PackageInfoData(
-        appName: "LTvLauncher",
+        appName: "LTv Extended",
         packageName: "com.leanbitlab.ltvL",
         version: "1.0.0",
         buildNumber: "1",

@@ -41,7 +41,7 @@ class BackupService {
     if (dir == null) {
       throw const FileSystemException("Could not find any suitable directory for backup");
     }
-    return File(path.join(dir.path, 'ltv_backup.json'));
+    return File(path.join(dir.path, 'ltv_extended_backup.json'));
   }
 
   Future<Directory> getBackupDirectory() async {
@@ -123,7 +123,7 @@ class BackupService {
         await for (final entity in dir.list()) {
           if (entity is File && seenPaths.add(entity.path)) {
             final name = path.basename(entity.path);
-            if ((name.startsWith('ltv_backup') || name.startsWith('flauncher_backup')) && name.endsWith('.json')) {
+            if ((name.startsWith('ltv_extended_backup') || name.startsWith('ltv_backup') || name.startsWith('flauncher_backup')) && name.endsWith('.json')) {
               try {
                 final lastModified = await entity.lastModified();
                 final size = await entity.length();
@@ -151,7 +151,7 @@ class BackupService {
     final now = DateTime.now();
     final timestamp = "${now.year}${now.month.toString().padLeft(2, '0')}${now.day.toString().padLeft(2, '0')}_"
         "${now.hour.toString().padLeft(2, '0')}${now.minute.toString().padLeft(2, '0')}${now.second.toString().padLeft(2, '0')}";
-    final filename = 'ltv_backup_$timestamp.json';
+    final filename = 'ltv_extended_backup_$timestamp.json';
     final File file = File(path.join(dir.path, filename));
 
     // 1. Fetch complete settings

@@ -1,5 +1,5 @@
 {
-    "aboutFlauncher": "LTvLauncherについて",
+    "aboutFlauncher": "LTv Extendedについて",
     "addCategory": "カテゴリを追加",
     "addSection": "セクションを追加",
     "alphabetical": "アルファベット順",
@@ -88,7 +88,7 @@
     "appSelectorTransitionAnimation": "アプリセレクターの遷移アニメーション",
     "sort": "並べ替え",
     "systemSettings": "システム設定",
-    "textAboutDialog": "LTvLauncherはFLauncherをベースにしたAndroid TV用のカスタムオープンソースランチャーです。\n\nLeanBitLabによって開発されています。\nソースコードは{repoUrl}で入手できます。",
+    "textAboutDialog": "LTv ExtendedはFLauncherをベースにしたAndroid TV用のカスタムオープンソースランチャーです。\n\nLeanBitLab の LTvLauncher を基にしています。ポスターとメディアの統合は hamish henare (hamishakl) によるものです。\nソースコード: {repoUrl}",
     "@textAboutDialog": {
         "placeholders": {
             "repoUrl": {
@@ -110,10 +110,10 @@
     "pickDayWallpaper": "昼の壁紙を選択",
     "pickNightWallpaper": "夜の壁紙を選択",
     "accessibility": "アクセシビリティ",
-    "defaultLauncherIsDefault": "LTvLauncherはデフォルトのランチャーです",
-    "defaultLauncherNotDefault": "LTvLauncherはデフォルトのランチャーではありません",
+    "defaultLauncherIsDefault": "LTv Extendedはデフォルトのランチャーです",
+    "defaultLauncherNotDefault": "LTv Extendedはデフォルトのランチャーではありません",
     "setAsDefaultLauncher": "デフォルトのランチャーに設定",
-    "defaultLauncherDescription": "デフォルトのランチャーに設定すると、ホームボタンは常にLTvLauncherに戻ります。TVの起動時も直接LTvLauncherが起動します。",
+    "defaultLauncherDescription": "デフォルトのランチャーに設定すると、ホームボタンは常にLTv Extendedに戻ります。TVの起動時も直接LTv Extendedが起動します。",
     "inputs": "入力",
     "inputSources": "入力ソース",
     "backupAndRestore": "バックアップと復元",

@@ -7,7 +7,7 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
-  String get aboutFlauncher => '关于 LTvLauncher';
+  String get aboutFlauncher => '关于 LTv Extended';
 
   @override
   String get addCategory => '添加类别';
@@ -199,7 +199,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String textAboutDialog(String repoUrl) {
-    return 'LTvLauncher 是一款基于 FLauncher 定制的开源 Android TV 桌面启动器。\n\n由 LeanBitLab 开发。\n源代码可在 $repoUrl 获取。';
+    return 'LTv Extended 是一款基于 FLauncher 定制的开源 Android TV 桌面启动器。\n\n基于 LeanBitLab 的 LTvLauncher。海报与媒体集成由 hamish henare (hamishakl) 开发。\n源代码：$repoUrl';
   }
 
   @override
@@ -245,16 +245,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get accessibility => '无障碍';
 
   @override
-  String get defaultLauncherIsDefault => 'LTvLauncher 是默认桌面';
+  String get defaultLauncherIsDefault => 'LTv Extended 是默认桌面';
 
   @override
-  String get defaultLauncherNotDefault => 'LTvLauncher 不是默认桌面';
+  String get defaultLauncherNotDefault => 'LTv Extended 不是默认桌面';
 
   @override
   String get setAsDefaultLauncher => '设为默认桌面';
 
   @override
-  String get defaultLauncherDescription => '设为默认桌面后，按 Home 键将始终返回 LTvLauncher。电视开机也会直接进入 LTvLauncher。';
+  String get defaultLauncherDescription => '设为默认桌面后，按 Home 键将始终返回 LTv Extended。电视开机也会直接进入 LTv Extended。';
 
   @override
   String get inputs => '输入源';

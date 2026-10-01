@@ -1,5 +1,5 @@
 name: flauncher
-description: Flutter-based Android TV launcher.
+description: LTv Extended, a customizable Android TV launcher.
 
 version: 2026.09.15+8111
 
@@ -44,6 +44,7 @@ dev_dependencies:
   plugin_platform_interface: any
   package_info_plus_platform_interface: any
   flutter_launcher_icons: ^0.13.1
+  image: ^4.7.2
 
 flutter_icons:
   android: "ic_launcher"

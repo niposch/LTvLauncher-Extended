@@ -1,5 +1,5 @@
 {
-    "aboutFlauncher": "LTvLauncher Hakkında",
+    "aboutFlauncher": "LTv Extended Hakkında",
     "addCategory": "Kategori ekle",
     "addSection": "Bölüm ekle",
     "alphabetical": "Alfabetik",
@@ -88,7 +88,7 @@
     "appSelectorTransitionAnimation": "Uygulama seçici geçiş animasyonu",
     "sort": "Sırala",
     "systemSettings": "Sistem ayarları",
-    "textAboutDialog": "LTvLauncher, FLauncher tabanlı, Android TV için özelleştirilmiş açık kaynaklı bir başlatıcıdır.\n\nLeanBitLab tarafından geliştirilmiştir.\nKaynak kodu {repoUrl} adresinde mevcuttur.",
+    "textAboutDialog": "LTv Extended, FLauncher tabanlı, Android TV için özelleştirilmiş açık kaynaklı bir başlatıcıdır.\n\nLeanBitLab tarafından geliştirilen LTvLauncher tabanlıdır. Poster ve medya entegrasyonları hamish henare (hamishakl) tarafından geliştirilmiştir.\nKaynak kodu: {repoUrl}",
     "@textAboutDialog": {
         "placeholders": {
             "repoUrl": {
@@ -110,10 +110,10 @@
     "pickDayWallpaper": "Gündüz duvar kağıdını seç",
     "pickNightWallpaper": "Gece duvar kağıdını seç",
     "accessibility": "Erişilebilirlik",
-    "defaultLauncherIsDefault": "LTvLauncher varsayılan başlatıcıdır",
-    "defaultLauncherNotDefault": "LTvLauncher varsayılan başlatıcı değildir",
+    "defaultLauncherIsDefault": "LTv Extended varsayılan başlatıcıdır",
+    "defaultLauncherNotDefault": "LTv Extended varsayılan başlatıcı değildir",
     "setAsDefaultLauncher": "Varsayılan başlatıcı olarak ayarla",
-    "defaultLauncherDescription": "Varsayılan başlatıcı olarak ayarlandığında, Ana Sayfa düğmesi her zaman LTvLauncher'a döner. TV de doğrudan LTvLauncher'da başlar.",
+    "defaultLauncherDescription": "Varsayılan başlatıcı olarak ayarlandığında, Ana Sayfa düğmesi her zaman LTv Extended'a döner. TV de doğrudan LTv Extended'da başlar.",
     "inputs": "Girişler",
     "inputSources": "Giriş Kaynakları",
     "backupAndRestore": "Yedekleme ve Geri Yükleme",

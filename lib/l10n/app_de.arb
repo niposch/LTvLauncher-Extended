@@ -10,7 +10,7 @@
     "weatherNoLocations": "Keine Orte gefunden. Versuche einen Ortsnamen oder eine Postleitzahl.",
     "weatherSearchFailed": "Ortssuche fehlgeschlagen. Prüfe deine Verbindung und versuche es erneut.",
     "weatherSetupHint": "Wähle oben einen Wetterstandort oder aktiviere die lokale Datenfreigabe in Breezy Weather. Prüfe deine Verbindung, falls Wetterdaten fehlen.",
-    "aboutFlauncher": "Über LTvLauncher",
+    "aboutFlauncher": "Über LTv Extended",
     "addCategory": "Kategorie hinzufügen",
     "addSection": "Abschnitt hinzufügen",
     "alphabetical": "Alphabetisch",
@@ -99,7 +99,7 @@
     "appSelectorTransitionAnimation": "App-Auswahl-Übergangsanimation",
     "sort": "Sortieren",
     "systemSettings": "Systemeinstellungen",
-    "textAboutDialog": "LTvLauncher ist ein angepasster Open-Source-Launcher für Android TV, basierend auf FLauncher.\n\nEntwickelt von LeanBitLab.\nQuellcode verfügbar unter {repoUrl}.",
+    "textAboutDialog": "LTv Extended ist ein angepasster Open-Source-Launcher für Android TV, basierend auf FLauncher.\n\nBasierend auf LTvLauncher von LeanBitLab. Poster- und Medienintegrationen von hamish henare (hamishakl).\nQuellcode: {repoUrl}",
     "@textAboutDialog": {
         "placeholders": {
             "repoUrl": {
@@ -121,10 +121,10 @@
     "pickDayWallpaper": "Tag-Hintergrundbild auswählen",
     "pickNightWallpaper": "Nacht-Hintergrundbild auswählen",
     "accessibility": "Barrierefreiheit",
-    "defaultLauncherIsDefault": "LTvLauncher ist der Standard-Launcher",
-    "defaultLauncherNotDefault": "LTvLauncher ist nicht der Standard-Launcher",
+    "defaultLauncherIsDefault": "LTv Extended ist der Standard-Launcher",
+    "defaultLauncherNotDefault": "LTv Extended ist nicht der Standard-Launcher",
     "setAsDefaultLauncher": "Als Standard-Launcher festlegen",
-    "defaultLauncherDescription": "Wenn als Standard-Launcher festgelegt, kehrt die Home-Taste immer zu LTvLauncher zurück. Der TV bootet ebenfalls direkt in LTvLauncher.",
+    "defaultLauncherDescription": "Wenn als Standard-Launcher festgelegt, kehrt die Home-Taste immer zu LTv Extended zurück. Der TV bootet ebenfalls direkt in LTv Extended.",
     "inputs": "Eingänge",
     "inputSources": "Eingabequellen",
     "backupAndRestore": "Sichern & Wiederherstellen",

@@ -7,7 +7,7 @@ class AppLocalizationsKo extends AppLocalizations {
   AppLocalizationsKo([String locale = 'ko']) : super(locale);
 
   @override
-  String get aboutFlauncher => 'LTvLauncher 정보';
+  String get aboutFlauncher => 'LTv Extended 정보';
 
   @override
   String get addCategory => '카테고리 추가';
@@ -199,7 +199,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String textAboutDialog(String repoUrl) {
-    return 'LTvLauncher는 FLauncher를 기반으로 한 Android TV용 맞춤형 오픈 소스 런처입니다.\n\nLeanBitLab에서 개발했습니다.\n소스 코드는 $repoUrl에서 사용할 수 있습니다.';
+    return 'LTv Extended는 FLauncher를 기반으로 한 Android TV용 맞춤형 오픈 소스 런처입니다.\n\nLeanBitLab의 LTvLauncher를 기반으로 합니다. 포스터 및 미디어 통합은 hamish henare (hamishakl)가 개발했습니다.\n소스 코드: $repoUrl';
   }
 
   @override
@@ -245,16 +245,16 @@ class AppLocalizationsKo extends AppLocalizations {
   String get accessibility => '접근성';
 
   @override
-  String get defaultLauncherIsDefault => 'LTvLauncher가 기본 런처입니다';
+  String get defaultLauncherIsDefault => 'LTv Extended가 기본 런처입니다';
 
   @override
-  String get defaultLauncherNotDefault => 'LTvLauncher가 기본 런처가 아닙니다';
+  String get defaultLauncherNotDefault => 'LTv Extended가 기본 런처가 아닙니다';
 
   @override
   String get setAsDefaultLauncher => '기본 런처로 설정';
 
   @override
-  String get defaultLauncherDescription => '기본 런처로 설정하면 홈 버튼은 항상 LTvLauncher로 돌아갑니다. TV도 직접 LTvLauncher로 부팅됩니다.';
+  String get defaultLauncherDescription => '기본 런처로 설정하면 홈 버튼은 항상 LTv Extended로 돌아갑니다. TV도 직접 LTv Extended로 부팅됩니다.';
 
   @override
   String get inputs => '입력';

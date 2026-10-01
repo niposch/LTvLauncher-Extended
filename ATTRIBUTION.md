@@ -1,6 +1,6 @@
 # Attribution
 
-LTvLauncher Extended is a derivative of [LTvLauncher by LeanBitLab](https://github.com/leanbitlab-org/LtvLauncher), which is based on [osrosal's FLauncher fork](https://github.com/osrosal/flauncher) and [FLauncher by Étienne Fesser](https://gitlab.com/flauncher/flauncher). Existing copyright notices and the [GNU GPL v3 license](LICENSE) are retained.
+LTv Extended is a derivative of [LTvLauncher by LeanBitLab](https://github.com/leanbitlab-org/LtvLauncher), which is based on [osrosal's FLauncher fork](https://github.com/osrosal/flauncher) and [FLauncher by Étienne Fesser](https://gitlab.com/flauncher/flauncher). Existing copyright notices and the [GNU GPL v3 license](LICENSE) are retained.
 
 The following commits from [hamishakl/LtvLauncher, branch `posters`](https://github.com/hamishakl/LtvLauncher/tree/posters) were authored by **hamish henare** and integrated with their original authorship and history:
 
@@ -11,6 +11,6 @@ The following commits from [hamishakl/LtvLauncher, branch `posters`](https://git
 | [7e6ff96](https://github.com/hamishakl/LtvLauncher/commit/7e6ff96) | Open-Meteo weather and Jellyfin Next Up / Recently Added rows |
 | [34b29ab](https://github.com/hamishakl/LtvLauncher/commit/34b29ab) | Seerr For You recommendations |
 
-Integration, the distinct Android application ID, compatibility fixes, rendering performance and rounded-corner fixes, and optional weather details and city selection in this repository were assisted by **Codex (OpenAI)**. New commits for this work include `Co-authored-by: Codex <codex@openai.com>`; the imported upstream commits retain their original authorship without modification.
+Integration, the distinct Android application ID, compatibility fixes, rendering performance and rounded-corner fixes, optional weather details and city selection, and LTv Extended branding in this repository were assisted by **Codex (OpenAI)**. The updated icon and TV banner retain the upstream TV mark and were edited with OpenAI's imagegen tool. New commits for this work include `Co-authored-by: Codex <codex@openai.com>`; the imported upstream commits retain their original authorship without modification.
 
 Weather forecasts and city search use [Open-Meteo](https://open-meteo.com/). City search data is provided by [GeoNames](https://www.geonames.org/), as credited by the [Open-Meteo Geocoding API](https://open-meteo.com/en/docs/geocoding-api).

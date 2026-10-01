@@ -1,12 +1,12 @@
-# LTvLauncher Extended
+# LTv Extended
 
 This fork integrates [hamishakl's `posters` branch](https://github.com/hamishakl/LtvLauncher/tree/posters), authored by **hamish henare**, into LTvLauncher. The original commits and authorship are preserved. See [ATTRIBUTION.md](ATTRIBUTION.md) for credits and [the extension setup guide](docs/extensions.md) for weather, Jellyfin, and Seerr configuration.
 
-Release builds use **`com.niposch.ltvlauncher.extended`** and the label **LTvLauncher Extended**. Debug builds use **`com.niposch.ltvlauncher.extended.debug`**. Both can be installed alongside upstream LTvLauncher (`com.leanbitlab.ltvL`) and LTv Posters (`com.leanbitlab.ltvL.posters`), with their own app data and permissions. The upstream download links below still distribute the original app.
+Release builds use **`com.niposch.ltvlauncher.extended`** and the label **LTv Extended**. Debug builds use **`com.niposch.ltvlauncher.extended.debug`**. Both can be installed alongside upstream LTvLauncher (`com.leanbitlab.ltvL`) and LTv Posters (`com.leanbitlab.ltvL.posters`), with their own app data and permissions. The visible app name is LTv Extended; its package ID stays stable across this branding update.
 
 ## Differences from upstream
 
-| Area | LTvLauncher Extended |
+| Area | LTv Extended |
 | --- | --- |
 | Android identity | Separate package, app label, data, and service permissions so it can coexist with upstream and LTv Posters |
 | Continue Watching | Poster artwork behind cards, downloaded in a bounded worker pool, downscaled, and cached on disk |
@@ -22,19 +22,19 @@ The media and weather additions above are credited to **hamish henare (hamishakl
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".github/assets/banner_dark.svg">
   <source media="(prefers-color-scheme: light)" srcset=".github/assets/banner_light.svg">
-  <img alt="LTvLauncher Banner" src=".github/assets/banner_light.svg">
+  <img alt="LTv Extended Banner" src=".github/assets/banner_light.svg">
 </picture>
 
 <div align="center">
 
-[![Latest Release](https://img.shields.io/github/v/release/leanbitlab-org/LtvLauncher?style=flat-square&color=4f46e5&label=Release)](https://github.com/leanbitlab-org/LtvLauncher/releases/latest)
-[![Downloads](https://img.shields.io/github/downloads/leanbitlab-org/LtvLauncher/total?style=flat-square&color=059669&label=Downloads)](https://github.com/leanbitlab-org/LtvLauncher/releases)
-[![Stars](https://img.shields.io/github/stars/leanbitlab-org/LtvLauncher?style=flat-square&color=dc2626&label=Stars)](https://github.com/leanbitlab-org/LtvLauncher/stargazers)
+[![Latest Release](https://img.shields.io/github/v/release/niposch/LTvLauncher-Extended?style=flat-square&color=4f46e5&label=Release)](https://github.com/niposch/LTvLauncher-Extended/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/niposch/LTvLauncher-Extended/total?style=flat-square&color=059669&label=Downloads)](https://github.com/niposch/LTvLauncher-Extended/releases)
+[![Stars](https://img.shields.io/github/stars/niposch/LTvLauncher-Extended?style=flat-square&color=dc2626&label=Stars)](https://github.com/niposch/LTvLauncher-Extended/stargazers)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL_v3-blue.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-3.0)
 [![Sponsor](https://img.shields.io/badge/Sponsor-LeanBitLab-db2777?style=flat-square&logo=githubsponsors&logoColor=white)](https://github.com/sponsors/LeanBitLab)
 [![Donate on Open Collective](https://img.shields.io/badge/Donate-Open_Collective-1f6feb?style=flat-square&logo=opencollective&logoColor=white)](https://opencollective.com/leanbitlab-org)
 
-**A fast, private, and customizable open-source launcher for Android TV.**  
+**A fast, private, and customizable open-source launcher for Android TV.**
 *Forked from [FLauncher](https://github.com/osrosal/flauncher) (originally by [etienn01](https://gitlab.com/flauncher/flauncher)).*
 
 [Screenshots](#-screenshots) • [Download APKs](#-download) • [Features](#-features) • [Setup Guide](#-setup-guide) • [Community](#-community--contributing) • [Other Projects](https://github.com/LeanBitLab#-android-projects)
@@ -45,9 +45,9 @@ The media and weather additions above are credited to **hamish henare (hamishakl
 
 ## 🚀 Overview
 
-**LTvLauncher** is an open-source, private, and ad-free launcher designed specifically for Android TV, Google TV, and Fire TV devices. Built with Flutter, it delivers a responsive, remote-friendly interface focused on simplicity, speed, and deep customization.
+**LTv Extended** is an open-source, private, and ad-free launcher designed specifically for Android TV, Google TV, and Fire TV devices. Built with Flutter, it delivers a responsive, remote-friendly interface focused on simplicity, speed, and deep customization.
 
-With native D-pad navigation, recency-sorted Continue Watching rows, customizable categories, dynamic weather & status bar widgets, TV input source switching, system-wide notification overlays, and OLED screensavers, LTvLauncher gives you total control over your TV home screen without intrusive ads or algorithmic noise.
+With native D-pad navigation, recency-sorted Continue Watching rows, customizable categories, dynamic weather & status bar widgets, TV input source switching, system-wide notification overlays, and OLED screensavers, LTv Extended gives you total control over your TV home screen without intrusive ads or algorithmic noise.
 
 ---
 
@@ -114,44 +114,15 @@ With native D-pad navigation, recency-sorted Continue Watching rows, customizabl
 
 ## 📥 Download
 
-<table border="0">
-  <tr>
-    <td align="center" valign="middle">
-      <a href="https://github.com/leanbitlab-org/LtvLauncher/releases/latest">
-        <img alt="Get it on GitHub" src=".github/assets/get_it_on_github.png" height="75">
-      </a>
-    </td>
-    <td align="center" valign="middle">
-      <a href="https://apt.izzysoft.de/fdroid/index/apk/com.leanbitlab.ltvL">
-        <img alt="Get it on IzzyOnDroid" src=".github/assets/IzzyOnDroid.png" height="75">
-      </a>
-    </td>
-    <td align="center" valign="middle">
-      <a href="https://go.aftvnews.com">
-        <img alt="Downloader Code: 7259827" src=".github/assets/get_it_on_downloader.png" height="75">
-      </a>
-    </td>
-    <td align="center" valign="middle">
-      <a href="https://github.com/leanbitlab-org/LtvLauncher/releases">
-        <img alt="Pre-release" src=".github/badges/prerelease.png" height="75">
-      </a>
-    </td>
-  </tr>
-</table>
+[LTv Extended releases](https://github.com/niposch/LTvLauncher-Extended/releases) contain this fork’s APKs when published. You can also [build locally](docs/extensions.md#local-build). Upstream store listings and Downloader codes distribute the original app.
 
 ### Architecture Matrix
 
 | File | Target Devices | Architecture |
 |:---|:---|:---|
-| **`LTvLauncher-universal-release.apk`** | **Recommended** for any Android TV or Fire TV device | Universal |
-| **`LTvLauncher-arm64-v8a-release.apk`** | Chromecast with Google TV (4K/HD), Nvidia Shield TV, newer smart TVs | 64-bit ARM (`arm64-v8a`) |
-| **`LTvLauncher-armeabi-v7a-release.apk`** | Fire TV Stick (Lite, 4K, 4K Max), older smart TVs, budget boxes | 32-bit ARM (`armeabi-v7a`) |
-
-> [!TIP]
-> **Fast Installation via the Downloader App (Fire TV & Android TV)**:
-> 1. Open the **Downloader** app by AFTVnews on your TV (available on Amazon Appstore & Google Play Store).
-> 2. Enter quick code **`7259827`** in the URL / search box.
-> 3. Downloader will automatically download and prompt you to install the latest LTvLauncher release.
+| **`LTv-Extended-universal-release.apk`** | **Recommended** for any Android TV or Fire TV device | Universal |
+| **`LTv-Extended-arm64-v8a-release.apk`** | Chromecast with Google TV (4K/HD), Nvidia Shield TV, newer smart TVs | 64-bit ARM (`arm64-v8a`) |
+| **`LTv-Extended-armeabi-v7a-release.apk`** | Fire TV Stick (Lite, 4K, 4K Max), older smart TVs, budget boxes | 32-bit ARM (`armeabi-v7a`) |
 
 ---
 
@@ -160,24 +131,24 @@ With native D-pad navigation, recency-sorted Continue Watching rows, customizabl
 ### Method 1: Via Built-in Settings (Recommended for Android TV)
 This is the easiest and native way:
 1. Open **Settings -> Accessibility -> Set as default launcher**.
-2. Select **LTvLauncher** from the system home app picker or default apps list.
+2. Select **LTv Extended** from the system home app picker or default apps list.
 
 > [!NOTE]
 > On **Google TV**, the stock launcher (`com.google.android.apps.tv.launcherx`) registers its HOME intent with priority 2, which overrides third-party launcher selections. If your device returns to Google TV when pressing Home, use **Method 2**.
 
 ### Method 2: Home Button Fix (Google TV & Fire TV)
-If your device blocks changing the default launcher, use LTvLauncher's built-in Home Button Fix:
+If your device blocks changing the default launcher, use LTv Extended's built-in Home Button Fix:
 1. Open **Settings -> Accessibility**.
 2. Select **Home Button Fix (Google TV)**.
-3. Turn on the accessibility service for **LTvLauncher** in your system settings.
+3. Turn on the accessibility service for **LTv Extended** in your system settings.
 
-Once enabled, LTvLauncher automatically intercepts Home button presses and brings you straight to your custom home screen.
+Once enabled, LTv Extended automatically intercepts Home button presses and brings you straight to your custom home screen.
 
 ### Method 3: Remap the Home button via Key Mapper
 If you prefer key remapping:
 1. Install [Key Mapper](https://github.com/keymapperorg/KeyMapper).
 2. Create a trigger for your remote's **Home** button.
-3. Bind the action to launch **LTvLauncher**.
+3. Bind the action to launch **LTv Extended**.
 
 ### Method 4: Disable the default launcher via ADB
 
@@ -204,24 +175,24 @@ $ adb shell pm enable com.google.android.tungsten.setupwraith
 
 ## 📱 More Android Projects by LeanBitLab
 
-Discover our complete suite of privacy-first, open-source Android applications and utilities:  
+Explore the upstream developers’ suite of privacy-first, open-source Android applications and utilities:
 👉 **[Explore All LeanBitLab Android Projects](https://github.com/LeanBitLab#-android-projects)**
 
 ---
 
 ## 🤝 Community & Contributing
 
-- **Bug Reports & Feature Requests**: [Open a GitHub Issue](https://github.com/leanbitlab-org/LtvLauncher/issues)
-- **Discussions & Feedback**: [GitHub Discussions](https://github.com/leanbitlab-org/LtvLauncher/discussions)
-- **Official Telegram Channel**: [@LeanBitLab](https://t.me/leanbitlab)
+- **Bug Reports & Feature Requests**: [Open a GitHub Issue](https://github.com/niposch/LTvLauncher-Extended/issues)
+- **Discussions & Feedback**: [GitHub Discussions](https://github.com/niposch/LTvLauncher-Extended/discussions)
+- **Upstream Telegram Channel**: [@LeanBitLab](https://t.me/leanbitlab)
 
 ---
 
-## 💖 Support the Project
+## 💖 Support the Upstream Project
 
 Building and maintaining a lightweight, ad-free Android TV launcher requires hardware testing across various TV chipsets, display profiles, and continuous development.
 
-If LTvLauncher improves your daily TV experience, please consider supporting our work!
+LTv Extended builds on work by LeanBitLab. The links below support those upstream developers.
 
 <div align="left">
   <a href="https://github.com/sponsors/LeanBitLab">
@@ -247,5 +218,5 @@ If LTvLauncher improves your daily TV experience, please consider supporting our
 
 ## ⚖️ License
 
-LTvLauncher is licensed under the **GNU General Public License v3.0 (GPL-3.0)**.  
+LTv Extended is licensed under the **GNU General Public License v3.0 (GPL-3.0)**.
 See the [LICENSE](LICENSE) file for details.

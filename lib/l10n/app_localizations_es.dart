@@ -7,7 +7,7 @@ class AppLocalizationsEs extends AppLocalizations {
   AppLocalizationsEs([String locale = 'es']) : super(locale);
 
   @override
-  String get aboutFlauncher => 'Acerca de LTvLauncher';
+  String get aboutFlauncher => 'Acerca de LTv Extended';
 
   @override
   String get addCategory => 'Agregar categoría';
@@ -199,7 +199,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String textAboutDialog(String repoUrl) {
-    return 'LTvLauncher es un lanzador de código abierto personalizado para Android TV, basado en FLauncher.\n\nDesarrollado por LeanBitLab.\nCódigo fuente disponible en $repoUrl.';
+    return 'LTv Extended es un lanzador de código abierto personalizado para Android TV, basado en FLauncher.\n\nBasado en LTvLauncher de LeanBitLab. Integraciones de pósteres y medios de hamish henare (hamishakl).\nCódigo fuente: $repoUrl';
   }
 
   @override
@@ -245,16 +245,16 @@ class AppLocalizationsEs extends AppLocalizations {
   String get accessibility => 'Accesibilidad';
 
   @override
-  String get defaultLauncherIsDefault => 'LTvLauncher es el lanzador predeterminado';
+  String get defaultLauncherIsDefault => 'LTv Extended es el lanzador predeterminado';
 
   @override
-  String get defaultLauncherNotDefault => 'LTvLauncher no es el lanzador predeterminado';
+  String get defaultLauncherNotDefault => 'LTv Extended no es el lanzador predeterminado';
 
   @override
   String get setAsDefaultLauncher => 'Establecer como lanzador predeterminado';
 
   @override
-  String get defaultLauncherDescription => 'Cuando se establece como lanzador predeterminado, el botón de inicio siempre regresará a LTvLauncher. El TV también iniciará directamente en LTvLauncher.';
+  String get defaultLauncherDescription => 'Cuando se establece como lanzador predeterminado, el botón de inicio siempre regresará a LTv Extended. El TV también iniciará directamente en LTv Extended.';
 
   @override
   String get inputs => 'Entradas';

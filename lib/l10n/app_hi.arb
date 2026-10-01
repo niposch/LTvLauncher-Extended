@@ -1,5 +1,5 @@
 {
-    "aboutFlauncher": "LTvLauncher के बारे में",
+    "aboutFlauncher": "LTv Extended के बारे में",
     "addCategory": "श्रेणी जोड़ें",
     "addSection": "अनुभाग जोड़ें",
     "alphabetical": "वर्णानुक्रम",
@@ -88,7 +88,7 @@
     "appSelectorTransitionAnimation": "ऐप सेलेक्टर ट्रांज़िशन एनिमेशन",
     "sort": "क्रमबद्ध करें",
     "systemSettings": "सिस्टम सेटिंग्स",
-    "textAboutDialog": "LTvLauncher FLauncher पर आधारित Android TV के लिए एक अनुकूलित ओपन-सोर्स लॉन्चर है।\n\nLeanBitLab द्वारा विकसित।\nस्रोत कोड {repoUrl} पर उपलब्ध है।",
+    "textAboutDialog": "LTv Extended FLauncher पर आधारित Android TV के लिए एक अनुकूलित ओपन-सोर्स लॉन्चर है।\n\nLeanBitLab के LTvLauncher पर आधारित। पोस्टर और मीडिया एकीकरण hamish henare (hamishakl) द्वारा।\nस्रोत कोड: {repoUrl}",
     "@textAboutDialog": {
         "placeholders": {
             "repoUrl": {
@@ -110,10 +110,10 @@
     "pickDayWallpaper": "दिन का वॉलपेपर चुनें",
     "pickNightWallpaper": "रात का वॉलपेपर चुनें",
     "accessibility": "पहुंच (एक्सेसिबिलिटी)",
-    "defaultLauncherIsDefault": "LTvLauncher डिफ़ॉल्ट लॉन्चर है",
-    "defaultLauncherNotDefault": "LTvLauncher डिफ़ॉल्ट लॉन्चर नहीं है",
+    "defaultLauncherIsDefault": "LTv Extended डिफ़ॉल्ट लॉन्चर है",
+    "defaultLauncherNotDefault": "LTv Extended डिफ़ॉल्ट लॉन्चर नहीं है",
     "setAsDefaultLauncher": "डिफ़ॉल्ट लॉन्चर के रूप में सेट करें",
-    "defaultLauncherDescription": "डिफ़ॉल्ट लॉन्चर के रूप में सेट होने पर, होम बटन हमेशा LTvLauncher पर वापस आएगा। टीवी भी सीधे LTvLauncher में बूट होगा।",
+    "defaultLauncherDescription": "डिफ़ॉल्ट लॉन्चर के रूप में सेट होने पर, होम बटन हमेशा LTv Extended पर वापस आएगा। टीवी भी सीधे LTv Extended में बूट होगा।",
     "inputs": "इनपुट",
     "inputSources": "इनपुट स्रोत",
     "backupAndRestore": "बैकअप और पुनर्स्थापना",

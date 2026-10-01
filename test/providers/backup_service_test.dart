@@ -46,6 +46,16 @@ void main() {
     );
   });
 
+  test('backup picker recognizes Extended exports and legacy backup names', () async {
+    final exported = File(await backupService.exportBackup());
+    expect(exported.uri.pathSegments.last, startsWith('ltv_extended_backup_'));
+    final legacyLtv = await exported.copy('${exported.parent.path}/ltv_backup_legacy.json');
+    final legacyFlauncher = await exported.copy('${exported.parent.path}/flauncher_backup_legacy.json');
+    final entries = await backupService.getBackupFiles();
+    final paths = entries.map((entry) => entry.file.absolute.uri);
+    expect(paths, containsAll([exported.absolute.uri, legacyLtv.absolute.uri, legacyFlauncher.absolute.uri]));
+  });
+
   test("Export and Import Backup preserves database and SharedPreferences settings", () async {
     // 1. Populate database and SharedPreferences
     await sharedPreferences.setBool("app_highlight_animation_enabled", false);

@@ -1,5 +1,5 @@
 {
-    "aboutFlauncher": "About LTvLauncher",
+    "aboutFlauncher": "About LTv Extended",
     "addCategory": "Add category",
     "addSection": "Add section",
     "alphabetical": "Alphabetical",
@@ -88,7 +88,7 @@
     "appSelectorTransitionAnimation": "App selector transition animation",
     "sort": "Sort",
     "systemSettings": "System settings",
-    "textAboutDialog": "LTvLauncher is a customized open-source launcher for Android TV, based on FLauncher.\n\nDeveloped by LeanBitLab.\nSource code available at {repoUrl}.",
+    "textAboutDialog": "LTv Extended is a customized open-source launcher for Android TV, based on FLauncher.\n\nBased on LTvLauncher by LeanBitLab. Poster and media integrations by hamish henare (hamishakl).\nSource code: {repoUrl}",
     "@textAboutDialog": {
         "placeholders": {
             "repoUrl": {
@@ -110,10 +110,10 @@
     "pickDayWallpaper": "Pick day wallpaper",
     "pickNightWallpaper": "Pick night wallpaper",
     "accessibility": "Accessibility",
-    "defaultLauncherIsDefault": "LTvLauncher is the default launcher",
-    "defaultLauncherNotDefault": "LTvLauncher is not the default launcher",
+    "defaultLauncherIsDefault": "LTv Extended is the default launcher",
+    "defaultLauncherNotDefault": "LTv Extended is not the default launcher",
     "setAsDefaultLauncher": "Set as default launcher",
-    "defaultLauncherDescription": "When set as the default launcher, the Home button will always return to LTvLauncher. The TV will also boot directly into LTvLauncher.",
+    "defaultLauncherDescription": "When set as the default launcher, the Home button will always return to LTv Extended. The TV will also boot directly into LTv Extended.",
     "inputs": "Inputs",
     "inputSources": "Input Sources",
     "backupAndRestore": "Backup & Restore",

@@ -51,7 +51,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text("Accessibility"), findsOneWidget);
-    expect(find.text("LTvLauncher is the default launcher"), findsOneWidget);
+    expect(find.text("LTv Extended is the default launcher"), findsOneWidget);
     expect(find.text("Set as default launcher"), findsOneWidget);
   });
 
@@ -87,6 +87,6 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text("Accessibility"), findsOneWidget);
-    expect(find.text("LTvLauncher is not the default launcher"), findsOneWidget);
+    expect(find.text("LTv Extended is not the default launcher"), findsOneWidget);
   });
 }

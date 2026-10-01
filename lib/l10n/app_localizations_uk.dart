@@ -7,7 +7,7 @@ class AppLocalizationsUk extends AppLocalizations {
   AppLocalizationsUk([String locale = 'uk']) : super(locale);
 
   @override
-  String get aboutFlauncher => 'Про LTvLauncher';
+  String get aboutFlauncher => 'Про LTv Extended';
 
   @override
   String get addCategory => 'Додати категорію';
@@ -199,7 +199,7 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String textAboutDialog(String repoUrl) {
-    return 'LTvLauncher — це налаштований лаунчер з відкритим кодом для Android TV, створений на основі FLauncher.\n\nРозроблено LeanBitLab.\nВихідний код доступний за адресою $repoUrl.';
+    return 'LTv Extended — це налаштований лаунчер з відкритим кодом для Android TV, створений на основі FLauncher.\n\nНа основі LTvLauncher від LeanBitLab. Інтеграції постерів і медіа від hamish henare (hamishakl).\nВихідний код: $repoUrl';
   }
 
   @override
@@ -245,16 +245,16 @@ class AppLocalizationsUk extends AppLocalizations {
   String get accessibility => 'Спеціальні можливості';
 
   @override
-  String get defaultLauncherIsDefault => 'LTvLauncher є лаунчером за замовчуванням';
+  String get defaultLauncherIsDefault => 'LTv Extended є лаунчером за замовчуванням';
 
   @override
-  String get defaultLauncherNotDefault => 'LTvLauncher не є лаунчером за замовчуванням';
+  String get defaultLauncherNotDefault => 'LTv Extended не є лаунчером за замовчуванням';
 
   @override
   String get setAsDefaultLauncher => 'Встановити як лаунчер за замовчуванням';
 
   @override
-  String get defaultLauncherDescription => 'Якщо встановлено як лаунчер за замовчуванням, кнопка «Домівка» завжди повертатиме до LTvLauncher. Телевізор також завантажуватиметься одразу в LTvLauncher.';
+  String get defaultLauncherDescription => 'Якщо встановлено як лаунчер за замовчуванням, кнопка «Домівка» завжди повертатиме до LTv Extended. Телевізор також завантажуватиметься одразу в LTv Extended.';
 
   @override
   String get inputs => 'Джерела сигналу';

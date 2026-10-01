@@ -99,13 +99,13 @@ def main():
     if not changelog:
         changelog = get_git_changelog(tag_name)
     
-    size_universal = find_apk_size("LTvLauncher-universal-release.apk", "app-release.apk")
-    size_armv7 = find_apk_size("LTvLauncher-armeabi-v7a-release.apk", "app-armeabi-v7a-release.apk")
-    size_arm64 = find_apk_size("LTvLauncher-arm64-v8a-release.apk", "app-arm64-v8a-release.apk")
+    size_universal = find_apk_size("LTv-Extended-universal-release.apk", "app-release.apk")
+    size_armv7 = find_apk_size("LTv-Extended-armeabi-v7a-release.apk", "app-armeabi-v7a-release.apk")
+    size_arm64 = find_apk_size("LTv-Extended-arm64-v8a-release.apk", "app-arm64-v8a-release.apk")
 
-    release_notes = f"""### 💖 Support Our Work
+    release_notes = f"""### 💖 Support the Upstream Project
 
-As an open-source, community-funded project, we operate on a very limited budget. If LTvLauncher helps you daily, please consider supporting us on [GitHub Sponsors](https://github.com/sponsors/LeanBitLab) or [Open Collective](https://opencollective.com/leanbitlab-org). Sharing LTvLauncher with friends and family makes a huge difference!
+LTv Extended builds on LTvLauncher by LeanBitLab. You can support the upstream developers on [GitHub Sponsors](https://github.com/sponsors/LeanBitLab) or [Open Collective](https://opencollective.com/leanbitlab-org). See ATTRIBUTION.md for all project credits.
 
 ## 🚀 What's New
 
@@ -116,9 +116,9 @@ As an open-source, community-funded project, we operate on a very limited budget
 
 | File | Target Devices | Architecture | Size |
 |:---|:---|:---|:---|
-| **`LTvLauncher-universal-release.apk`** | All Android TV & Fire TV devices (Universal) | All | {size_universal} |
-| **`LTvLauncher-arm64-v8a-release.apk`** | Chromecast with Google TV, Nvidia Shield, modern TVs | 64-bit ARM (`arm64-v8a`) | {size_arm64} |
-| **`LTvLauncher-armeabi-v7a-release.apk`** | Fire TV Stick (Lite, 4K, 4K Max), older smart TVs | 32-bit ARM (`armeabi-v7a`) | {size_armv7} |
+| **`LTv-Extended-universal-release.apk`** | All Android TV & Fire TV devices (Universal) | All | {size_universal} |
+| **`LTv-Extended-arm64-v8a-release.apk`** | Chromecast with Google TV, Nvidia Shield, modern TVs | 64-bit ARM (`arm64-v8a`) | {size_arm64} |
+| **`LTv-Extended-armeabi-v7a-release.apk`** | Fire TV Stick (Lite, 4K, 4K Max), older smart TVs | 32-bit ARM (`armeabi-v7a`) | {size_armv7} |
 """
 
     with open("release_notes.md", "w") as f:

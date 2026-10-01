@@ -51,7 +51,7 @@ Future<void> main() async {
   // Global Error Boundary & Crash Protection
   FlutterError.onError = (FlutterErrorDetails details) {
     FlutterError.presentError(details);
-    debugPrint('FLauncher Error Boundary: ${details.exception}');
+    debugPrint('LTv Extended Error Boundary: ${details.exception}');
   };
 
   ErrorWidget.builder = (FlutterErrorDetails details) {

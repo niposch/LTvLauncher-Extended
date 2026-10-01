@@ -76,7 +76,7 @@ class _DonateDialogState extends State<DonateDialog> {
                   Icon(Icons.favorite, color: Color(0xFFE91E63), size: 24),
                   SizedBox(width: 8),
                   Text(
-                    "Support LTvLauncher",
+                    "Support upstream",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,

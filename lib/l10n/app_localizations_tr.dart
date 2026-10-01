@@ -7,7 +7,7 @@ class AppLocalizationsTr extends AppLocalizations {
   AppLocalizationsTr([String locale = 'tr']) : super(locale);
 
   @override
-  String get aboutFlauncher => 'LTvLauncher Hakkında';
+  String get aboutFlauncher => 'LTv Extended Hakkında';
 
   @override
   String get addCategory => 'Kategori ekle';
@@ -199,7 +199,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String textAboutDialog(String repoUrl) {
-    return 'LTvLauncher, FLauncher tabanlı, Android TV için özelleştirilmiş açık kaynaklı bir başlatıcıdır.\n\nLeanBitLab tarafından geliştirilmiştir.\nKaynak kodu $repoUrl adresinde mevcuttur.';
+    return 'LTv Extended, FLauncher tabanlı, Android TV için özelleştirilmiş açık kaynaklı bir başlatıcıdır.\n\nLeanBitLab tarafından geliştirilen LTvLauncher tabanlıdır. Poster ve medya entegrasyonları hamish henare (hamishakl) tarafından geliştirilmiştir.\nKaynak kodu: $repoUrl';
   }
 
   @override
@@ -245,16 +245,16 @@ class AppLocalizationsTr extends AppLocalizations {
   String get accessibility => 'Erişilebilirlik';
 
   @override
-  String get defaultLauncherIsDefault => 'LTvLauncher varsayılan başlatıcıdır';
+  String get defaultLauncherIsDefault => 'LTv Extended varsayılan başlatıcıdır';
 
   @override
-  String get defaultLauncherNotDefault => 'LTvLauncher varsayılan başlatıcı değildir';
+  String get defaultLauncherNotDefault => 'LTv Extended varsayılan başlatıcı değildir';
 
   @override
   String get setAsDefaultLauncher => 'Varsayılan başlatıcı olarak ayarla';
 
   @override
-  String get defaultLauncherDescription => 'Varsayılan başlatıcı olarak ayarlandığında, Ana Sayfa düğmesi her zaman LTvLauncher\'a döner. TV de doğrudan LTvLauncher\'da başlar.';
+  String get defaultLauncherDescription => 'Varsayılan başlatıcı olarak ayarlandığında, Ana Sayfa düğmesi her zaman LTv Extended\'a döner. TV de doğrudan LTv Extended\'da başlar.';
 
   @override
   String get inputs => 'Girişler';

@@ -1,5 +1,5 @@
 {
-    "aboutFlauncher": "关于 LTvLauncher",
+    "aboutFlauncher": "关于 LTv Extended",
     "addCategory": "添加类别",
     "addSection": "添加分区",
     "alphabetical": "按字母顺序",
@@ -88,7 +88,7 @@
     "appSelectorTransitionAnimation": "应用选择器转场动画",
     "sort": "排序",
     "systemSettings": "系统设置",
-    "textAboutDialog": "LTvLauncher 是一款基于 FLauncher 定制的开源 Android TV 桌面启动器。\n\n由 LeanBitLab 开发。\n源代码可在 {repoUrl} 获取。",
+    "textAboutDialog": "LTv Extended 是一款基于 FLauncher 定制的开源 Android TV 桌面启动器。\n\n基于 LeanBitLab 的 LTvLauncher。海报与媒体集成由 hamish henare (hamishakl) 开发。\n源代码：{repoUrl}",
     "@textAboutDialog": {
         "placeholders": {
             "repoUrl": {
@@ -110,10 +110,10 @@
     "pickDayWallpaper": "选择日间壁纸",
     "pickNightWallpaper": "选择夜间壁纸",
     "accessibility": "无障碍",
-    "defaultLauncherIsDefault": "LTvLauncher 是默认桌面",
-    "defaultLauncherNotDefault": "LTvLauncher 不是默认桌面",
+    "defaultLauncherIsDefault": "LTv Extended 是默认桌面",
+    "defaultLauncherNotDefault": "LTv Extended 不是默认桌面",
     "setAsDefaultLauncher": "设为默认桌面",
-    "defaultLauncherDescription": "设为默认桌面后，按 Home 键将始终返回 LTvLauncher。电视开机也会直接进入 LTvLauncher。",
+    "defaultLauncherDescription": "设为默认桌面后，按 Home 键将始终返回 LTv Extended。电视开机也会直接进入 LTv Extended。",
     "inputs": "输入源",
     "inputSources": "输入源",
     "backupAndRestore": "备份与恢复",

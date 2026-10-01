@@ -4,6 +4,8 @@ The extensions come from [hamish henare's posters branch](https://github.com/ham
 
 ## Installation and app identity
 
+The visible app name is **LTv Extended**, including the TV banner, launcher icon, default-home picker, accessibility service, and screensaver. APK files use the prefix `LTv-Extended-`; the package ID remains unchanged so existing Extended installations retain their settings and data.
+
 The release application ID is `com.niposch.ltvlauncher.extended`; debug builds append `.debug`. Android gives each installation its own database, preferences, poster cache, external files directory, and permissions. Existing upstream settings are not automatically imported. Enable notification access, accessibility, or the default home app separately for Extended if desired.
 
 The native Java namespace remains `com.leanbitlab.ltvL`, so launch a release build with:
@@ -74,3 +76,14 @@ flutter build apk --debug --target-platform=android-arm,android-arm64
 ```
 
 Release builds use the existing keystore environment variables or `android/local.properties` signing configuration. For device testing with a local debug key, an unsigned release APK can be signed locally with Android build-tools `apksigner`; keep private signing material out of the repository.
+
+## Branding assets
+
+`assets/icon.png` and `assets/banner.png` are the master artwork. After updating them, regenerate all Android icon densities, the 320×180 TV banners, and the metadata icon:
+
+```sh
+dart run flutter_launcher_icons
+dart run tool/export_brand_assets.dart
+```
+
+Translations in `lib/l10n/*.arb` provide the app's visible name in settings and default-launcher prompts. Run `flutter gen-l10n` after editing them. Upstream names remain in credits and historical release notes; internal Dart/native identifiers and platform channels remain stable for compatibility.

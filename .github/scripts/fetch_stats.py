@@ -3,7 +3,7 @@ import json
 import os
 import subprocess
 
-REPO = 'leanbitlab-org/LtvLauncher'
+REPO = os.environ.get('GITHUB_REPOSITORY', 'niposch/LTvLauncher-Extended')
 token = os.environ.get('GH_TOKEN') or os.environ.get('GITHUB_TOKEN')
 
 headers = {'User-Agent': 'Mozilla/5.0'}

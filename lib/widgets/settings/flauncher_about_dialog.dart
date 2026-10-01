@@ -74,7 +74,7 @@ class LTvLauncherAboutDialog extends StatelessWidget {
 
               // Title & Version
               const Text(
-                "LTvLauncher Extended",
+                "LTv Extended",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
@@ -139,7 +139,7 @@ class LTvLauncherAboutDialog extends StatelessWidget {
               _AboutButton(
                 icon: Icons.language,
                 iconColor: const Color(0xFF7C4DFF),
-                label: "Website",
+                label: "Upstream Website",
                 accentColor: accentColor,
                 autofocus: true,
                 onPressed: () {
@@ -164,7 +164,7 @@ class LTvLauncherAboutDialog extends StatelessWidget {
               _AboutButton(
                 icon: Icons.send_rounded,
                 iconColor: const Color(0xFF2CA5E0),
-                label: "Telegram (@LeanBitLab)",
+                label: "Upstream Telegram",
                 accentColor: accentColor,
                 onPressed: () {
                   FLauncherChannel().openUrl("https://t.me/LeanBitLab");
@@ -176,7 +176,7 @@ class LTvLauncherAboutDialog extends StatelessWidget {
               _AboutButton(
                 icon: Icons.forum_rounded,
                 iconColor: const Color(0xFFFF4500),
-                label: "Reddit (r/LeanBitLab_)",
+                label: "Upstream Reddit",
                 accentColor: accentColor,
                 onPressed: () {
                   FLauncherChannel().openUrl("https://www.reddit.com/r/LeanBitLab_/");

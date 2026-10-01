@@ -7,7 +7,7 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
-  String get aboutFlauncher => 'حول LTvLauncher';
+  String get aboutFlauncher => 'حول LTv Extended';
 
   @override
   String get addCategory => 'إضافة فئة';
@@ -199,7 +199,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String textAboutDialog(String repoUrl) {
-    return 'LTvLauncher هو مشغل مفتوح المصدر ومخصص لتلفزيون أندرويد، مبني على FLauncher.\n\nتم تطويره بواسطة LeanBitLab.\nالكود المصدري متاح على $repoUrl.';
+    return 'LTv Extended هو مشغل مفتوح المصدر ومخصص لتلفزيون أندرويد، مبني على FLauncher.\n\nمبني على LTvLauncher من LeanBitLab. تكاملات الملصقات والوسائط من hamish henare (hamishakl).\nالكود المصدري: $repoUrl';
   }
 
   @override
@@ -245,16 +245,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get accessibility => 'إمكانية الوصول';
 
   @override
-  String get defaultLauncherIsDefault => 'LTvLauncher هو المشغل الافتراضي';
+  String get defaultLauncherIsDefault => 'LTv Extended هو المشغل الافتراضي';
 
   @override
-  String get defaultLauncherNotDefault => 'LTvLauncher ليس المشغل الافتراضي';
+  String get defaultLauncherNotDefault => 'LTv Extended ليس المشغل الافتراضي';
 
   @override
   String get setAsDefaultLauncher => 'تعيين كمشغل افتراضي';
 
   @override
-  String get defaultLauncherDescription => 'عند تعيينه كمشغل افتراضي، سيعود زر الصفحة الرئيسية دائماً إلى LTvLauncher. سيتم أيضاً تشغيل التلفزيون مباشرة في LTvLauncher.';
+  String get defaultLauncherDescription => 'عند تعيينه كمشغل افتراضي، سيعود زر الصفحة الرئيسية دائماً إلى LTv Extended. سيتم أيضاً تشغيل التلفزيون مباشرة في LTv Extended.';
 
   @override
   String get inputs => 'المدخلات';
