@@ -18,6 +18,7 @@
 
 
 import 'package:flauncher/fork/jellyfin_rows.dart';
+import 'package:flauncher/gradients.dart';
 import 'package:flauncher/fork/jellyfin_service.dart';
 import 'package:flauncher/fork/seerr_service.dart';
 import 'package:flauncher/actions.dart';
@@ -197,6 +198,12 @@ class _FLauncherState extends State<FLauncher> {
   }
 
   Widget _wallpaper(BuildContext context, WallpaperService wallpaperService) {
+    // A black background needs neither a full-screen gradient nor a translucent
+    // scrim. Those layers dominated GPU frame submission on the TV Streamer.
+    if (wallpaperService.wallpaper == null &&
+        wallpaperService.gradient.uuid == FLauncherGradients.pitchBlack.uuid) {
+      return Container(key: const Key('background'), color: Colors.black);
+    }
     Widget background;
     if (wallpaperService.wallpaper != null) {
       final physicalSize = MediaQuery.sizeOf(context);

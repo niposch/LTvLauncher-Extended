@@ -25,6 +25,7 @@ import 'package:flauncher/providers/settings_service.dart';
 import 'package:flauncher/widgets/application_info_panel.dart';
 import 'package:flauncher/widgets/focus_keyboard_listener.dart';
 import 'package:flauncher/widgets/app_card_keys.dart';
+import 'package:flauncher/widgets/focus_card_surface.dart';
 import 'package:flauncher/providers/launcher_state.dart';
 import 'package:flauncher/providers/notifications_service.dart';
 import 'package:flutter/material.dart';
@@ -77,7 +78,7 @@ class _AppCardState extends State<AppCard> with TickerProviderStateMixin {
       milliseconds: 1200,
     ),
   );
-  
+
   double _bumpDirection = 0;
   late final AnimationController _bumpController = AnimationController(
     vsync: this,
@@ -226,211 +227,200 @@ class _AppCardState extends State<AppCard> with TickerProviderStateMixin {
                     child: RepaintBoundary(
                       child: LayoutBuilder(
                         builder: (context, constraints) {
-                          return AnimatedContainer(
-                            duration: appSelectorTransitionAnimationEnabled ? const Duration(milliseconds: 200) : Duration.zero,
-                            curve: Curves.easeOutBack,
-                            transformAlignment: Alignment.center,
-                            transform: _scaleTransform(context, themes, constraints.maxWidth),
-                            child: Material(
-                          borderRadius: borderRadius,
-                          clipBehavior: Clip.antiAlias,
-                          elevation: shouldHighlight ? (themes == 'classic' ? 8 : 16) : 0,
-                          shadowColor: Colors.black,
-                          child: Stack(
-                            fit: StackFit.expand,
-                            children: [
-                              Selector<NotificationsService, int>(
-                                selector: (_, service) => service.getNotificationCount(widget.application.packageName),
-                                builder: (context, count, _) {
-                                  if (count <= 0) return const SizedBox.shrink();
-                                  return Positioned(
-                                    top: 8,
-                                    right: 8,
-                                    child: IgnorePointer(
-                                      child: Container(
-                                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                                        decoration: BoxDecoration(
-                                          color: Colors.red,
-                                          borderRadius: BorderRadius.circular(10),
-                                          boxShadow: const [
-                                            BoxShadow(
-                                              color: Colors.black45,
-                                              blurRadius: 4,
-                                              offset: Offset(0, 2),
-                                            ),
-                                          ],
-                                        ),
-                                        constraints: const BoxConstraints(
-                                          minWidth: 20,
-                                          minHeight: 20,
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            '$count',
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.bold,
-                                              height: 1.0,
+                          return FocusCardSurface(
+                            focused: shouldHighlight,
+                            focusedScale: _focusScale(themes, constraints.maxWidth),
+                            focusedElevation: themes == 'classic' ? 8 : 16,
+                            inactiveDimOpacity: 0.10,
+                            animate: appSelectorTransitionAnimationEnabled,
+                            borderRadius: borderRadius,
+                            child: Stack(
+                              fit: StackFit.expand,
+                              children: [
+                                Selector<NotificationsService, int>(
+                                  selector: (_, service) => service.getNotificationCount(widget.application.packageName),
+                                  builder: (context, count, _) {
+                                    if (count <= 0) return const SizedBox.shrink();
+                                    return Positioned(
+                                      top: 8,
+                                      right: 8,
+                                      child: IgnorePointer(
+                                        child: Container(
+                                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                          decoration: BoxDecoration(
+                                            color: Colors.red,
+                                            borderRadius: BorderRadius.circular(10),
+                                            boxShadow: const [
+                                              BoxShadow(
+                                                color: Colors.black45,
+                                                blurRadius: 4,
+                                                offset: Offset(0, 2),
+                                              ),
+                                            ],
+                                          ),
+                                          constraints: const BoxConstraints(
+                                            minWidth: 20,
+                                            minHeight: 20,
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              '$count',
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.bold,
+                                                height: 1.0,
+                                              ),
                                             ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  );
-                                },
-                              ),
-                              Actions(
-                                actions: <Type, Action<Intent>>{
-                                  ActivateIntent: CallbackAction<ActivateIntent>(
-                                    onInvoke: (_) => _onPressed(context, LogicalKeyboardKey.enter),
-                                  ),
-                                  ButtonActivateIntent: CallbackAction<ButtonActivateIntent>(
-                                    onInvoke: (_) => _onPressed(context, LogicalKeyboardKey.enter),
-                                  ),
-                                },
-                                child: InkWell(
-                                  focusNode: _focusNode,
-                                  autofocus: widget.autofocus,
-                                  focusColor: Colors.transparent,
-                                  child: _appImage(),
-                                  onTap: () => _onPressed(context, LogicalKeyboardKey.enter),
-                                  onLongPress: () => _onLongPress(context, LogicalKeyboardKey.enter),
-                                  onFocusChange: (focused) {
-                                    Scrollable.ensureVisible(
-                                      context,
-                                      // This specific alignment value is not only
-                                      // to center the focused card in the row while
-                                      // scrolling, but to prevent the topmost category
-                                      // title to be hidden by the content above it when
-                                      // scrolling from the app bar. How it relates to this,
-                                      // I don't know
-                                      alignment: 0.5,
-                                      curve: Curves.easeInOut,
-                                      duration: Duration(milliseconds: 100)
                                     );
                                   },
                                 ),
-                              ),
-                              if (_moving) ..._arrows(),
-                              IgnorePointer(
-                                child: AnimatedOpacity(
-                                  duration: appSelectorTransitionAnimationEnabled ? const Duration(milliseconds: 200) : Duration.zero,
-                                  curve: Curves.easeInOut,
-                                  opacity: shouldHighlight ? 0 : 0.10,
-                                  child: Container(color: Colors.black),
-                                ),
-                              ),
-                              Selector<SettingsService, (bool, String)>(
-                                selector: (_, settingsService) => (settingsService.appHighlightAnimationEnabled, settingsService.accentColorHex),
-                                builder: (context, settings, _) {
-                                  final (animationEnabled, accentColorHex) = settings;
-                                  final accentColor = Color(int.parse('FF$accentColorHex', radix: 16));
-
-                                  if (shouldHighlight && !hideHighlightOutlineOnHomescreen) {
-                                    if (themes == 'premium') {
-                                      _animation.stop();
-                                      return const SizedBox();
-                                    }
-                                    if (themes == 'classic') {
-                                      _animation.stop();
-                                      return IgnorePointer(
-                                        child: Stack(
-                                          fit: StackFit.expand,
-                                          children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius: borderRadius,
-                                                border: Border.all(
-                                                  color: accentColor,
-                                                  width: 4
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
+                                Actions(
+                                  actions: <Type, Action<Intent>>{
+                                    ActivateIntent: CallbackAction<ActivateIntent>(
+                                      onInvoke: (_) => _onPressed(context, LogicalKeyboardKey.enter),
+                                    ),
+                                    ButtonActivateIntent: CallbackAction<ButtonActivateIntent>(
+                                      onInvoke: (_) => _onPressed(context, LogicalKeyboardKey.enter),
+                                    ),
+                                  },
+                                  child: InkWell(
+                                    focusNode: _focusNode,
+                                    autofocus: widget.autofocus,
+                                    focusColor: Colors.transparent,
+                                    child: _appImage(),
+                                    onTap: () => _onPressed(context, LogicalKeyboardKey.enter),
+                                    onLongPress: () => _onLongPress(context, LogicalKeyboardKey.enter),
+                                    onFocusChange: (focused) {
+                                      if (!focused) return;
+                                      Scrollable.ensureVisible(
+                                        context,
+                                        // This specific alignment value is not only
+                                        // to center the focused card in the row while
+                                        // scrolling, but to prevent the topmost category
+                                        // title to be hidden by the content above it when
+                                        // scrolling from the app bar. How it relates to this,
+                                        // I don't know
+                                        alignment: 0.5,
+                                        curve: Curves.easeInOut,
+                                        duration: Duration(milliseconds: 100)
                                       );
-                                    }
-                                    if (animationEnabled) {
-                                      _animation.repeat(reverse: true);
-                                      return AnimatedBuilder(
-                                        animation: CurvedAnimation(parent: _animation, curve: Curves.easeInOut),
-                                        builder: (context, child) {
-                                          final opacity = 0.4 + (_animation.value * 0.6);
+                                    },
+                                  ),
+                                ),
+                                if (_moving) ..._arrows(),
+                                Selector<SettingsService, (bool, String)>(
+                                  selector: (_, settingsService) => (settingsService.appHighlightAnimationEnabled, settingsService.accentColorHex),
+                                  builder: (context, settings, _) {
+                                    final (animationEnabled, accentColorHex) = settings;
+                                    final accentColor = Color(int.parse('FF$accentColorHex', radix: 16));
 
-                                          return IgnorePointer(
-                                            child: Stack(
-                                              fit: StackFit.expand,
-                                              children: [
-                                                // Outer outline (Accent Color)
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius: borderRadius,
-                                                    border: Border.all(
-                                                      color: accentColor.withOpacity(opacity),
-                                                      width: 2
-                                                    ),
+                                    if (shouldHighlight && !hideHighlightOutlineOnHomescreen) {
+                                      if (themes == 'premium') {
+                                        _animation.stop();
+                                        return const SizedBox();
+                                      }
+                                      if (themes == 'classic') {
+                                        _animation.stop();
+                                        return IgnorePointer(
+                                          child: Stack(
+                                            fit: StackFit.expand,
+                                            children: [
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius: borderRadius,
+                                                  border: Border.all(
+                                                    color: accentColor,
+                                                    width: 4
                                                   ),
                                                 ),
-                                                // Inner outline (Black)
-                                                Padding(
-                                                  padding: const EdgeInsets.all(2),
-                                                  child: Container(
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      }
+                                      if (animationEnabled) {
+                                        _animation.repeat(reverse: true);
+                                        return AnimatedBuilder(
+                                          animation: CurvedAnimation(parent: _animation, curve: Curves.easeInOut),
+                                          builder: (context, child) {
+                                            final opacity = 0.4 + (_animation.value * 0.6);
+
+                                            return IgnorePointer(
+                                              child: Stack(
+                                                fit: StackFit.expand,
+                                                children: [
+                                                  // Outer outline (Accent Color)
+                                                  Container(
                                                     decoration: BoxDecoration(
-                                                      borderRadius: innerBorderRadius,
+                                                      borderRadius: borderRadius,
                                                       border: Border.all(
-                                                        color: Colors.black.withOpacity(opacity),
+                                                        color: accentColor.withOpacity(opacity),
                                                         width: 2
                                                       ),
                                                     ),
                                                   ),
-                                                ),
-                                              ],
-                                            ),
-                                          );
-                                        },
-                                      );
-                                    } else {
-                                      _animation.stop();
-                                      return IgnorePointer(
-                                        child: Stack(
-                                          fit: StackFit.expand,
-                                          children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius: borderRadius,
-                                                border: Border.all(
-                                                  color: accentColor,
-                                                  width: 2
-                                                ),
+                                                  // Inner outline (Black)
+                                                  Padding(
+                                                    padding: const EdgeInsets.all(2),
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                        borderRadius: innerBorderRadius,
+                                                        border: Border.all(
+                                                          color: Colors.black.withOpacity(opacity),
+                                                          width: 2
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.all(2),
-                                              child: Container(
+                                            );
+                                          },
+                                        );
+                                      } else {
+                                        _animation.stop();
+                                        return IgnorePointer(
+                                          child: Stack(
+                                            fit: StackFit.expand,
+                                            children: [
+                                              Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius: innerBorderRadius,
+                                                  borderRadius: borderRadius,
                                                   border: Border.all(
-                                                    color: Colors.black,
+                                                    color: accentColor,
                                                     width: 2
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                      );
+                                              Padding(
+                                                padding: const EdgeInsets.all(2),
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius: innerBorderRadius,
+                                                    border: Border.all(
+                                                      color: Colors.black,
+                                                      width: 2
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      }
                                     }
-                                  }
 
-                                  _animation.stop();
-                                  return const SizedBox();
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
+                                    _animation.stop();
+                                    return const SizedBox();
+                                  },
+                                ),
+                              ],
+                            ),
+                          );
                     },
                   ),
                 ),
@@ -561,9 +551,9 @@ class _AppCardState extends State<AppCard> with TickerProviderStateMixin {
     return FocusManager.instance.highlightMode == FocusHighlightMode.traditional && Focus.of(context).hasFocus;
   }
 
-  Matrix4 _scaleTransform(BuildContext context, String theme, double maxWidth) {
+  double _focusScale(String theme, double maxWidth) {
     double scale = 1.0;
-    if (!_moving && _shouldHighlight(context)) {
+    if (!_moving) {
       if (theme == 'premium') {
         scale = 1.15;
       } else if (theme == 'classic') {
@@ -581,7 +571,7 @@ class _AppCardState extends State<AppCard> with TickerProviderStateMixin {
         }
       }
     }
-    return Matrix4.diagonal3Values(scale, scale, 1.0);
+    return scale;
   }
 
   List<Widget> _arrows() {

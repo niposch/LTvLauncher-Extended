@@ -6,6 +6,7 @@ import 'package:flauncher/actions.dart';
 import 'package:flauncher/widgets/app_card_keys.dart';
 import 'package:flauncher/widgets/focus_keyboard_listener.dart';
 import 'package:flauncher/widgets/watch_next_info_panel.dart';
+import 'package:flauncher/widgets/focus_card_surface.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -300,21 +301,14 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
         break;
     }
 
-    double scale = 1.0;
-    if (_focused) {
-      if (themes == 'premium') {
-        scale = 1.15;
-      } else if (themes == 'classic') {
-        scale = 1.0;
-      } else {
-        scale = 1.1;
-      }
+    final double scale;
+    if (themes == 'premium') {
+      scale = 1.15;
+    } else if (themes == 'classic') {
+      scale = 1.0;
+    } else {
+      scale = 1.1;
     }
-
-    final double elevation = _focused
-        ? (themes == 'classic' ? 8 : 16)
-        : 0;
-    final Color shadowColor = Colors.black;
 
     Widget? highlightWidget;
     if (_focused && !hideHighlightOutlineOnHomescreen) {
@@ -439,21 +433,16 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
               child: AnimatedOpacity(
                 opacity: _clicked ? 0.5 : 1.0,
                 duration: const Duration(milliseconds: 150),
-                child: AnimatedContainer(
-                  duration: appSelectorTransitionAnimationEnabled
-                      ? const Duration(milliseconds: 200)
-                      : Duration.zero,
-                  curve: Curves.easeOutBack,
+                child: SizedBox(
                   width: cardWidth,
                   height: cardHeight,
-                  transform: Matrix4.diagonal3Values(scale, scale, 1.0),
-                  transformAlignment: Alignment.center,
-                  child: Material(
-                    borderRadius: borderRadius,
-                    clipBehavior: Clip.antiAlias,
-                    elevation: elevation,
-                    shadowColor: shadowColor,
+                  child: FocusCardSurface(
                     color: Colors.transparent,
+                    focused: _focused,
+                    focusedScale: scale,
+                    focusedElevation: themes == 'classic' ? 8 : 16,
+                    animate: appSelectorTransitionAnimationEnabled,
+                    borderRadius: borderRadius,
                     child: Stack(
                       fit: StackFit.expand,
                       children: [
@@ -470,7 +459,6 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
                         // Card surface: dark gradient, or a bottom scrim over the poster
                         Container(
                           decoration: BoxDecoration(
-                            borderRadius: borderRadius,
                             gradient: hasPoster
                                 ? LinearGradient(
                                     begin: Alignment.topCenter,
@@ -491,10 +479,6 @@ class _WatchNextCardState extends State<WatchNextCard> with SingleTickerProvider
                                       Color(0xFF090A0B),
                                     ],
                                   ),
-                            border: Border.all(
-                              color: _focused ? Colors.transparent : Colors.white.withOpacity(0.06),
-                              width: 1,
-                            ),
                           ),
                           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
                           child: Column(

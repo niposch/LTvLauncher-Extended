@@ -10,6 +10,7 @@ Release builds use **`com.niposch.ltvlauncher.extended`** and the label **LTvLau
 | --- | --- |
 | Android identity | Separate package, app label, data, and service permissions so it can coexist with upstream and LTv Posters |
 | Continue Watching | Poster artwork behind cards, downloaded in a bounded worker pool, downscaled, and cached on disk |
+| Rendering | Fast solid fill for Pitch Black backgrounds; synchronized focus scaling and shadows; clean compositing of rounded card corners. See [device measurements](docs/performance.md) |
 | Weather | Open-Meteo fallback when Breezy Weather is absent; location configured through `fork_config.json` |
 | Jellyfin | Optional Next Up and Recently Added rows, opening items in Jellyfin for Android TV |
 | Seerr | Optional For You recommendations from watch history and requests, opening items in Seerr TV |

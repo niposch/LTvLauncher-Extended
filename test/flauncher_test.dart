@@ -159,6 +159,17 @@ void main() {
     expect(tester.widget(find.byKey(Key("background"))), isA<Container>());
   });
 
+  testWidgets('Pitch Black uses a solid fill without full-screen gradient layers', (tester) async {
+    final apps = mkAppService();
+    when(apps.launcherSections).thenReturn([]);
+    final wallpaper = mkWallpaperService(false) as MockWallpaperService;
+    when(wallpaper.gradient).thenReturn(FLauncherGradients.pitchBlack);
+    await _pumpWidgetWithProviders(tester, wallpaper, apps, mkSettingsService());
+    final background = tester.widget<Container>(find.byKey(const Key('background')));
+    expect(background.color, Colors.black);
+    expect(background.decoration, isNull);
+  });
+
   testWidgets("Pressing select on settings icon opens SettingsPanel", (tester) async {
     final appsService = mkAppService();
     when(appsService.launcherSections).thenReturn([
