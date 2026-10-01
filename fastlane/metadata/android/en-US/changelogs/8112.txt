@@ -1,0 +1,5 @@
+- First LTv Extended release, installable alongside upstream.
+- Integrates hamish henare's poster, Open-Meteo, Jellyfin, and Seerr additions with preserved attribution.
+- Smoother focus animations and cached backgrounds; corrected card shadows, corners, and row clipping.
+- Weather city search, optional high/low and rain chance, direct pill configuration, and aligned clock/weather pills.
+- System settings first in the drawer; new Extended icon, banner, and documentation.

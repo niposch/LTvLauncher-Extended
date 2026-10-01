@@ -49,6 +49,9 @@ jobs:
       - name: Generate Database Migrations Schema
         run: flutter pub run drift_dev schema generate drift_schemas/ test/generated_migrations/
 
+      - name: Run Tests
+        run: flutter test
+
       - name: Configure Keystore Signing
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}

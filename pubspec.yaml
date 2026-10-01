@@ -1,7 +1,7 @@
 name: flauncher
 description: LTv Extended, a customizable Android TV launcher.
 
-version: 2026.09.15+8111
+version: 2026.10.01+8112
 
 environment:
   sdk: ">=3.4.3"
