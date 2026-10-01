@@ -51,6 +51,11 @@ class SettingsPanelPage extends StatelessWidget {
               children: [
                 FocusableSettingsTile(
                   autofocus: true,
+                  leading: const Icon(Icons.settings_outlined),
+                  title: Text(localizations.systemSettings, style: Theme.of(context).textTheme.bodyMedium),
+                  onPressed: () => context.read<AppsService>().openSettings(),
+                ),
+                FocusableSettingsTile(
                   leading: const Icon(Icons.apps),
                   title: Text(localizations.applications, style: Theme.of(context).textTheme.bodyMedium),
                   onPressed: () => Navigator.of(context).pushNamed(ApplicationsPanelPage.routeName),
@@ -89,11 +94,6 @@ class SettingsPanelPage extends StatelessWidget {
                   ),
                 ),
                 const Divider(),
-                FocusableSettingsTile(
-                  leading: const Icon(Icons.settings_outlined),
-                  title: Text(localizations.systemSettings, style: Theme.of(context).textTheme.bodyMedium),
-                  onPressed: () => context.read<AppsService>().openSettings(),
-                ),
                 FocusableSettingsTile(
                   leading: const Icon(Icons.info_outline),
                   title: Text(localizations.aboutFlauncher, style: Theme.of(context).textTheme.bodyMedium),
