@@ -1,0 +1,2 @@
+- Moved Updates to the second Settings entry, directly below System settings.
+- Clarified that debug builds preview updates and changelogs; open regular LTv Extended to download and install release updates.

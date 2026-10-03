@@ -609,7 +609,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get updatesChangelog => 'Was ist neu?';
 
   @override
-  String get updatesDebugHint => 'Dies ist eine Debug-Version. Du kannst Änderungen lesen, aber Release-Updates können diese Version nicht ersetzen.';
+  String get updatesDebugHint => 'In LTv Extended (Debug) können keine Updates installiert werden. Öffne LTv Extended, um Release-Updates herunterzuladen und zu installieren. Hier kannst du die Änderungen lesen.';
 
   @override
   String get updatesLegacyHint => 'Diese ältere Version unterstützt keine In-App-Updates. Lade sie auf der GitHub-Releases-Seite des Projekts herunter.';

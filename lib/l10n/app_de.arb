@@ -254,7 +254,7 @@
     "updatesUpToDate": "Du bist auf dem neuesten Stand",
     "updatesNoReleases": "Noch keine veröffentlichten Versionen",
     "updatesChangelog": "Was ist neu?",
-    "updatesDebugHint": "Dies ist eine Debug-Version. Du kannst Änderungen lesen, aber Release-Updates können diese Version nicht ersetzen.",
+    "updatesDebugHint": "In LTv Extended (Debug) können keine Updates installiert werden. Öffne LTv Extended, um Release-Updates herunterzuladen und zu installieren. Hier kannst du die Änderungen lesen.",
     "updatesLegacyHint": "Diese ältere Version unterstützt keine In-App-Updates. Lade sie auf der GitHub-Releases-Seite des Projekts herunter.",
     "updatesDownload": "Update herunterladen ({size})",
     "updatesDownloading": "Download: {percent}%",

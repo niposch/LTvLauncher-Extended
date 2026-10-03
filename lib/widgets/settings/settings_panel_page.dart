@@ -56,6 +56,7 @@ class SettingsPanelPage extends StatelessWidget {
                   title: Text(localizations.systemSettings, style: Theme.of(context).textTheme.bodyMedium),
                   onPressed: () => context.read<AppsService>().openSettings(),
                 ),
+                const UpdateSettingsTile(),
                 FocusableSettingsTile(
                   leading: const Icon(Icons.apps),
                   title: Text(localizations.applications, style: Theme.of(context).textTheme.bodyMedium),
@@ -94,7 +95,6 @@ class SettingsPanelPage extends StatelessWidget {
                     builder: (_) => const DonateDialog(),
                   ),
                 ),
-                const UpdateSettingsTile(),
                 const Divider(),
                 FocusableSettingsTile(
                   leading: const Icon(Icons.info_outline),

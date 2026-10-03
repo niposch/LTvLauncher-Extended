@@ -1,12 +1,12 @@
 # In-app updates
 
-Open **Settings → Updates** to check for a release, read **What’s new**, or browse the ten most recent stable releases. Release notes support D-pad Up/Down scrolling and OK to close.
+**Updates** is the second entry in Settings, directly below **System settings**. Open **Settings → Updates** to check for a release, read **What’s new**, or browse the ten most recent stable releases. Release notes support D-pad Up/Down scrolling and OK to close.
 
 Automatic checks are enabled by default and can be switched off. They contact the public GitHub Releases API at most once every 24 hours while the launcher is running, including after resume. The last attempt is persisted, so restarting the app does not bypass the limit. Failed checks also back off for 24 hours; **Check for updates** always permits an immediate retry. A cached update notice remains available offline. There are no startup prompts, background downloads, analytics, accounts or embedded access tokens.
 
 When a newer release is available, the Settings entry gains an **Update available** indicator. Choose **Download update** to download the universal ARMv7/ARM64 APK into private cache, with progress and cancellation. The app verifies the declared size, SHA-256 hash, Android package, signing identity and strictly greater Android version code before opening Android’s installer. Android checks device compatibility and asks the user to confirm installation. On Android 8+, enable **Allow updates from this app** if prompted, return to the launcher, and choose **Install update**. Cancelled or failed installations can be retried; the download button can fetch a fresh copy. No broad file/storage permissions or silent installation are used.
 
-Debug builds keep their separate `.debug` identity, name and visual markers. They can check releases and read changelogs but both the Flutter UI and native bridge block installing production APKs. Updates from another signing source (for example a separately signed distribution) are rejected; users must continue using that source’s updater. Drafts and prereleases are excluded.
+Debug builds keep their separate `.debug` identity, name and visual markers. They can check releases and read changelogs but both the Flutter UI and native bridge block installing production APKs. The page tells users to open **LTv Extended** (without the Debug suffix) to download and install release updates; its download action appears only when a newer release is available. Updates from another signing source (for example a separately signed distribution) are rejected; users must continue using that source’s updater. Drafts and prereleases are excluded.
 
 ## Release contract
 
@@ -37,4 +37,4 @@ English and German update UI strings are translated; other locales use the gener
 
 ## Release preparation
 
-The next release target is **2026.10.03** (Android version code **8113**), including the Home/standby fixes, separate debug build markers and in-app updater. Its changelog is `fastlane/metadata/android/en-US/changelogs/8113.txt`. Android CI tests run after Flutter builds the APKs, which generates the ignored Gradle wrapper on a clean checkout.
+**2026.10.03** (Android version code **8113**) introduced the in-app updater. The follow-up release is **2026.10.04** (Android version code **8114**), moving Updates to the second Settings entry and clarifying debug installation guidance. Its changelog is `fastlane/metadata/android/en-US/changelogs/8114.txt`. Android CI tests run after Flutter builds the APKs, which generates the ignored Gradle wrapper on a clean checkout.

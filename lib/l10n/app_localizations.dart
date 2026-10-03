@@ -1274,7 +1274,7 @@ abstract class AppLocalizations {
   /// No description provided for @updatesDebugHint.
   ///
   /// In en, this message translates to:
-  /// **'This is a debug build. You can read release notes, but release updates cannot replace it.'**
+  /// **'Updates cannot be installed in LTv Extended (Debug). Open LTv Extended to download and install release updates. You can read changelogs here.'**
   String get updatesDebugHint;
 
   /// No description provided for @updatesLegacyHint.
