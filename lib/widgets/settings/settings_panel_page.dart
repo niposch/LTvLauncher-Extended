@@ -31,6 +31,7 @@ import 'package:provider/provider.dart';
 import 'package:flauncher/l10n/app_localizations.dart';
 
 import 'focusable_settings_tile.dart';
+import 'updates_page.dart';
 
 class SettingsPanelPage extends StatelessWidget {
   static const String routeName = "settings_panel";
@@ -93,6 +94,7 @@ class SettingsPanelPage extends StatelessWidget {
                     builder: (_) => const DonateDialog(),
                   ),
                 ),
+                const UpdateSettingsTile(),
                 const Divider(),
                 FocusableSettingsTile(
                   leading: const Icon(Icons.info_outline),

@@ -60,6 +60,9 @@ def keystoreFilePath = System.getenv("KEYSTORE_FILE") ?: localProperties['storeF
 def hasKeystore = keystoreFilePath != null && file(keystoreFilePath).exists()
 
 android {
+    buildFeatures {
+        buildConfig true
+    }
     dependenciesInfo {
         // Disables dependency metadata when building APKs (for IzzyOnDroid/F-Droid)
         includeInApk = false
@@ -144,6 +147,10 @@ android {
             }
         }
     }
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
 }
 
 flutter {

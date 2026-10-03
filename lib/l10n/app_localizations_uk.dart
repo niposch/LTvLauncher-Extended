@@ -565,4 +565,119 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get weatherUnavailable => 'Weather unavailable';
+
+  @override
+  String get updatesTitle => 'Updates';
+
+  @override
+  String get updatesAvailable => 'Update available';
+
+  @override
+  String get updatesAutomatic => 'Check automatically';
+
+  @override
+  String get updatesAutomaticHint => 'Check GitHub once a day while the launcher is open. Updates appear here; downloads start only when you choose them.';
+
+  @override
+  String get updatesCheck => 'Check for updates';
+
+  @override
+  String get updatesChecking => 'Checking…';
+
+  @override
+  String updatesInstalled(String version) {
+    return 'Installed: $version';
+  }
+
+  @override
+  String updatesLastChecked(String date) {
+    return 'Last checked: $date';
+  }
+
+  @override
+  String updatesNewVersion(String version) {
+    return 'Update available: $version';
+  }
+
+  @override
+  String get updatesUpToDate => 'You are up to date';
+
+  @override
+  String get updatesNoReleases => 'No published releases yet';
+
+  @override
+  String get updatesChangelog => 'What’s new';
+
+  @override
+  String get updatesDebugHint => 'This is a debug build. You can read release notes, but release updates cannot replace it.';
+
+  @override
+  String get updatesLegacyHint => 'This older release has no in-app update metadata. Download it from the project’s GitHub Releases page.';
+
+  @override
+  String updatesDownload(String size) {
+    return 'Download update ($size)';
+  }
+
+  @override
+  String updatesDownloading(String percent) {
+    return 'Downloading: $percent%';
+  }
+
+  @override
+  String get updatesCancel => 'Cancel download';
+
+  @override
+  String get updatesCancelled => 'Download cancelled';
+
+  @override
+  String get updatesVerifying => 'Verifying update…';
+
+  @override
+  String get updatesInstall => 'Install update';
+
+  @override
+  String get updatesAllowInstalls => 'Allow updates from this app';
+
+  @override
+  String get updatesPermissionHint => 'Allow this app to install unknown apps in Android settings, then return here and choose Install update.';
+
+  @override
+  String get updatesInstallerOpened => 'Finish installation in Android’s confirmation screen. If you cancelled, you can try again.';
+
+  @override
+  String get updatesHistory => 'Release history';
+
+  @override
+  String get updatesScrollHint => 'Up / Down: scroll • OK: close';
+
+  @override
+  String get updatesNoNotes => 'No changelog was provided for this release.';
+
+  @override
+  String get updatesClose => 'Close';
+
+  @override
+  String get updatesNetworkError => 'Could not connect to GitHub or download the update. Check your connection and try again.';
+
+  @override
+  String get updatesRateLimit => 'GitHub’s request limit was reached. Please try again later.';
+
+  @override
+  String get updatesMetadataError => 'This release has invalid update information. Please try again later.';
+
+  @override
+  String get updatesIntegrityError => 'The download is incomplete or could not be verified. Download it again.';
+
+  @override
+  String get updatesSignatureError => 'This APK is not signed for your installed app. Install updates from the same source as your current installation.';
+
+  @override
+  String get updatesVersionError => 'This APK does not contain a newer matching version.';
+
+  @override
+  String get updatesSdkError => 'This update requires a newer Android version.';
+
+  @override
+  String get updatesInstallerError => 'Android’s installer or install settings could not be opened on this device.';
 }

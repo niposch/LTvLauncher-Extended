@@ -6,7 +6,7 @@ The extensions come from [hamish henare's posters branch](https://github.com/ham
 
 The visible app name is **LTv Extended**, including the TV banner, launcher icon, default-home picker, accessibility service, and screensaver. APK files use the prefix `LTv-Extended-`; the package ID remains unchanged so existing Extended installations retain their settings and data.
 
-The release application ID is `com.niposch.ltvlauncher.extended`; debug builds append `.debug`. Android gives each installation its own database, preferences, poster cache, external files directory, and permissions. Existing upstream settings are not automatically imported. Enable notification access, accessibility, or the default home app separately for Extended if desired.
+The release application ID is `com.niposch.ltvlauncher.extended`; debug builds append `.debug` and are named **LTv Extended (Debug)**. Debug mode shows a persistent pink **DEBUG · LTv Extended** badge above drawers/dialogs and uses small purple Material `bug_report` marks on the app icon and TV banner. Release builds keep the normal artwork and have no debug badge. Android gives each installation its own database, preferences, poster cache, external files directory, and permissions. Existing upstream settings are not automatically imported. Enable notification access, accessibility, or the default home app separately for Extended if desired.
 
 The native Java namespace remains `com.leanbitlab.ltvL`, so launch a release build with:
 
@@ -62,7 +62,7 @@ Enable Continue Watching in launcher settings to show the media rows. Jellyfin s
 
 Open-Meteo weather refreshes at most every 30 minutes after a successful fetch, with an immediate fetch when the selected city changes. Jellyfin refreshes every 10 minutes, and Seerr every 30 minutes, with additional refreshes on resume.
 
-Remote artwork is downloaded and downscaled to at most 640 pixels wide, cached privately on disk, and pruned after 30 days without access. The app requests Internet access and permits HTTP for local media servers. It contacts Open-Meteo, configured media servers, and artwork hosts such as TMDB; it does not add analytics.
+Remote artwork is downloaded and downscaled to at most 640 pixels wide, cached privately on disk, and pruned after 30 days without access. The app requests Internet access and permits HTTP for local media servers. It contacts Open-Meteo, configured media servers, artwork hosts such as TMDB, and GitHub for enabled update checks; it does not add analytics. Update checks can be disabled in **Settings → Updates**. See [in-app updates](updating.md) for installation and release publishing.
 
 ## Local build
 
@@ -75,7 +75,7 @@ flutter test test/providers/watch_next_service_test.dart
 flutter build apk --debug --target-platform=android-arm,android-arm64
 ```
 
-Release builds use the existing keystore environment variables or `android/local.properties` signing configuration. For device testing with a local debug key, an unsigned release APK can be signed locally with Android build-tools `apksigner`; keep private signing material out of the repository.
+Release builds use the existing keystore environment variables or `android/local.properties` signing configuration. Keep private signing material out of the repository. Local debug testing must use the separate debug package. Published releases require the existing release key so in-app updates can preserve installed app data.
 
 ## Branding assets
 

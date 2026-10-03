@@ -565,4 +565,119 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get weatherUnavailable => 'Wetter nicht verfügbar';
+
+  @override
+  String get updatesTitle => 'Updates';
+
+  @override
+  String get updatesAvailable => 'Update verfügbar';
+
+  @override
+  String get updatesAutomatic => 'Automatisch nach Updates suchen';
+
+  @override
+  String get updatesAutomaticHint => 'Einmal täglich auf GitHub prüfen, während der Launcher geöffnet ist. Updates erscheinen hier; Downloads starten erst nach deiner Auswahl.';
+
+  @override
+  String get updatesCheck => 'Nach Updates suchen';
+
+  @override
+  String get updatesChecking => 'Wird geprüft…';
+
+  @override
+  String updatesInstalled(String version) {
+    return 'Installiert: $version';
+  }
+
+  @override
+  String updatesLastChecked(String date) {
+    return 'Zuletzt geprüft: $date';
+  }
+
+  @override
+  String updatesNewVersion(String version) {
+    return 'Update verfügbar: $version';
+  }
+
+  @override
+  String get updatesUpToDate => 'Du bist auf dem neuesten Stand';
+
+  @override
+  String get updatesNoReleases => 'Noch keine veröffentlichten Versionen';
+
+  @override
+  String get updatesChangelog => 'Was ist neu?';
+
+  @override
+  String get updatesDebugHint => 'Dies ist eine Debug-Version. Du kannst Änderungen lesen, aber Release-Updates können diese Version nicht ersetzen.';
+
+  @override
+  String get updatesLegacyHint => 'Diese ältere Version unterstützt keine In-App-Updates. Lade sie auf der GitHub-Releases-Seite des Projekts herunter.';
+
+  @override
+  String updatesDownload(String size) {
+    return 'Update herunterladen ($size)';
+  }
+
+  @override
+  String updatesDownloading(String percent) {
+    return 'Download: $percent%';
+  }
+
+  @override
+  String get updatesCancel => 'Download abbrechen';
+
+  @override
+  String get updatesCancelled => 'Download abgebrochen';
+
+  @override
+  String get updatesVerifying => 'Update wird geprüft…';
+
+  @override
+  String get updatesInstall => 'Update installieren';
+
+  @override
+  String get updatesAllowInstalls => 'Updates aus dieser App erlauben';
+
+  @override
+  String get updatesPermissionHint => 'Erlaube dieser App in den Android-Einstellungen die Installation unbekannter Apps. Kehre dann zurück und wähle „Update installieren“.';
+
+  @override
+  String get updatesInstallerOpened => 'Schließe die Installation im Android-Bestätigungsfenster ab. Nach einem Abbruch kannst du es erneut versuchen.';
+
+  @override
+  String get updatesHistory => 'Versionsverlauf';
+
+  @override
+  String get updatesScrollHint => 'Hoch / Runter: scrollen • OK: schließen';
+
+  @override
+  String get updatesNoNotes => 'Für diese Version wurden keine Änderungen angegeben.';
+
+  @override
+  String get updatesClose => 'Schließen';
+
+  @override
+  String get updatesNetworkError => 'Die Verbindung zu GitHub oder der Download ist fehlgeschlagen. Prüfe deine Verbindung und versuche es erneut.';
+
+  @override
+  String get updatesRateLimit => 'Das GitHub-Anfragelimit wurde erreicht. Versuche es später erneut.';
+
+  @override
+  String get updatesMetadataError => 'Die Update-Informationen dieser Version sind ungültig. Versuche es später erneut.';
+
+  @override
+  String get updatesIntegrityError => 'Der Download ist unvollständig oder konnte nicht geprüft werden. Lade das Update erneut herunter.';
+
+  @override
+  String get updatesSignatureError => 'Diese APK ist nicht für deine installierte App signiert. Beziehe Updates aus derselben Quelle wie deine aktuelle Installation.';
+
+  @override
+  String get updatesVersionError => 'Diese APK enthält keine passende neuere Version.';
+
+  @override
+  String get updatesSdkError => 'Dieses Update benötigt eine neuere Android-Version.';
+
+  @override
+  String get updatesInstallerError => 'Der Android-Installer oder die Installationseinstellungen konnten auf diesem Gerät nicht geöffnet werden.';
 }

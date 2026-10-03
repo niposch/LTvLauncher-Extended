@@ -42,6 +42,14 @@ class LauncherState extends ChangeNotifier
     notifyListeners();
   }
 
+  void returnHome() {
+    _suppressBackUntil = null;
+    if (!_launcherVisible) {
+      _launcherVisible = true;
+      notifyListeners();
+    }
+  }
+
   void suppressBackNavigation() {
     _suppressBackUntil = DateTime.now().add(const Duration(milliseconds: 500));
   }

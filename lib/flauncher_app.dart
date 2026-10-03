@@ -27,6 +27,8 @@ import 'package:flauncher/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import 'flauncher.dart';
+import 'widgets/launcher_home_listener.dart';
+import 'widgets/debug_build_badge.dart';
 
 class FLauncherApp extends StatelessWidget
 {
@@ -50,6 +52,8 @@ class FLauncherApp extends StatelessWidget
         final appLocale = tuple.$2;
 
         return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      builder: (_, child) => DebugBuildBadge(child: child!),
       locale: appLocale,
       scrollBehavior: const MaterialScrollBehavior().copyWith(
         overscroll: false,
@@ -145,7 +149,7 @@ class FLauncherApp extends StatelessWidget
       home: Builder(
         builder: (context) => PopScope(
           canPop: false,
-          child: FLauncher(),
+          child: const LauncherHomeListener(child: FLauncher()),
           onPopInvoked: (didPop) {
             LauncherState launcherState = context.read<LauncherState>();
             launcherState.handleBackNavigation(context);

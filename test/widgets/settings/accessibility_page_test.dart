@@ -88,5 +88,17 @@ void main() {
 
     expect(find.text("Accessibility"), findsOneWidget);
     expect(find.text("LTv Extended is not the default launcher"), findsOneWidget);
+
+    when(appsService.isDefaultLauncher()).thenAnswer((_) async => true);
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.inactive);
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+    await tester.pumpAndSettle();
+    expect(find.text("LTv Extended is the default launcher"), findsOneWidget);
+
+    when(appsService.isDefaultLauncher()).thenAnswer((_) async => false);
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.inactive);
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+    await tester.pumpAndSettle();
+    expect(find.text("LTv Extended is not the default launcher"), findsOneWidget);
   });
 }

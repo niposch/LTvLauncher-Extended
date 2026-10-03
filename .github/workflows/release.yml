@@ -7,9 +7,8 @@ on:
   workflow_dispatch:
     inputs:
       tag_name:
-        description: 'Tag name for the release (e.g. v1.0.0)'
+        description: 'Tag matching pubspec versionName (e.g. v2026.10.02)'
         required: true
-        default: 'v-dev'
 
 permissions:
   contents: write
@@ -52,6 +51,20 @@ jobs:
       - name: Run Tests
         run: flutter test
 
+      - name: Require Release Signing
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: |
+          for variable in KEYSTORE_BASE64 KEYSTORE_PASSWORD KEY_ALIAS KEY_PASSWORD; do
+            if [ -z "${!variable}" ]; then
+              echo "Missing required release signing secret: $variable"
+              exit 1
+            fi
+          done
+
       - name: Configure Keystore Signing
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
@@ -77,12 +90,24 @@ jobs:
           mv build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk build/app/outputs/flutter-apk/LTv-Extended-armeabi-v7a-release.apk
           mv build/app/outputs/flutter-apk/app-arm64-v8a-release.apk build/app/outputs/flutter-apk/LTv-Extended-arm64-v8a-release.apk
 
+      - name: Run Android Unit Tests
+        working-directory: android
+        run: ./gradlew :app:testDebugUnitTest
+
+      - name: Test In-App Update Metadata
+        run: python3 -m unittest discover -s .github/scripts -p 'test_update_manifest.py'
+
+      - name: Generate In-App Update Metadata
+        env:
+          TAG_NAME: ${{ github.event.inputs.tag_name || github.ref_name }}
+        run: python3 .github/scripts/generate_update_manifest.py
+
       - name: Generate Release Notes
         env:
           TAG_NAME: ${{ github.event.inputs.tag_name || github.ref_name }}
         run: python3 .github/scripts/generate_release_notes.py
 
-      - name: Create GitHub Release and Upload APKs
+      - name: Create Draft GitHub Release and Upload APKs
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.event.inputs.tag_name || github.ref_name }}
@@ -91,7 +116,17 @@ jobs:
             build/app/outputs/flutter-apk/LTv-Extended-universal-release.apk
             build/app/outputs/flutter-apk/LTv-Extended-armeabi-v7a-release.apk
             build/app/outputs/flutter-apk/LTv-Extended-arm64-v8a-release.apk
-          draft: false
+            update.json
+          draft: true
+          fail_on_unmatched_files: true
           prerelease: ${{ contains(github.event.inputs.tag_name || github.ref_name, '-') }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Publish only after all APKs and update metadata are available.
+      - name: Publish Complete Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          TAG_NAME: ${{ github.event.inputs.tag_name || github.ref_name }}
+        run: gh release edit "$TAG_NAME" --draft=false

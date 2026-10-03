@@ -47,6 +47,7 @@ import 'package:flauncher/widgets/settings/continue_watching_max_items_page.dart
 import 'package:flauncher/widgets/settings/continue_watching_apps_page.dart';
 import 'package:flauncher/models/app.dart';
 import 'package:flutter/material.dart';
+import 'updates_page.dart';
 
 class SettingsPanel extends StatefulWidget {
   final String? initialRoute;
@@ -84,6 +85,8 @@ class _SettingsPanelState extends State<SettingsPanel> {
                   switch (settings.name) {
                     case SettingsPanelPage.routeName:
                       return _FastPageRoute(builder: (_) => SettingsPanelPage());
+                    case UpdatesPage.routeName:
+                      return _FastPageRoute(builder: (_) => const UpdatesPage());
                     case GeneralSettingsPage.routeName:
                       return _FastPageRoute(builder: (_) => GeneralSettingsPage());
                     case InterfaceSettingsPage.routeName:

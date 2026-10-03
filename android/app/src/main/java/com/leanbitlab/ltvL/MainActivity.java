@@ -83,6 +83,27 @@ public class MainActivity extends FlutterActivity {
     private final String NOTIFICATIONS_EVENT_CHANNEL = "me.efesser.flauncher/event_notifications";
     private final String WEATHER_EVENT_CHANNEL = "me.efesser.flauncher/event_weather";
     private final String WATCH_NEXT_EVENT_CHANNEL = "me.efesser.flauncher/event_watch_next";
+    private EventChannel.EventSink homeEventSink;
+    private boolean pendingHomeRequest;
+
+    @Override
+    protected void onNewIntent(@NonNull Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        if (Intent.ACTION_MAIN.equals(intent.getAction()) && intent.hasCategory(Intent.CATEGORY_HOME)) {
+            if (homeEventSink != null) homeEventSink.success(true);
+            else pendingHomeRequest = true;
+        }
+    }
+
+    private AppUpdateManager appUpdateManager;
+
+    @Override
+    public void cleanUpFlutterEngine(@NonNull FlutterEngine flutterEngine) {
+        if (appUpdateManager != null) { appUpdateManager.dispose(); appUpdateManager = null; }
+        super.cleanUpFlutterEngine(flutterEngine);
+    }
+
     private MethodChannel.Result pendingPermissionResult;
     private static final ExecutorService sIoExecutor = Executors.newFixedThreadPool(4);
 
@@ -92,6 +113,21 @@ public class MainActivity extends FlutterActivity {
         new Thread(this::prunePosterCache, "poster-cache-prune").start();
 
         BinaryMessenger messenger = flutterEngine.getDartExecutor().getBinaryMessenger();
+        appUpdateManager = new AppUpdateManager(this, messenger);
+        new EventChannel(messenger, "me.efesser.flauncher/event_home").setStreamHandler(
+                new EventChannel.StreamHandler() {
+                    @Override
+                    public void onListen(Object arguments, EventChannel.EventSink events) {
+                        homeEventSink = events;
+                        if (pendingHomeRequest) {
+                            pendingHomeRequest = false;
+                            events.success(true);
+                        }
+                    }
+
+                    @Override
+                    public void onCancel(Object arguments) { homeEventSink = null; }
+                });
 
         new MethodChannel(messenger, METHOD_CHANNEL).setMethodCallHandler((call, result) -> {
             switch (call.method) {
@@ -576,8 +612,24 @@ public class MainActivity extends FlutterActivity {
     }
 
     private boolean isDefaultLauncher() {
+        // Google TV's higher-priority HOME intent can resolve to stock even when
+        // the system default-app picker has selected this app. Query the selection first.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            android.app.role.RoleManager roles = getSystemService(android.app.role.RoleManager.class);
+            if (roles != null && roles.isRoleAvailable(android.app.role.RoleManager.ROLE_HOME)) {
+                return roles.isRoleHeld(android.app.role.RoleManager.ROLE_HOME);
+            }
+        }
+        List<android.content.IntentFilter> filters = new ArrayList<>();
+        List<ComponentName> preferredActivities = new ArrayList<>();
+        getPackageManager().getPreferredActivities(filters, preferredActivities, getPackageName());
+        for (int i = 0; i < filters.size(); i++) {
+            if (filters.get(i).hasAction(Intent.ACTION_MAIN)
+                    && filters.get(i).hasCategory(Intent.CATEGORY_HOME)
+                    && getPackageName().equals(preferredActivities.get(i).getPackageName())) return true;
+        }
         Intent intent = new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME);
-        ResolveInfo defaultLauncher = getPackageManager().resolveActivity(intent, 0);
+        ResolveInfo defaultLauncher = getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
 
         if (defaultLauncher != null && defaultLauncher.activityInfo != null) {
             return defaultLauncher.activityInfo.packageName.equals(getPackageName());

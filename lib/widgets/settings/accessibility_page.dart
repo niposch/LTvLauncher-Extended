@@ -154,7 +154,7 @@ class _AccessibilityPageState extends State<AccessibilityPage> with WidgetsBindi
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Text(
-                    'If you are using Google TV, enable "Home Button Fix" under Accessibility settings to make the Home button open this launcher.',
+                    'If you are using Google TV, enable "Home Button Fix" under Accessibility settings to make the Home button open this launcher and return here when the stock home screen appears after waking from standby.',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: Colors.white54,
                         ),
@@ -195,7 +195,7 @@ class _AccessibilityPageState extends State<AccessibilityPage> with WidgetsBindi
                 borderRadius: BorderRadius.circular(4),
               ),
               child: SelectableText(
-                'adb shell settings put secure enabled_accessibility_services $packageName/$packageName.LauncherAccessibilityService',
+                'adb shell settings put secure enabled_accessibility_services $packageName/com.leanbitlab.ltvL.LauncherAccessibilityService',
                 style: const TextStyle(fontFamily: 'monospace', fontSize: 12),
               ),
             ),

@@ -212,7 +212,13 @@
     "showWeatherHighLow": "Show today's high and low",
     "showWeatherRainChance": "Show today's rain / snow chance",
     "weatherRainChance": "Precip. {chance}%",
-    "@weatherRainChance": {"placeholders": {"chance": {"type": "int"}}},
+    "@weatherRainChance": {
+        "placeholders": {
+            "chance": {
+                "type": "int"
+            }
+        }
+    },
     "weatherLocation": "Weather location",
     "weatherAutomatic": "Clear location / use Breezy Weather",
     "weatherLocationHint": "Search for your city to use Open-Meteo weather at that location.",
@@ -242,5 +248,75 @@
     "weatherSettings": "Weather settings",
     "weatherNoLocation": "No location selected",
     "weatherUpdating": "Updating weather…",
-    "weatherUnavailable": "Weather unavailable"
+    "weatherUnavailable": "Weather unavailable",
+    "updatesTitle": "Updates",
+    "updatesAvailable": "Update available",
+    "updatesAutomatic": "Check automatically",
+    "updatesAutomaticHint": "Check GitHub once a day while the launcher is open. Updates appear here; downloads start only when you choose them.",
+    "updatesCheck": "Check for updates",
+    "updatesChecking": "Checking…",
+    "updatesInstalled": "Installed: {version}",
+    "updatesLastChecked": "Last checked: {date}",
+    "updatesNewVersion": "Update available: {version}",
+    "updatesUpToDate": "You are up to date",
+    "updatesNoReleases": "No published releases yet",
+    "updatesChangelog": "What’s new",
+    "updatesDebugHint": "This is a debug build. You can read release notes, but release updates cannot replace it.",
+    "updatesLegacyHint": "This older release has no in-app update metadata. Download it from the project’s GitHub Releases page.",
+    "updatesDownload": "Download update ({size})",
+    "updatesDownloading": "Downloading: {percent}%",
+    "updatesCancel": "Cancel download",
+    "updatesCancelled": "Download cancelled",
+    "updatesVerifying": "Verifying update…",
+    "updatesInstall": "Install update",
+    "updatesAllowInstalls": "Allow updates from this app",
+    "updatesPermissionHint": "Allow this app to install unknown apps in Android settings, then return here and choose Install update.",
+    "updatesInstallerOpened": "Finish installation in Android’s confirmation screen. If you cancelled, you can try again.",
+    "updatesHistory": "Release history",
+    "updatesScrollHint": "Up / Down: scroll • OK: close",
+    "updatesNoNotes": "No changelog was provided for this release.",
+    "updatesClose": "Close",
+    "updatesNetworkError": "Could not connect to GitHub or download the update. Check your connection and try again.",
+    "updatesRateLimit": "GitHub’s request limit was reached. Please try again later.",
+    "updatesMetadataError": "This release has invalid update information. Please try again later.",
+    "updatesIntegrityError": "The download is incomplete or could not be verified. Download it again.",
+    "updatesSignatureError": "This APK is not signed for your installed app. Install updates from the same source as your current installation.",
+    "updatesVersionError": "This APK does not contain a newer matching version.",
+    "updatesSdkError": "This update requires a newer Android version.",
+    "updatesInstallerError": "Android’s installer or install settings could not be opened on this device.",
+    "@updatesInstalled": {
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }
+    },
+    "@updatesLastChecked": {
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "@updatesNewVersion": {
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }
+    },
+    "@updatesDownload": {
+        "placeholders": {
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "@updatesDownloading": {
+        "placeholders": {
+            "percent": {
+                "type": "String"
+            }
+        }
+    }
 }

@@ -1,0 +1,5 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@mipmap/ic_launcher" />
+    <item android:drawable="@drawable/debug_mark" android:width="16dp" android:height="16dp"
+        android:gravity="bottom|right" android:right="2dp" android:bottom="2dp" />
+</layer-list>

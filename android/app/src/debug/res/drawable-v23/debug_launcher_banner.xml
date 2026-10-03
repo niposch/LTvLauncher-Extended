@@ -1,0 +1,5 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/banner" />
+    <item android:drawable="@drawable/debug_mark" android:width="28dp" android:height="28dp"
+        android:gravity="bottom|right" android:right="10dp" android:bottom="10dp" />
+</layer-list>

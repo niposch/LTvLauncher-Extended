@@ -1198,6 +1198,216 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Weather unavailable'**
   String get weatherUnavailable;
+
+  /// No description provided for @updatesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Updates'**
+  String get updatesTitle;
+
+  /// No description provided for @updatesAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Update available'**
+  String get updatesAvailable;
+
+  /// No description provided for @updatesAutomatic.
+  ///
+  /// In en, this message translates to:
+  /// **'Check automatically'**
+  String get updatesAutomatic;
+
+  /// No description provided for @updatesAutomaticHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Check GitHub once a day while the launcher is open. Updates appear here; downloads start only when you choose them.'**
+  String get updatesAutomaticHint;
+
+  /// No description provided for @updatesCheck.
+  ///
+  /// In en, this message translates to:
+  /// **'Check for updates'**
+  String get updatesCheck;
+
+  /// No description provided for @updatesChecking.
+  ///
+  /// In en, this message translates to:
+  /// **'Checking…'**
+  String get updatesChecking;
+
+  /// No description provided for @updatesInstalled.
+  ///
+  /// In en, this message translates to:
+  /// **'Installed: {version}'**
+  String updatesInstalled(String version);
+
+  /// No description provided for @updatesLastChecked.
+  ///
+  /// In en, this message translates to:
+  /// **'Last checked: {date}'**
+  String updatesLastChecked(String date);
+
+  /// No description provided for @updatesNewVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'Update available: {version}'**
+  String updatesNewVersion(String version);
+
+  /// No description provided for @updatesUpToDate.
+  ///
+  /// In en, this message translates to:
+  /// **'You are up to date'**
+  String get updatesUpToDate;
+
+  /// No description provided for @updatesNoReleases.
+  ///
+  /// In en, this message translates to:
+  /// **'No published releases yet'**
+  String get updatesNoReleases;
+
+  /// No description provided for @updatesChangelog.
+  ///
+  /// In en, this message translates to:
+  /// **'What’s new'**
+  String get updatesChangelog;
+
+  /// No description provided for @updatesDebugHint.
+  ///
+  /// In en, this message translates to:
+  /// **'This is a debug build. You can read release notes, but release updates cannot replace it.'**
+  String get updatesDebugHint;
+
+  /// No description provided for @updatesLegacyHint.
+  ///
+  /// In en, this message translates to:
+  /// **'This older release has no in-app update metadata. Download it from the project’s GitHub Releases page.'**
+  String get updatesLegacyHint;
+
+  /// No description provided for @updatesDownload.
+  ///
+  /// In en, this message translates to:
+  /// **'Download update ({size})'**
+  String updatesDownload(String size);
+
+  /// No description provided for @updatesDownloading.
+  ///
+  /// In en, this message translates to:
+  /// **'Downloading: {percent}%'**
+  String updatesDownloading(String percent);
+
+  /// No description provided for @updatesCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel download'**
+  String get updatesCancel;
+
+  /// No description provided for @updatesCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Download cancelled'**
+  String get updatesCancelled;
+
+  /// No description provided for @updatesVerifying.
+  ///
+  /// In en, this message translates to:
+  /// **'Verifying update…'**
+  String get updatesVerifying;
+
+  /// No description provided for @updatesInstall.
+  ///
+  /// In en, this message translates to:
+  /// **'Install update'**
+  String get updatesInstall;
+
+  /// No description provided for @updatesAllowInstalls.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow updates from this app'**
+  String get updatesAllowInstalls;
+
+  /// No description provided for @updatesPermissionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow this app to install unknown apps in Android settings, then return here and choose Install update.'**
+  String get updatesPermissionHint;
+
+  /// No description provided for @updatesInstallerOpened.
+  ///
+  /// In en, this message translates to:
+  /// **'Finish installation in Android’s confirmation screen. If you cancelled, you can try again.'**
+  String get updatesInstallerOpened;
+
+  /// No description provided for @updatesHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Release history'**
+  String get updatesHistory;
+
+  /// No description provided for @updatesScrollHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Up / Down: scroll • OK: close'**
+  String get updatesScrollHint;
+
+  /// No description provided for @updatesNoNotes.
+  ///
+  /// In en, this message translates to:
+  /// **'No changelog was provided for this release.'**
+  String get updatesNoNotes;
+
+  /// No description provided for @updatesClose.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get updatesClose;
+
+  /// No description provided for @updatesNetworkError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not connect to GitHub or download the update. Check your connection and try again.'**
+  String get updatesNetworkError;
+
+  /// No description provided for @updatesRateLimit.
+  ///
+  /// In en, this message translates to:
+  /// **'GitHub’s request limit was reached. Please try again later.'**
+  String get updatesRateLimit;
+
+  /// No description provided for @updatesMetadataError.
+  ///
+  /// In en, this message translates to:
+  /// **'This release has invalid update information. Please try again later.'**
+  String get updatesMetadataError;
+
+  /// No description provided for @updatesIntegrityError.
+  ///
+  /// In en, this message translates to:
+  /// **'The download is incomplete or could not be verified. Download it again.'**
+  String get updatesIntegrityError;
+
+  /// No description provided for @updatesSignatureError.
+  ///
+  /// In en, this message translates to:
+  /// **'This APK is not signed for your installed app. Install updates from the same source as your current installation.'**
+  String get updatesSignatureError;
+
+  /// No description provided for @updatesVersionError.
+  ///
+  /// In en, this message translates to:
+  /// **'This APK does not contain a newer matching version.'**
+  String get updatesVersionError;
+
+  /// No description provided for @updatesSdkError.
+  ///
+  /// In en, this message translates to:
+  /// **'This update requires a newer Android version.'**
+  String get updatesSdkError;
+
+  /// No description provided for @updatesInstallerError.
+  ///
+  /// In en, this message translates to:
+  /// **'Android’s installer or install settings could not be opened on this device.'**
+  String get updatesInstallerError;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

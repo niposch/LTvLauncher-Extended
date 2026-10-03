@@ -25,7 +25,7 @@
 
 This fork integrates [hamishakl's `posters` branch](https://github.com/hamishakl/LtvLauncher/tree/posters), authored by **hamish henare**, into LTvLauncher. The original commits and authorship are preserved. See [ATTRIBUTION.md](ATTRIBUTION.md) for credits and [the extension setup guide](docs/extensions.md) for weather, Jellyfin, and Seerr configuration.
 
-Release builds use **`com.niposch.ltvlauncher.extended`** and the label **LTv Extended**. Debug builds use **`com.niposch.ltvlauncher.extended.debug`**. Both can be installed alongside upstream LTvLauncher (`com.leanbitlab.ltvL`) and LTv Posters (`com.leanbitlab.ltvL.posters`), with their own app data and permissions. The visible app name is LTv Extended; its package ID stays stable across this branding update.
+Release builds use **`com.niposch.ltvlauncher.extended`** and the label **LTv Extended**. Debug builds use **`com.niposch.ltvlauncher.extended.debug`** and the label **LTv Extended (Debug)**. Debug builds display a persistent pink DEBUG badge and have small purple Material `bug_report` marks on their Android icon and TV banner. Both can be installed alongside upstream LTvLauncher (`com.leanbitlab.ltvL`) and LTv Posters (`com.leanbitlab.ltvL.posters`), with their own app data and permissions. The visible app name is LTv Extended; its package ID stays stable across this branding update.
 
 ## Differences from upstream
 
@@ -37,7 +37,8 @@ Release builds use **`com.niposch.ltvlauncher.extended`** and the label **LTv Ex
 | Weather | Click the weather pill to configure a city (no default city), with optional daily high/low and precipitation chance; Open-Meteo and Breezy Weather support |
 | Jellyfin | Optional Next Up and Recently Added rows, opening items in Jellyfin for Android TV |
 | Seerr | Optional For You recommendations from watch history and requests, opening items in Seerr TV |
-| Network access | Internet permission for weather, configured media servers, and remote artwork; HTTP supported for local servers |
+| Updates | Quiet daily GitHub release checks in Settings, changelogs and release history, verified downloads and Android-confirmed installation; see [in-app updates](docs/updating.md) |
+| Network access | Internet permission for weather, configured media servers, remote artwork and optional update checks; HTTP supported for local servers |
 
 The media and weather additions above are credited to **hamish henare (hamishakl)**. See [extension setup](docs/extensions.md) and [full attribution](ATTRIBUTION.md).
 
@@ -148,7 +149,9 @@ If your device blocks changing the default launcher, use LTv Extended's built-in
 2. Select **Home Button Fix (Google TV)**.
 3. Turn on the accessibility service for **LTv Extended** in your system settings.
 
-Once enabled, LTv Extended automatically intercepts Home button presses and brings you straight to your custom home screen.
+Once enabled, LTv Extended intercepts Home button presses and closes its open settings drawers or dialogs. It also returns to Extended when another launcher’s home activity appears within ten seconds of waking from standby. The stock launcher stays installed and enabled. Resumed apps, playback, system settings, and unrelated windows are not redirected. This uses the accessibility service’s window metadata; no screen text is read or stored. Start on boot remains a separate setting for full reboots.
+
+The default-launcher indicator reports Android’s selected Home role/preference. Google TV may still resolve Home to its higher-priority stock launcher even while Extended is selected; the Home Button Fix handles that difference. See [Home and standby behavior](docs/home-and-standby.md) for validation.
 
 ### Method 3: Remap the Home button via Key Mapper
 If you prefer key remapping:
