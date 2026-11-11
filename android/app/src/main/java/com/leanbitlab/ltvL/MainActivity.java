@@ -106,11 +106,28 @@ public class MainActivity extends FlutterActivity {
 
     private MethodChannel.Result pendingPermissionResult;
     private static final ExecutorService sIoExecutor = Executors.newFixedThreadPool(4);
+    private PosterCache posterCache;
+    private final ProviderArtworkGate providerArtworkGate = new ProviderArtworkGate();
+
+    @Override
+    protected void onResume() {
+        // Before super, which tells Dart the app resumed and triggers a poster refresh.
+        providerArtworkGate.setResumed(true);
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        // Before super: stop opening other apps' providers as soon as another app takes over.
+        providerArtworkGate.setResumed(false);
+        super.onPause();
+    }
 
     @Override
     public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
         super.configureFlutterEngine(flutterEngine);
-        new Thread(this::prunePosterCache, "poster-cache-prune").start();
+        posterCache = new PosterCache(new java.io.File(getCacheDir(), "posters"), POSTER_CACHE_MAX_AGE_MS);
+        new Thread(posterCache::prune, "poster-cache-prune").start();
 
         BinaryMessenger messenger = flutterEngine.getDartExecutor().getBinaryMessenger();
         appUpdateManager = new AppUpdateManager(this, messenger);
@@ -1445,38 +1462,10 @@ public class MainActivity extends FlutterActivity {
         }
     }
 
-    // Fork: disk cache for remote Watch Next posters, downscaled so the row loads
-    // instantly after a restart and full-size artwork never crosses the channel.
+    // Fork: HTTP posters retain their existing downscaling. Provider posters are
+    // cached without conversion so repeated requests do not reopen the provider.
     private static final int POSTER_MAX_WIDTH = 640;
     private static final long POSTER_CACHE_MAX_AGE_MS = 30L * 24 * 60 * 60 * 1000;
-
-    private java.io.File posterCacheDir() {
-        java.io.File dir = new java.io.File(getCacheDir(), "posters");
-        if (!dir.exists()) dir.mkdirs();
-        return dir;
-    }
-
-    private static String sha1Hex(String s) {
-        try {
-            java.security.MessageDigest md = java.security.MessageDigest.getInstance("SHA-1");
-            StringBuilder sb = new StringBuilder();
-            for (byte b : md.digest(s.getBytes(java.nio.charset.StandardCharsets.UTF_8))) {
-                sb.append(String.format("%02x", b));
-            }
-            return sb.toString();
-        } catch (Exception e) {
-            return Integer.toHexString(s.hashCode());
-        }
-    }
-
-    private void prunePosterCache() {
-        long cutoff = System.currentTimeMillis() - POSTER_CACHE_MAX_AGE_MS;
-        java.io.File[] files = posterCacheDir().listFiles();
-        if (files == null) return;
-        for (java.io.File f : files) {
-            if (f.lastModified() < cutoff) f.delete();
-        }
-    }
 
     private static byte[] downscalePoster(byte[] raw) {
         try {
@@ -1506,31 +1495,15 @@ public class MainActivity extends FlutterActivity {
     }
 
     private byte[] getWatchNextPoster(String posterArtUri) {
-        if (posterArtUri == null || !(posterArtUri.startsWith("http://") || posterArtUri.startsWith("https://"))) {
-            return fetchWatchNextPoster(posterArtUri);
-        }
-        java.io.File cached = new java.io.File(posterCacheDir(), sha1Hex(posterArtUri) + ".jpg");
-        if (cached.exists() && cached.length() > 0) {
-            try {
-                byte[] bytes = new byte[(int) cached.length()];
-                try (java.io.DataInputStream in = new java.io.DataInputStream(new java.io.FileInputStream(cached))) {
-                    in.readFully(bytes);
-                }
-                cached.setLastModified(System.currentTimeMillis());
-                return bytes;
-            } catch (Exception ignored) {
-                cached.delete();
-            }
-        }
-        byte[] raw = fetchWatchNextPoster(posterArtUri);
-        if (raw == null || raw.length == 0) return raw;
-        byte[] small = downscalePoster(raw);
-        try (java.io.FileOutputStream fos = new java.io.FileOutputStream(cached)) {
-            fos.write(small);
-        } catch (Exception ignored) {
-            cached.delete();
-        }
-        return small;
+        return posterCache.get(posterArtUri, () -> {
+            // Cache misses for content:// artwork open the publishing app's provider, so
+            // they only run while the launcher is resumed (see ProviderArtworkGate).
+            byte[] raw = providerArtworkGate.load(posterArtUri, () -> fetchWatchNextPoster(posterArtUri));
+            if (raw == null || raw.length == 0) return raw;
+            // Preserve provider artwork as delivered; HTTP posters retain their existing downscaling.
+            return posterArtUri.startsWith("http://") || posterArtUri.startsWith("https://")
+                    ? downscalePoster(raw) : raw;
+        });
     }
 
     private byte[] fetchWatchNextPoster(String posterArtUri) {

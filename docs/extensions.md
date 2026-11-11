@@ -62,7 +62,37 @@ Enable Continue Watching in launcher settings to show the media rows. Jellyfin s
 
 Open-Meteo weather refreshes at most every 30 minutes after a successful fetch, with an immediate fetch when the selected city changes. Jellyfin refreshes every 10 minutes, and Seerr every 30 minutes, with additional refreshes on resume.
 
-Remote artwork is downloaded and downscaled to at most 640 pixels wide, cached privately on disk, and pruned after 30 days without access. The app requests Internet access and permits HTTP for local media servers. It contacts Open-Meteo, configured media servers, artwork hosts such as TMDB, and GitHub for enabled update checks; it does not add analytics. Update checks can be disabled in **Settings → Updates**. See [in-app updates](updating.md) for installation and release publishing.
+HTTP(S) artwork is downloaded and downscaled to at most 640 pixels wide. Android `content://` artwork is also cached privately on disk, preserving the bytes and dimensions delivered by its provider. Both use the full artwork URI as the cache key and expire after 30 days without access; file/resource artwork continues to load directly. The app requests Internet access and permits HTTP for local media servers. It contacts Open-Meteo, configured media servers, artwork hosts such as TMDB, and GitHub for enabled update checks; it does not add analytics. Update checks can be disabled in **Settings → Updates**. See [in-app updates](updating.md) for installation and release publishing.
+
+
+### Provider thumbnail caching (2026-10-26)
+
+Continue Watching can receive `content://` thumbnails from apps such as Jellyfin. Those thumbnails now use the same private `cache/posters/` store as HTTP artwork, so a cache hit does not reopen the originating app's content provider. Existing HTTP cache files are retained. Content-provider bytes are stored without resizing or re-encoding; HTTP artwork retains its existing 640-pixel/JPEG processing.
+
+The native `PosterCache` serializes misses for the same URI and publishes completed files by rename, so simultaneous requests do not repeatedly load one provider or read a partly written cache entry. Missing/empty results are retried on a later request, and unavailable cache storage does not prevent displaying successfully loaded artwork. Cache files have hashed names rather than source URLs. Idle entries are pruned at launcher initialization, and expired entries are also treated as misses when requested.
+
+Within a running launcher, Continue Watching reuses artwork by its URI rather than the program ID. Providers can recreate Watch Next rows without forcing another image fetch; a changed artwork URI fetches the replacement even when the program ID stays the same. Providers should change the URI/version/tag when artwork changes. An image replaced behind an unchanged URI can remain cached until eviction; Android's **Clear cache** action forces a reload without clearing launcher settings.
+
+### Provider artwork only while the launcher is in front (2026-11-11)
+
+Opening a `content://` poster runs code in the app that published it. Some providers decode and re-encode artwork on their own main thread; Jellyfin for Android TV 0.19.10, for example, re-encodes full-size artwork as WebP there, taking seconds per image on a Google TV Streamer. Watch Next changes are usually published by the app currently in use, so a launcher that fetches the new artwork immediately, from the background, can freeze that foreground app until Android reports an ANR and closes it.
+
+`ProviderArtworkGate` therefore opens provider artwork only while the launcher activity is resumed, and at most one request at a time per provider authority. A cache miss while the launcher is in the background returns no poster without caching the result; the resume refresh loads it. Requests still waiting when the launcher is left are dropped, so after the user launches an app, at most one request per provider can still be running in it. Cached artwork, HTTP(S), file and resource artwork are not gated. This applies to every provider, without per-app rules or URI rewriting.
+
+Limit: a provider that blocks its own main thread still does so for one image at a time while the launcher is in front; that only affects the provider app's background work, not the app in use.
+
+Validation commands for the focused cache change:
+
+```sh
+flutter test test/providers/watch_next_service_test.dart
+dart analyze lib/providers/watch_next_service.dart test/providers/watch_next_service_test.dart
+cd android
+./gradlew :app:testDebugUnitTest :app:assembleDebug -Ptarget-platform=android-arm,android-arm64
+```
+
+The Java regression tests exercise persisted provider bytes, changed URIs, existing HTTP entries, concurrent requests, failed/empty fetches, truncated/expired entries, idle pruning, unavailable cache storage, and direct local/resource loads. Dart regression tests cover replacement program IDs and changed artwork under a retained ID. Local validation passed on 2026-10-26: 16 Watch Next Dart tests, 23 native Java tests (including nine cache tests), Dart analysis of both changed Dart files, and the ARMv7/ARM64 debug APK build. These checks do not establish on-device playback or ANR recovery; the cache change has not been installed or exercised on hardware.
+
+Validation on 2026-11-11: 31 native Java tests (including eight `ProviderArtworkGate` tests covering background deferral, uncached deferred results, dropping queued requests on pause, one-at-a-time per provider and independent providers), 16 Watch Next Dart tests, and the ARMv7/ARM64 debug APK build passed. On a Google TV Streamer with the debug build: after opening the launcher and switching to Jellyfin within one second, no artwork was fetched during 20 seconds in Jellyfin; within 25 seconds of returning to the launcher, all six posters (two from Jellyfin's provider) were cached, with no new Jellyfin ANR. Long-term ANR absence has not been observed yet.
 
 ## Local build
 

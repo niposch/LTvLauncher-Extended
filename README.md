@@ -32,7 +32,7 @@ Release builds use **`com.niposch.ltvlauncher.extended`** and the label **LTv Ex
 | Area | LTv Extended |
 | --- | --- |
 | Android identity | Separate package, app label, data, and service permissions so it can coexist with upstream and LTv Posters |
-| Continue Watching | Poster artwork behind cards, downloaded in a bounded worker pool, downscaled, and cached on disk |
+| Continue Watching | Poster artwork behind cards, loaded in a bounded worker pool and cached on disk for HTTP and content-provider URIs; HTTP artwork retains its existing downscaling |
 | Rendering | Cached wallpaper and gradient composition, fast solid fill for Pitch Black, synchronized focus scaling and shadows, and clean rounded card corners. See [device measurements](docs/performance.md) |
 | Weather | Click the weather pill to configure a city (no default city), with optional daily high/low and precipitation chance; Open-Meteo and Breezy Weather support |
 | Jellyfin | Optional Next Up and Recently Added rows, opening items in Jellyfin for Android TV |

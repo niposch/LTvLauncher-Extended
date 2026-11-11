@@ -38,3 +38,5 @@ English and German update UI strings are translated; other locales use the gener
 ## Release preparation
 
 **2026.10.03** (Android version code **8113**) introduced the in-app updater. The follow-up release is **2026.10.04** (Android version code **8114**), moving Updates to the second Settings entry and clarifying debug installation guidance. Its changelog is `fastlane/metadata/android/en-US/changelogs/8114.txt`. Android CI tests run after Flutter builds the APKs, which generates the ignored Gradle wrapper on a clean checkout.
+
+**2026.11.01** (Android version code **8115**) caches content-provider artwork and only opens other apps' artwork providers while the launcher is in the foreground, preventing Continue Watching from freezing the app in use (see [extensions](extensions.md#provider-artwork-only-while-the-launcher-is-in-front-2026-11-11)). Its changelog is `fastlane/metadata/android/en-US/changelogs/8115.txt`.
