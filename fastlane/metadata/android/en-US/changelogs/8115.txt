@@ -1,0 +1,2 @@
+- Continue Watching no longer freezes the app you are using: artwork from other apps, such as Jellyfin, is only requested while the launcher is on screen, one image at a time per app.
+- Artwork from apps is cached on disk, so it is not requested again after a restart or when an app rebuilds its Continue Watching entries.

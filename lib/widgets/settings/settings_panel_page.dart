@@ -31,6 +31,7 @@ import 'package:provider/provider.dart';
 import 'package:flauncher/l10n/app_localizations.dart';
 
 import 'focusable_settings_tile.dart';
+import 'updates_page.dart';
 
 class SettingsPanelPage extends StatelessWidget {
   static const String routeName = "settings_panel";
@@ -55,6 +56,7 @@ class SettingsPanelPage extends StatelessWidget {
                   title: Text(localizations.systemSettings, style: Theme.of(context).textTheme.bodyMedium),
                   onPressed: () => context.read<AppsService>().openSettings(),
                 ),
+                const UpdateSettingsTile(),
                 FocusableSettingsTile(
                   leading: const Icon(Icons.apps),
                   title: Text(localizations.applications, style: Theme.of(context).textTheme.bodyMedium),

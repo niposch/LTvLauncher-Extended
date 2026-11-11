@@ -28,6 +28,10 @@ class FLauncherChannel {
   static const _weatherEventChannel = EventChannel('me.efesser.flauncher/event_weather');
   static const _watchNextEventChannel = EventChannel('me.efesser.flauncher/event_watch_next');
 
+  Stream<void> get homeRequests => const EventChannel('me.efesser.flauncher/event_home')
+      .receiveBroadcastStream()
+      .map((_) {});
+
   Future<List<Map<dynamic, dynamic>>> getApplications() async {
     List<Map<dynamic, dynamic>>? applications = await _methodChannel.invokeListMethod("getApplications");
     return applications!;

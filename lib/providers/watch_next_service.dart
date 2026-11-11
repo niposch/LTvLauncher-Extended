@@ -93,14 +93,17 @@ class WatchNextService extends ChangeNotifier with WidgetsBindingObserver {
       if (callSnapshot != _callCount) return;
 
       // Phase 1: Emit programs immediately with cached posters where available
+      final postersByUri = {
+        for (final p in _programs)
+          if (p.posterArtUri.isNotEmpty && p.posterBytes != null)
+            p.posterArtUri: p.posterBytes!,
+      };
       final List<WatchNextProgram> newPrograms = [];
       for (final map in list) {
         final program = WatchNextProgram.fromMap(map);
-        // Reuse existing poster bytes if same program already loaded
-        final existing = _findExisting(program.id);
-        if (existing != null && existing.posterBytes != null) {
-          program.posterBytes = existing.posterBytes;
-        }
+        // Program IDs can change when providers rebuild Watch Next entries.
+        // Only reuse bytes when the artwork URI itself is unchanged.
+        program.posterBytes = postersByUri[program.posterArtUri];
         newPrograms.add(program);
       }
 
@@ -153,13 +156,6 @@ class WatchNextService extends ChangeNotifier with WidgetsBindingObserver {
         refresh();
       }
     }
-  }
-
-  WatchNextProgram? _findExisting(int id) {
-    for (final p in _programs) {
-      if (p.id == id) return p;
-    }
-    return null;
   }
 
   Future<bool> checkPermission() async {

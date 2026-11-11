@@ -1,0 +1,6 @@
+- Added update checks, changelogs and release history in Settings → Updates, with verified downloads and Android-confirmed installs.
+- Fixed Google TV standby wake through Home Button Fix while keeping the stock launcher enabled.
+- Home now closes drawers/dialogs; default-launcher status reads the selected Home app.
+- Debug builds have a separate identity, screen badge and Material bug icon.
+
+Install this release once to enable future in-app updates.

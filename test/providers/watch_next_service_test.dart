@@ -211,6 +211,49 @@ void main() {
     watchNextService.dispose();
   });
 
+  test('reuses artwork when a provider replaces the program ID', () async {
+    const uri = 'content://example.provider/artwork?tag=one';
+    var id = 1;
+    final bytes = Uint8List.fromList([1, 2, 3]);
+    when(mockChannel.getWatchNextPrograms()).thenAnswer((_) async => [
+      {'id': id, 'title': 'Episode', 'posterArtUri': uri},
+    ]);
+    when(mockChannel.getWatchNextPoster(uri)).thenAnswer((_) async => bytes);
+    watchNextService = WatchNextService(mockChannel);
+    while (!watchNextService.initialized) {
+      await pumpEventQueue();
+    }
+    id = 2;
+    clearInteractions(mockChannel);
+    await watchNextService.refresh();
+    expect(watchNextService.programs.single.id, 2);
+    expect(watchNextService.programs.single.posterBytes, bytes);
+    verifyNever(mockChannel.getWatchNextPoster(any));
+    watchNextService.dispose();
+  });
+
+  test('reloads changed artwork even when the program ID stays the same', () async {
+    var uri = 'content://example.provider/artwork?tag=one';
+    final original = Uint8List.fromList([1, 2, 3]);
+    final replacement = Uint8List.fromList([4, 5, 6]);
+    when(mockChannel.getWatchNextPrograms()).thenAnswer((_) async => [
+      {'id': 1, 'title': 'Episode', 'posterArtUri': uri},
+    ]);
+    when(mockChannel.getWatchNextPoster(any)).thenAnswer((call) async =>
+        call.positionalArguments[0] == uri && uri.endsWith('two') ? replacement : original);
+    watchNextService = WatchNextService(mockChannel);
+    while (!watchNextService.initialized) {
+      await pumpEventQueue();
+    }
+    expect(watchNextService.programs.single.posterBytes, original);
+    uri = 'content://example.provider/artwork?tag=two';
+    clearInteractions(mockChannel);
+    await watchNextService.refresh();
+    expect(watchNextService.programs.single.posterBytes, replacement);
+    verify(mockChannel.getWatchNextPoster(uri)).called(1);
+    watchNextService.dispose();
+  });
+
   group('WatchNextService Permissions', () {
     test('checkPermission queries channel directly', () async {
       when(mockChannel.checkWatchNextPermission()).thenAnswer((_) async => false);

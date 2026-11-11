@@ -21,6 +21,7 @@ import 'dart:async';
 import 'package:flauncher/database.dart';
 import 'package:flauncher/flauncher_channel.dart';
 import 'package:flauncher/providers/apps_service.dart';
+import 'package:flauncher/providers/update_service.dart';
 import 'package:flauncher/providers/launcher_state.dart';
 import 'package:flauncher/providers/network_service.dart';
 import 'package:flauncher/providers/settings_service.dart';
@@ -90,6 +91,7 @@ Future<void> main() async {
 
   runApp(MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => UpdateService(sharedPreferences), lazy: false),
         Provider<BackupService>(
           create: (_) => BackupService(fLauncherDatabase, sharedPreferences),
         ),
